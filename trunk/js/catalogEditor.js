@@ -33,7 +33,8 @@
 				pnl.find(".dataGridPnl").datagrid({
 					loader: $A.dataSource.getTable,
 					columns: [columns],
-					queryParams:{catID:rootID}
+					queryParams:{catID:rootID},
+					onClickRow: RowEditor.open
 				})
 			})
 		}
