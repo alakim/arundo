@@ -82,8 +82,9 @@ var Arundo = (function($, $H, $P){
 			checkDataSource();
 			checkView();
 			__.view.init();
-			//buildMainMenu();
-			//console.log(Arundo);
+		},
+		displayError: function(err){
+			alert("Error: "+(err.message || err));
 		}
 	};
 	
