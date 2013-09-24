@@ -6,14 +6,23 @@
 		open:function(rowIdx, rowData){
 			if(!$("#"+dlgID).length){
 				$("body").append(Html.div({id:dlgID}));
+				$("#"+dlgID)
+					.html(rowIdx+" opened!")
+					.dialog({
+						title:$A.locale.getItem("rowEditor"), 
+						width: 300, height: 200,
+						resizable: true,
+						buttons:[
+							{text:$A.locale.getItem("btOK"), handler:function(){
+								alert("OK");
+							}},
+							{text:$A.locale.getItem("btCancel"), handler:function(){
+								$("#"+dlgID).dialog("close");
+							}}
+						]
+					});
 			}
-			$("#"+dlgID)
-				.html(rowIdx+" opened!")
-				.dialog({
-					title:"Row Editor", 
-					width: 300, height: 200,
-					resizable: true
-				});
+			$("#"+dlgID).dialog("open");
 		}
 	};
 	

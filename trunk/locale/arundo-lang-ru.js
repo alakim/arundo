@@ -3,5 +3,8 @@ Arundo.locale.addItems("ru", {
 	options: "Свойства",
 	menu: "Меню",
 	mainPage: "Главная",
-	wholeTree: "Все каталоги"
+	wholeTree: "Все каталоги",
+	rowEditor: "Редактирование записи",
+	btOK: "Ввод",
+	btCancel: "Отмена"
 });
