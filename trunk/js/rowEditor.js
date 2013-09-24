@@ -2,6 +2,19 @@
 
 	var dlgID = "rowEditorDlg";
 	
+	var templates = {
+		dialog: function(data){with(H){
+			return table({border:1, cellpadding:3, cellspacing:0},
+				apply(data.data, function(val, colID){
+					return tr(
+						td(data.columns[colID].title),
+						td(val)
+					);
+				})
+			);
+		}}
+	};
+	
 	var __={
 		open:function(rowIdx, rowData){
 			if(!$("#"+dlgID).length){
@@ -22,7 +35,12 @@
 						]
 					});
 			}
+			var contentPnl = $("#"+dlgID+" .dialog-content");
+			contentPnl.html("loading...");
 			$("#"+dlgID).dialog("open");
+			$A.dataSource.getRecord(rowData.id, function(data){
+				contentPnl.html(templates.dialog(data));
+			}, $A.displayError);
 		}
 	};
 	
