@@ -29,10 +29,11 @@
 					});
 				}
 			});
-			$A.dataSource.getColumns(null, function(columns){
+			$A.dataSource.getColumns(rootID, function(columns){
 				pnl.find(".dataGridPnl").datagrid({
 					loader: $A.dataSource.getTable,
-					columns: [columns]
+					columns: [columns],
+					queryParams:{catID:rootID}
 				})
 			})
 		}

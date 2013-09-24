@@ -24,10 +24,38 @@ Arundo.dataSource = (function($){
 	
 	indexTree();
 	
+	var testData = {
+		persons:[
+			{"id":"PPS","fio":"Петренко П.С."}
+		],
+		management:[
+			{"id":"III","fio":"Иванов И.И"},
+			{"id":"PPP","fio":"Петров П.П."}
+		],
+		developers:[
+			{"id":"SSS","fio":"Сидоров С.С."}
+		],
+		accDep:[
+			{"id":"KKK","fio":"Кульман К.К."}
+		],
+		economy:[
+			{"id":"VVV","fio":"Ватман В.В."}
+		],
+		news:[
+			{id:"n1", date:"2013-08-22T11:35", title:"Протон-М вышел на орбиту", text:"Состоялся успешный запуск ракеты-носителя Протон-М с разгонным блоком Бриз, доставившей новый спутник связи на околоземную орбиту."},
+			{id:"n2", date:"2013-08-23T09:00", title:"Планируется экспедиция к Марсу", text:"Рассматривается проект пилотируемой экспедиции к Марсу."}
+		],
+		goods:[
+			{id:"selmerCl301", name:"Clarinet Bb Selmer USA CL301", description:"Boehm System, 6 rings, 17 keys"},
+			{id:"vandorenV12-3", name:"Vandoren Clarinet Reeds V12 #3"}
+		]
+	};
+	
 	var __ = {
 		name:"Test Data Source", 
 		getCatalogTree: function(param, onSuccess, onError){
-			var subtree = param.rootID?treeNodes[param.rootID].children : tree;
+			var root = param.rootID?treeNodes[param.rootID]:null;
+			var subtree = root?root.children : tree;
 			
 			if(param.depth==1){
 				var res = [];
@@ -36,39 +64,49 @@ Arundo.dataSource = (function($){
 				});
 				onSuccess(res);
 			}
-			else
-				onSuccess(subtree);
+			else{
+				var rTree = root?[{id:param.rootID, text:root.text, children: subtree}]
+						:subtree;
+				onSuccess(rTree);
+			}
 		}, 
 		getMenu: function(onSuccess, onError){
 		}, 
 		getRecord: function(recId, onSuccess, onError){
 		},
 		getTable: function(param, onSuccess, onError){
-			var catID = param.catID;
-			var idx = ({
-				persons:"A",
-				management:"B",
-				developers:"C",
-				accDep:"D",
-				economy:"E",
-				news:"F",
-				goods:"G"
-			}[catID] )|| "X";
-			onSuccess([
-				{"productid":"FI-SW-01"+"-"+idx,"productname":"Koi"},
-				{"productid":"K9-DL-01"+"-"+idx,"productname":"Dalmation"},
-				{"productid":"RP-SN-01"+"-"+idx,"productname":"Rattlesnake"},
-				{"productid":"RP-LI-02"+"-"+idx,"productname":"Iguana"},
-				{"productid":"FL-DSH-01"+"-"+idx,"productname":"Manx"},
-				{"productid":"FL-DLH-02"+"-"+idx,"productname":"Persian"},
-				{"productid":"AV-CB-01"+"-"+idx,"productname":"Amazon Parrot"}
-			])
+			onSuccess(testData[param.catID]);
 		},
 		getColumns: function(catID, onSuccess, onError){
-			onSuccess([
-				{field:"productid", title:"ID"},
-				{field:"productname", title:"Name"}
-			]);
+			var columns;
+			switch(catID){
+				case "persons":
+				case "management":
+				case "developers":
+				case "accDep":
+				case "economy":
+					columns = [
+						{field:"id", title:"ID"},
+						{field:"fio", title:"ФИО"}
+					];
+					break;
+				case "news":
+					columns = [
+						{field:"id", title:"ID"},
+						{field:"date", title:"Дата"},
+						{field:"title", title:"Заголовок"},
+						{field:"text", title:"Текст"}
+					];
+					break;
+				case "goods":
+					columns = [
+						{field:"id", title:"ID"},
+						{field:"name", title:"Наименование"},
+						{field:"description", title:"Описание"}
+					];
+					break;
+			}
+			onSuccess(columns);
 		}
 	};
 	
