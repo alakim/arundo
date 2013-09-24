@@ -34,6 +34,7 @@
 					loader: $A.dataSource.getTable,
 					columns: [columns],
 					queryParams:{catID:rootID},
+					singleSelect: true,
 					onClickRow: RowEditor.open
 				})
 			})
