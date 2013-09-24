@@ -10,7 +10,10 @@ var Arundo = (function($, $H, $P){
 				en:{
 					catalogs: "Catalogs",
 					mainPage: "Main",
-					wholeTree: "Whole Tree"
+					wholeTree: "Whole Tree",
+					rowEditor: "Edit Row",
+					btOK: "OK",
+					btCancel: "Cancel"
 				}
 			},
 			addItems: function(lang, items){
