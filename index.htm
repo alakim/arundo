@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="js/lib/html.js"></script>
 	<script type="text/javascript" src="js/lib/jspath.js"></script>
 	<script type="text/javascript" src="js/arundo.js"></script>
+	<script type="text/javascript" src="js/rowEditor.js"></script>
 	<script type="text/javascript" src="js/catalogEditor.js"></script>
 	
 	<script type="text/javascript" src="locale/arundo-lang-ru.js"></script>
@@ -26,6 +27,7 @@
 				init: function(){
 					__.addPanel("mainPnl", $A.locale.getItem("mainPage"), true);
 					$("#mainPnl").mainForm();
+					
 				},
 				addPanel: function(id, title, fixed){
 					panelIndex++;
@@ -42,7 +44,6 @@
 			};
 			$A.view = __;
 		})(Arundo, Html);
-
 		
 
 	</script>
@@ -59,8 +60,9 @@
 		<div id="tabsPnl" class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:auto;height:auto;">
 		</div>
 		<div id="tab-tools">
-			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="Arundo.view.addPanel()"></a>
+			<!--a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="Arundo.view.addPanel()"></a-->
 		</div>
+		
 	
 	</div>
 </body>
