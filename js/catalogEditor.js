@@ -5,10 +5,6 @@
 				ul({"class":"catTreePnl"})
 			),
 			div({"data-options":"region:'center',title:false"},
-				div({"class":"gridTools"},
-					a({"class":"btNewRow"}, $A.locale.getItem("btNew")),
-					a({"class":"btDelete"}, $A.locale.getItem("btDelete"))
-				),
 				div({"class":"dataGridPnl"})
 			)
 		);
@@ -41,20 +37,29 @@
 				singleSelect: true,
 				onClickRow: function(rowIdx, rowData){
 					rowEditor.open(rowData.id);
-				}
+				},
+				toolbar: [
+					{
+						iconCls: 'icon-add',
+						text: $A.locale.getItem("btNew"),
+						handler: function(){rowEditor.open();}
+					},
+					{
+						iconCls: 'icon-remove',
+						text: $A.locale.getItem("btDelete"),
+						handler: function(){alert('remove')}
+					},'-',
+					{
+						iconCls: 'icon-help',
+						handler: function(){alert('help')}
+					}
+				]
 			})
 		});
 		rowEditor.catID = rootID;
 		rowEditor.onSaved = function(){
 			pnl.find(".dataGridPnl").datagrid("reload");
 		}
-		$(".gridTools a").linkbutton({plain:true});
-		$(".gridTools a.btNewRow").linkbutton({iconCls:'icon-add'}).click(function(){
-			rowEditor.open();
-		});
-		$(".gridTools a.btDelete").linkbutton({iconCls:'icon-remove'}).click(function(){
-			alert("Deleted!");
-		});
 	}
 	
 	$.fn.catalogEditor = (function(rootID){
