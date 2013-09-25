@@ -36,7 +36,10 @@
 				singleSelect: true,
 				onClickRow: rowEditor.open
 			})
-		})
+		});
+		rowEditor.onSaved = function(){
+			pnl.find(".dataGridPnl").datagrid("reload");
+		}
 	}
 	
 	$.fn.catalogEditor = (function(rootID){

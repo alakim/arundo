@@ -31,9 +31,9 @@
 		return res;
 	}
 
-	return function(){
+	return function(){var _=this;
 		
-		$.extend(this, {
+		$.extend(_,{
 			open:function(rowIdx, rowData){
 				if(!$("#"+dlgID).length){
 					$("body").append(Html.div({id:dlgID}));
@@ -46,6 +46,7 @@
 								{text:$A.locale.getItem("btOK"), handler:function(){
 									saveData(function(){
 										$("#"+dlgID).dialog("close");
+										_.onSaved();
 									});
 								}},
 								{text:$A.locale.getItem("btCancel"), handler:function(){
@@ -70,7 +71,8 @@
 							parser: $A.date.parse
 						});
 				}, $A.displayError);
-			}
+			},
+			onSaved: function(){}
 		});
 	};
 })(jQuery, Arundo, Html);
