@@ -137,7 +137,10 @@ Arundo.dataSource = (function($){
 		getTable: function(param, onSuccess, onError){
 			onSuccess(testData.rows[param.catID]);
 		},
-		getColumns: function(catID, onSuccess, onError){
+		getTableColumns: function(catID, onSuccess, onError){
+			onSuccess(findColumns(catID));
+		},
+		getAllColumns: function(catID, onSuccess, onError){
 			onSuccess(findColumns(catID, "field;title;type"));
 		}
 	};

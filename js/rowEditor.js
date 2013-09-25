@@ -79,7 +79,7 @@
 					}, $A.displayError);
 				}
 				else{
-					$A.dataSource.getColumns(_.catID, function(data){
+					$A.dataSource.getAllColumns(_.catID, function(data){
 						contentPnl.html(templates.dialog({columns:data}))
 							.find(".dateFld").datebox({
 								formatter: $A.date.format,

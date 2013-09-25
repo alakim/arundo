@@ -24,7 +24,7 @@
 			},
 			onClick: function(node){
 				rowEditor.catID = node.id;
-				$A.dataSource.getColumns(node.id, function(columns){
+				$A.dataSource.getTableColumns(node.id, function(columns){
 					pnl.find(".dataGridPnl").datagrid({
 						loader: $A.dataSource.getTable,
 						columns:[columns],
@@ -33,7 +33,7 @@
 				});
 			}
 		});
-		$A.dataSource.getColumns(rootID, function(columns){
+		$A.dataSource.getTableColumns(rootID, function(columns){
 			pnl.find(".dataGridPnl").datagrid({
 				loader: $A.dataSource.getTable,
 				columns: [columns],
