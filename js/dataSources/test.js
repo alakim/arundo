@@ -130,6 +130,11 @@ Arundo.dataSource = (function($){
 			});
 			onSuccess(res);
 		},
+		saveRecord: function(recID, data, onSuccess, onError){
+			var row = rowIndex[recID].data;
+			for(var k in data) row[k] = data[k];
+			onSuccess();
+		},
 		getTable: function(param, onSuccess, onError){
 			onSuccess(testData.rows[param.catID]);
 		},
