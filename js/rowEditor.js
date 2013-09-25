@@ -4,15 +4,18 @@
 	var templates = {
 		dialog: function(data){with(H){
 			return table({border:0, cellpadding:3, cellspacing:0},
-				apply(data.data, function(val, colID){
-					var col = data.columns[colID];
+				apply(data.columns, function(col){
 					return tr(col.type=="rowID"?{style:"color:#888;"}:null,
 						td({"class":"fieldName"}, col.title),
-						templates.field(col.field, val, col.type)
-					);
+						templates.field(col.field, data.data?data.data[col.field]:templates.emptyValue(col.type), col.type)
+					)
 				})
 			);
 		}},
+		emptyValue: function(colType){
+			if(colType == "date") return $A.date.format(new Date());
+			return "";
+		},
 		field: function(id, val, type){with(H){
 			return td(
 				type=="text"?input({"class":"editField", type:"text", value:val, fldID:id})
@@ -76,7 +79,13 @@
 					}, $A.displayError);
 				}
 				else{
-					//$A.dataSource.
+					$A.dataSource.getColumns(_.catID, function(data){
+						contentPnl.html(templates.dialog({columns:data}))
+							.find(".dateFld").datebox({
+								formatter: $A.date.format,
+								parser: $A.date.parse
+							});
+					});
 				}
 			},
 			onSaved: function(){}
