@@ -4,13 +4,22 @@
 	
 	var templates = {
 		dialog: function(data){with(H){
-			return table({border:1, cellpadding:3, cellspacing:0},
+			return table({border:0, cellpadding:3, cellspacing:0},
 				apply(data.data, function(val, colID){
-					return tr(
-						td(data.columns[colID].title),
-						td(val)
+					var col = data.columns[colID];
+					return tr(col.type=="rowID"?{style:"color:#888;"}:null,
+						td({"class":"fieldName"}, col.title),
+						templates.field(col.field, val, col.type)
 					);
 				})
+			);
+		}},
+		field: function(id, val, type){with(H){
+			return td(
+				type=="text"?input({type:"text", value:val, fldID:id})
+				:type=="date"?input({type:"text", value:val, fldID:id})
+				:type=="textHTML"?textarea({fldID:id}, val)
+				:span(val)
 			);
 		}}
 	};
@@ -23,7 +32,7 @@
 					.html(rowIdx+" opened!")
 					.dialog({
 						title:$A.locale.getItem("rowEditor"), 
-						width: 300, height: 200,
+						width: 450, height: 300,
 						resizable: true,
 						buttons:[
 							{text:$A.locale.getItem("btOK"), handler:function(){
