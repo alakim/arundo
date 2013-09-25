@@ -38,19 +38,19 @@ Arundo.dataSource = (function($){
 		},
 		columns:{
 			persons:[
-					{field:"id", title:"ID"},
-					{field:"fio", title:"ФИО"}
+					{field:"id", title:"Row ID", type:"rowID"},
+					{field:"fio", title:"ФИО", type:"text"}
 				],
 			news:[
-				{field:"id", title:"ID"},
-				{field:"date", title:"Дата"},
-				{field:"title", title:"Заголовок"},
-				{field:"text", title:"Текст"}
+				{field:"id", title:"Row ID", type:"rowID"},
+				{field:"date", title:"Дата", type:"date"},
+				{field:"title", title:"Заголовок", type:"text"},
+				{field:"text", title:"Текст", type:"textHTML"}
 			],
 			goods:[
-				{field:"id", title:"ID"},
-				{field:"name", title:"Наименование"},
-				{field:"description", title:"Описание"}
+				{field:"id", title:"Row ID", type:"rowID"},
+				{field:"name", title:"Наименование", type:"text"},
+				{field:"description", title:"Описание", type:"textHTML"}
 			]
 		}
 	};
@@ -79,11 +79,21 @@ Arundo.dataSource = (function($){
 		}
 	})();
 	
-	function findColumns(catID){
+	function findColumns(catID, fields){
 		if(!catID) return [];
+		fields = fields || "field;title";
+		if(typeof(fields)=="string") fields = fields.split(";");
 		var columns = testData.columns[catID];
-		if(columns) return columns;
-		else return findColumns(treeNodes[catID].parent);
+		if(!columns) return findColumns(treeNodes[catID].parent, fields);
+		var res = [];
+		$.each(columns, function(i, col){
+			var cDef = {};
+			$.each(fields, function(j, fld){
+				cDef[fld] = col[fld];
+			});
+			res.push(cDef);
+		});
+		return res;
 	}
 
 	
@@ -115,7 +125,7 @@ Arundo.dataSource = (function($){
 				columns:{},
 				data:row
 			};
-			$.each(findColumns(catID), function(i, col){
+			$.each(findColumns(catID, "field;title;type"), function(i, col){
 				res.columns[col.field] = col;
 			});
 			onSuccess(res);
