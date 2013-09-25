@@ -56,8 +56,7 @@ Arundo.dataSource = (function($){
 	};
 
 	var treeNodes = {};
-	
-	(function indexTree(subtree, parentID){
+	function indexTree(subtree, parentID){
 		subtree = subtree || testData.tree;
 		$.each(subtree, function(i, nd){
 			if(treeNodes[nd.id]) alert("Tree Node '"+nd.id+"' already exists!");
@@ -66,10 +65,11 @@ Arundo.dataSource = (function($){
 				indexTree(nd.children, nd.id);
 			}
 		});
-	})();
+	}
+	indexTree();
 	
 	var rowIndex = {};
-	(function indexRows(){
+	function indexRows(){
 		for(var k in testData.rows){
 			var cat = testData.rows[k];
 			for(var i=0; i<cat.length; i++){
@@ -77,7 +77,8 @@ Arundo.dataSource = (function($){
 				rowIndex[row.id] = {catID:k, data:row};
 			}
 		}
-	})();
+	}
+	indexRows();
 	
 	function findColumns(catID, fields){
 		if(!catID) return [];
@@ -94,6 +95,10 @@ Arundo.dataSource = (function($){
 			res.push(cDef);
 		});
 		return res;
+	}
+	
+	function createNewID(){
+		return "itm"+(new Date()).getTime();
 	}
 
 	
@@ -130,8 +135,14 @@ Arundo.dataSource = (function($){
 			onSuccess(res);
 		},
 		saveRecord: function(recID, catID, data, onSuccess, onError){
-			var row = rowIndex[recID].data;
+			var newMode = recID==null;
+			var row = newMode?{}:rowIndex[recID].data;
 			for(var k in data) row[k] = data[k];
+			if(newMode){
+				row.id = createNewID();
+				testData.rows[catID].push(row);
+				indexRows();
+			}
 			onSuccess();
 		},
 		getTable: function(param, onSuccess, onError){
