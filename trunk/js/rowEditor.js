@@ -36,6 +36,7 @@
 		$.extend(_,{
 			catID:null,
 			open:function(rowID){
+				_.rowID = rowID;
 				if(!$("#"+dlgID).length){
 					$("body").append(Html.div({id:dlgID}));
 					$("#"+dlgID)
@@ -61,12 +62,12 @@
 				
 				function saveData(onSuccess){
 					var data = collectData(contentPnl);
-					$A.dataSource.saveRecord(rowID, _.catID, data, onSuccess, $A.displayError);
+					$A.dataSource.saveRecord(_.rowID, _.catID, data, onSuccess, $A.displayError);
 				}
 				
 				$("#"+dlgID).dialog("open");
-				if(rowID){
-					$A.dataSource.getRecord(rowID, _.catID, function(data){
+				if(_.rowID){
+					$A.dataSource.getRecord(_.rowID, _.catID, function(data){
 						contentPnl.html(templates.dialog(data))
 							.find(".dateFld").datebox({
 								formatter: $A.date.format,
