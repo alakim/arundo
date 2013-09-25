@@ -153,6 +153,9 @@ Arundo.dataSource = (function($){
 		},
 		getAllColumns: function(catID, onSuccess, onError){
 			onSuccess(findColumns(catID, "field;title;type"));
+		},
+		deleteRows: function(rowIDs, onSuccess, onError){
+			onError("deleteRow: method not implemented!");
 		}
 	};
 	
