@@ -118,9 +118,8 @@ Arundo.dataSource = (function($){
 		}, 
 		getMenu: function(onSuccess, onError){
 		}, 
-		getRecord: function(recID, onSuccess, onError){
+		getRecord: function(recID, catID, onSuccess, onError){
 			var row = rowIndex[recID].data;
-			var catID = rowIndex[recID].catID;
 			var res = {
 				columns:{},
 				data:row
@@ -130,7 +129,7 @@ Arundo.dataSource = (function($){
 			});
 			onSuccess(res);
 		},
-		saveRecord: function(recID, data, onSuccess, onError){
+		saveRecord: function(recID, catID, data, onSuccess, onError){
 			var row = rowIndex[recID].data;
 			for(var k in data) row[k] = data[k];
 			onSuccess();

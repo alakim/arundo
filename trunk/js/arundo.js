@@ -31,7 +31,9 @@ var Arundo = (function($, $H, $P){
 					wholeTree: "Whole Tree",
 					rowEditor: "Edit Row",
 					btOK: "OK",
-					btCancel: "Cancel"
+					btCancel: "Cancel",
+					btDelete: "Delete",
+					btNew: "New"
 				}
 			},
 			addItems: function(lang, items){

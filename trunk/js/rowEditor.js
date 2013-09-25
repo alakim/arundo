@@ -34,7 +34,8 @@
 	return function(){var _=this;
 		
 		$.extend(_,{
-			open:function(rowIdx, rowData){
+			catID:null,
+			open:function(rowID){
 				if(!$("#"+dlgID).length){
 					$("body").append(Html.div({id:dlgID}));
 					$("#"+dlgID)
@@ -60,17 +61,22 @@
 				
 				function saveData(onSuccess){
 					var data = collectData(contentPnl);
-					$A.dataSource.saveRecord(rowData.id, data, onSuccess, $A.displayError);
+					$A.dataSource.saveRecord(rowID, _.catID, data, onSuccess, $A.displayError);
 				}
 				
 				$("#"+dlgID).dialog("open");
-				$A.dataSource.getRecord(rowData.id, function(data){
-					contentPnl.html(templates.dialog(data))
-						.find(".dateFld").datebox({
-							formatter: $A.date.format,
-							parser: $A.date.parse
-						});
-				}, $A.displayError);
+				if(rowID){
+					$A.dataSource.getRecord(rowID, _.catID, function(data){
+						contentPnl.html(templates.dialog(data))
+							.find(".dateFld").datebox({
+								formatter: $A.date.format,
+								parser: $A.date.parse
+							});
+					}, $A.displayError);
+				}
+				else{
+					//$A.dataSource.
+				}
 			},
 			onSaved: function(){}
 		});
