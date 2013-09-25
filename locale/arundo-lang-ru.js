@@ -6,5 +6,7 @@ Arundo.locale.addItems("ru", {
 	wholeTree: "Все каталоги",
 	rowEditor: "Редактирование записи",
 	btOK: "Ввод",
-	btCancel: "Отмена"
+	btCancel: "Отмена",
+	btDelete: "Удалить",
+	btNew: "Создать"
 });
