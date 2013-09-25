@@ -66,21 +66,8 @@
 				$A.dataSource.getRecord(rowData.id, function(data){
 					contentPnl.html(templates.dialog(data))
 						.find(".dateFld").datebox({
-							formatter: function(d){
-								var y = d.getFullYear();
-								var m = d.getMonth()+1;
-								var d = d.getDate();
-								if(m<10) m = "0"+m;
-								if(d<10) d = "0"+d;
-								return [d, m, y].join(".");
-							},
-							parser: function(s){
-								var date = s.split(".");
-								var d = parseInt(date[0], 10);
-								var m = parseInt(date[1], 10);
-								var y = parseInt(date[2], 10);
-								return new Date(y, m-1, d);
-							}
+							formatter: $A.date.format,
+							parser: $A.date.parse
 						});
 				}, $A.displayError);
 			}
