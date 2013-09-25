@@ -16,13 +16,21 @@
 		}},
 		field: function(id, val, type){with(H){
 			return td(
-				type=="text"?input({type:"text", value:val, fldID:id})
-				:type=="date"?input({"class":"dateFld", type:"text", value:val, fldID:id})
-				:type=="textHTML"?textarea({fldID:id}, val)
+				type=="text"?input({"class":"editField", type:"text", value:val, fldID:id})
+				:type=="date"?input({"class":"editField dateFld", type:"text", value:val, fldID:id})
+				:type=="textHTML"?textarea({"class":"editField", fldID:id}, val)
 				:span(val)
 			);
 		}}
 	};
+	
+	function collectData(pnl){
+		var res = {};
+		pnl.find(".editField").each(function(i, fld){fld=$(fld);
+			res[fld.attr("fldID")] = fld.val();
+		});
+		return res;
+	}
 	
 	var __={
 		open:function(rowIdx, rowData){
@@ -35,7 +43,9 @@
 						resizable: true,
 						buttons:[
 							{text:$A.locale.getItem("btOK"), handler:function(){
-								alert("OK");
+								saveData(function(){
+									$("#"+dlgID).dialog("close");
+								});
 							}},
 							{text:$A.locale.getItem("btCancel"), handler:function(){
 								$("#"+dlgID).dialog("close");
@@ -45,6 +55,12 @@
 			}
 			var contentPnl = $("#"+dlgID+" .dialog-content");
 			contentPnl.html("loading...");
+			
+			function saveData(onSuccess){
+				var data = collectData(contentPnl);
+				$A.dataSource.saveRecord(rowData.id, data, onSuccess, $A.displayError);
+			}
+			
 			$("#"+dlgID).dialog("open");
 			$A.dataSource.getRecord(rowData.id, function(data){
 				contentPnl.html(templates.dialog(data))
