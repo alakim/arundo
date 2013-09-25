@@ -17,7 +17,7 @@
 		field: function(id, val, type){with(H){
 			return td(
 				type=="text"?input({type:"text", value:val, fldID:id})
-				:type=="date"?input({type:"text", value:val, fldID:id})
+				:type=="date"?input({"class":"dateFld", type:"text", value:val, fldID:id})
 				:type=="textHTML"?textarea({fldID:id}, val)
 				:span(val)
 			);
@@ -29,7 +29,6 @@
 			if(!$("#"+dlgID).length){
 				$("body").append(Html.div({id:dlgID}));
 				$("#"+dlgID)
-					.html(rowIdx+" opened!")
 					.dialog({
 						title:$A.locale.getItem("rowEditor"), 
 						width: 450, height: 300,
@@ -48,7 +47,24 @@
 			contentPnl.html("loading...");
 			$("#"+dlgID).dialog("open");
 			$A.dataSource.getRecord(rowData.id, function(data){
-				contentPnl.html(templates.dialog(data));
+				contentPnl.html(templates.dialog(data))
+					.find(".dateFld").datebox({
+						formatter: function(d){
+							var y = d.getFullYear();
+							var m = d.getMonth()+1;
+							var d = d.getDate();
+							if(m<10) m = "0"+m;
+							if(d<10) d = "0"+d;
+							return [d, m, y].join(".");
+						},
+						parser: function(s){
+							var date = s.split(".");
+							var d = parseInt(date[0], 10);
+							var m = parseInt(date[1], 10);
+							var y = parseInt(date[2], 10);
+							return new Date(y, m-1, d);
+						}
+					});
 			}, $A.displayError);
 		}
 	};
