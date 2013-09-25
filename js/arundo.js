@@ -1,5 +1,23 @@
 var Arundo = (function($, $H, $P){
 
+	var dateUtility = {
+		format: function(d){
+			var y = d.getFullYear();
+			var m = d.getMonth()+1;
+			var d = d.getDate();
+			if(m<10) m = "0"+m;
+			if(d<10) d = "0"+d;
+			return [d, m, y].join(".");
+		},
+		parse: function(s){
+			var date = s.split(".");
+			var d = parseInt(date[0], 10);
+			var m = parseInt(date[1], 10);
+			var y = parseInt(date[2], 10);
+			return new Date(y, m-1, d);
+		}
+	};
+
 	var locale = (function(){
 		function getLocale(lang){
 			return lang? locale.items[lang]: (locale.items.ru || locale.items.en);
@@ -71,6 +89,7 @@ var Arundo = (function($, $H, $P){
 	
 	var __ = {
 		locale: locale,
+		date: dateUtility,
 		dataSource: null,
 		view: null,
 		initPanel: function(pnl){
