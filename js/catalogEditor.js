@@ -11,6 +11,20 @@
 	}}
 	
 	function buildEditor(pnl, rowEditor, rootID){
+		
+		function deleteRows(rowIDs){
+			if(confirm("Delete these rows?"))
+				$A.dataSource.deleteRows(rowIDs, refreshGrid, $A.displayError);
+		}
+		
+		function addSysColumns(columns){
+			return [{checkbox:true}].concat(columns);
+		}
+
+		function refreshGrid(){
+			pnl.find(".dataGridPnl").datagrid("reload");
+		}
+		
 		pnl.html(template())
 			.find(".easyui-layout").layout();
 		
@@ -21,6 +35,7 @@
 			onClick: function(node){
 				rowEditor.catID = node.id;
 				$A.dataSource.getTableColumns(node.id, function(columns){
+					columns = addSysColumns(columns);
 					pnl.find(".dataGridPnl").datagrid({
 						loader: $A.dataSource.getTable,
 						columns:[columns],
@@ -30,11 +45,13 @@
 			}
 		});
 		$A.dataSource.getTableColumns(rootID, function(columns){
+			columns = addSysColumns(columns);
 			pnl.find(".dataGridPnl").datagrid({
 				loader: $A.dataSource.getTable,
 				columns: [columns],
 				queryParams:{catID:rootID},
 				singleSelect: true,
+				selectOnCheck: false,
 				onClickRow: function(rowIdx, rowData){
 					rowEditor.open(rowData.id);
 				},
@@ -47,7 +64,14 @@
 					{
 						iconCls: 'icon-remove',
 						text: $A.locale.getItem("btDelete"),
-						handler: function(){alert('remove')}
+						handler: function(){
+							var rows = pnl.find(".dataGridPnl").datagrid("getChecked");
+							var rowIDs = [];
+							$.each(rows, function(i, row){
+								rowIDs.push(row.id);
+							});
+							deleteRows(rowIDs);
+						}
 					},'-',
 					{
 						iconCls: 'icon-help',
@@ -57,11 +81,10 @@
 			})
 		});
 		rowEditor.catID = rootID;
-		rowEditor.onSaved = function(){
-			pnl.find(".dataGridPnl").datagrid("reload");
-		}
+		rowEditor.onSaved = refreshGrid;
+		
 	}
-	
+
 	$.fn.catalogEditor = (function(rootID){
 		$(this).each(function(i,el){
 			buildEditor($(el), new RowEditor(), rootID);
