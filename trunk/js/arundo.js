@@ -76,7 +76,7 @@ var Arundo = (function($, $H, $P){
 	
 	function checkDataSource(){
 		if(!__.dataSource) displayConfigError("Missing Data Source.");
-		checkInterface(__.dataSource, "function", ["getCatalogTree", "getMenu", "getRecord", "saveRecord", "getColumns"]);
+		checkInterface(__.dataSource, "function", ["getCatalogTree", "getMenu", "getRecord", "saveRecord", "getTableColumns", "getAllColumns"]);
 		checkInterface(__.dataSource, "string", ["name"]);
 	}
 	
