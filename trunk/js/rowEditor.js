@@ -1,5 +1,4 @@
 ﻿var RowEditor = (function($, $A, H){
-
 	var dlgID = "rowEditorDlg";
 	
 	var templates = {
@@ -31,61 +30,60 @@
 		});
 		return res;
 	}
-	
-	var __={
-		open:function(rowIdx, rowData){
-			if(!$("#"+dlgID).length){
-				$("body").append(Html.div({id:dlgID}));
-				$("#"+dlgID)
-					.dialog({
-						title:$A.locale.getItem("rowEditor"), 
-						width: 450, height: 300,
-						resizable: true,
-						buttons:[
-							{text:$A.locale.getItem("btOK"), handler:function(){
-								saveData(function(){
+
+	return function(){
+		
+		$.extend(this, {
+			open:function(rowIdx, rowData){
+				if(!$("#"+dlgID).length){
+					$("body").append(Html.div({id:dlgID}));
+					$("#"+dlgID)
+						.dialog({
+							title:$A.locale.getItem("rowEditor"), 
+							width: 450, height: 300,
+							resizable: true,
+							buttons:[
+								{text:$A.locale.getItem("btOK"), handler:function(){
+									saveData(function(){
+										$("#"+dlgID).dialog("close");
+									});
+								}},
+								{text:$A.locale.getItem("btCancel"), handler:function(){
 									$("#"+dlgID).dialog("close");
-								});
-							}},
-							{text:$A.locale.getItem("btCancel"), handler:function(){
-								$("#"+dlgID).dialog("close");
-							}}
-						]
-					});
+								}}
+							]
+						});
+				}
+				var contentPnl = $("#"+dlgID+" .dialog-content");
+				contentPnl.html("loading...");
+				
+				function saveData(onSuccess){
+					var data = collectData(contentPnl);
+					$A.dataSource.saveRecord(rowData.id, data, onSuccess, $A.displayError);
+				}
+				
+				$("#"+dlgID).dialog("open");
+				$A.dataSource.getRecord(rowData.id, function(data){
+					contentPnl.html(templates.dialog(data))
+						.find(".dateFld").datebox({
+							formatter: function(d){
+								var y = d.getFullYear();
+								var m = d.getMonth()+1;
+								var d = d.getDate();
+								if(m<10) m = "0"+m;
+								if(d<10) d = "0"+d;
+								return [d, m, y].join(".");
+							},
+							parser: function(s){
+								var date = s.split(".");
+								var d = parseInt(date[0], 10);
+								var m = parseInt(date[1], 10);
+								var y = parseInt(date[2], 10);
+								return new Date(y, m-1, d);
+							}
+						});
+				}, $A.displayError);
 			}
-			var contentPnl = $("#"+dlgID+" .dialog-content");
-			contentPnl.html("loading...");
-			
-			function saveData(onSuccess){
-				var data = collectData(contentPnl);
-				$A.dataSource.saveRecord(rowData.id, data, onSuccess, $A.displayError);
-			}
-			
-			$("#"+dlgID).dialog("open");
-			$A.dataSource.getRecord(rowData.id, function(data){
-				contentPnl.html(templates.dialog(data))
-					.find(".dateFld").datebox({
-						formatter: function(d){
-							var y = d.getFullYear();
-							var m = d.getMonth()+1;
-							var d = d.getDate();
-							if(m<10) m = "0"+m;
-							if(d<10) d = "0"+d;
-							return [d, m, y].join(".");
-						},
-						parser: function(s){
-							var date = s.split(".");
-							var d = parseInt(date[0], 10);
-							var m = parseInt(date[1], 10);
-							var y = parseInt(date[2], 10);
-							return new Date(y, m-1, d);
-						}
-					});
-			}, $A.displayError);
-		}
+		});
 	};
-	
-	
-	
-	return __;
 })(jQuery, Arundo, Html);
