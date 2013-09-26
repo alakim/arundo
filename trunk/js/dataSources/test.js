@@ -165,6 +165,9 @@ Arundo.dataSource = (function($){
 				testData.rows[catID] = res;
 			});
 			onSuccess();
+		},
+		deleteTreeNode: function(catID, onSuccess, onError){
+			onError("deleteTreeNode: method is not implemented!");
 		}
 	};
 	

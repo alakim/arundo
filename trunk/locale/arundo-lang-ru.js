@@ -5,6 +5,7 @@ Arundo.locale.addItems("ru", {
 	mainPage: "Главная",
 	wholeTree: "Все каталоги",
 	rowEditor: "Редактирование записи",
+	treeNodeEditor: "Редактирование каталога",
 	btOK: "Ввод",
 	btCancel: "Отмена",
 	btDelete: "Удалить",
@@ -15,5 +16,6 @@ Arundo.locale.addItems("ru", {
 	configError: "Ошибка конфигурации",
 	confirm: "Подтверждение",
 	confirmDeleteRows: "Вы действительно хотите удалить эти записи?",
+	confirmDeleteCat: "Вы действительно хотите удалить этот каталог?",
 	warningSelRows2Del: "Отметьте записи для удаления."
 });
