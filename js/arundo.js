@@ -30,6 +30,7 @@ var Arundo = (function($, $H, $P){
 					mainPage: "Main",
 					wholeTree: "Whole Tree",
 					rowEditor: "Edit Row",
+					treeNodeEditor: "Edit catalog",
 					btOK: "OK",
 					btCancel: "Cancel",
 					btDelete: "Delete",
@@ -40,6 +41,7 @@ var Arundo = (function($, $H, $P){
 					configError: "Configuration Error",
 					confirm: "Confirm",
 					confirmDeleteRows: "Are you sure you want to delete selected records?",
+					confirmDeleteCat: "Are you sure you want to delete selected catalog?",
 					warningSelRows2Del: "Select rows to delete."
 				}
 			},
@@ -83,7 +85,7 @@ var Arundo = (function($, $H, $P){
 	
 	function checkDataSource(){
 		if(!__.dataSource) displayConfigError("Missing Data Source.");
-		checkInterface(__.dataSource, "function", ["getCatalogTree", "getMenu", "getRecord", "saveRecord", "getTableColumns", "getAllColumns", "deleteRows"]);
+		checkInterface(__.dataSource, "function", ["getCatalogTree", "getMenu", "getRecord", "saveRecord", "getTableColumns", "getAllColumns", "deleteRows", "deleteTreeNode"]);
 		checkInterface(__.dataSource, "string", ["name"]);
 	}
 	

@@ -15,31 +15,34 @@
 		);
 	}}
 	
-	function buildTreeTools(pnl, treeNodeEditor){
-		pnl.find(".toolBar .toolButton").linkbutton({plain: true});
-		pnl.find(".toolBar .btTreeEditNode").linkbutton({iconCls: "icon-edit"})
-			.tooltip({deltaX:20, content:$A.locale.getItem("btEdit")})
-			.click(function(){
-				treeNodeEditor.open();
-			});
-		pnl.find(".toolBar .btTreeAddNode").linkbutton({iconCls: "icon-add"})
-			.tooltip({content:$A.locale.getItem("btNew")})
-			.click(function(){
-				alert("add tree node");
-			});
-		pnl.find(".toolBar .btTreeDelNode").linkbutton({iconCls: "icon-remove"})
-			.tooltip({content:$A.locale.getItem("btDelete")})
-			.click(function(){
-				alert("delete tree node");
-			});
-	}
 	
 	function buildEditor(pnl, rowEditor, treeNodeEditor, rootID){
+		
+		function buildTreeTools(){
+			pnl.find(".toolBar .toolButton").linkbutton({plain: true});
+			pnl.find(".toolBar .btTreeEditNode").linkbutton({iconCls: "icon-edit"})
+				.tooltip({deltaX:20, content:$A.locale.getItem("btEdit")})
+				.click(function(){
+					treeNodeEditor.open();
+				});
+			pnl.find(".toolBar .btTreeAddNode").linkbutton({iconCls: "icon-add"})
+				.tooltip({content:$A.locale.getItem("btNew")})
+				.click(function(){
+					alert("add tree node");
+				});
+			pnl.find(".toolBar .btTreeDelNode").linkbutton({iconCls: "icon-remove"})
+				.tooltip({content:$A.locale.getItem("btDelete")})
+				.click(function(){
+					$.messager.confirm($A.locale.getItem("confirm"), $A.locale.getItem("confirmDeleteCat"), function(r){
+						if(r) $A.dataSource.deleteTreeNode(treeNodeEditor.catID, refreshTree, $A.displayError);
+					});
+				});
+		}
 		
 		function deleteRows(rowIDs){
 			if(rowIDs.length){
 				$.messager.confirm($A.locale.getItem("confirm"), $A.locale.getItem("confirmDeleteRows"),function(r){
-					if (r) $A.dataSource.deleteRows(rowIDs, refreshGrid, $A.displayError);
+					if(r) $A.dataSource.deleteRows(rowIDs, refreshGrid, $A.displayError);
 				});
 			}
 			else{
@@ -51,9 +54,8 @@
 			return [{checkbox:true}].concat(columns);
 		}
 
-		function refreshGrid(){
-			pnl.find(".dataGridPnl").datagrid("reload");
-		}
+		function refreshGrid(){pnl.find(".dataGridPnl").datagrid("reload");}
+		function refreshTree(){};
 		
 		pnl.html(template())
 			.find(".easyui-layout").layout();

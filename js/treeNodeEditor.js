@@ -14,8 +14,37 @@
 		
 		$.extend(_,{
 			catID:null,
-			open:function(rowID){
-				alert("open!!!!!");
+			open:function(catID){
+				if(!$("#"+dlgID).length){
+					$("body").append(Html.div({id:dlgID}));
+					$("#"+dlgID)
+						.dialog({
+							title:$A.locale.getItem("treeNodeEditor"), 
+							width: 450, height: 300,
+							resizable: true,
+							buttons:[
+								{text:$A.locale.getItem("btOK"), handler:function(){
+									saveData(function(){
+										$("#"+dlgID).dialog("close");
+										_.onSaved();
+									});
+								}},
+								{text:$A.locale.getItem("btCancel"), handler:function(){
+									$("#"+dlgID).dialog("close");
+								}}
+							]
+						});
+				}
+				var contentPnl = $("#"+dlgID+" .dialog-content");
+				contentPnl.html("loading...");
+				
+				function saveData(onSuccess){
+					onSuccess();
+					// var data = collectData(contentPnl);
+					// $A.dataSource.saveRecord(_.rowID, _.catID, data, onSuccess, $A.displayError);
+				}
+				
+				$("#"+dlgID).dialog("open");
 			},
 			onSaved: function(){}
 		});
