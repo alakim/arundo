@@ -155,7 +155,16 @@ Arundo.dataSource = (function($){
 			onSuccess(findColumns(catID, "field;title;type"));
 		},
 		deleteRows: function(rowIDs, onSuccess, onError){
-			onError("deleteRow: method not implemented!");
+			$.each(rowIDs, function(i, recID){
+				var catID = rowIndex[recID].catID;
+				var catRows = testData.rows[catID];
+				res = [];
+				$.each(catRows, function(i, row){
+					if(row.id!=recID) res.push(row);
+				});
+				testData.rows[catID] = res;
+			});
+			onSuccess();
 		}
 	};
 	

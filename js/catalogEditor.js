@@ -15,12 +15,12 @@
 		);
 	}}
 	
-	function buildTreeTools(pnl){
+	function buildTreeTools(pnl, treeNodeEditor){
 		pnl.find(".toolBar .toolButton").linkbutton({plain: true});
 		pnl.find(".toolBar .btTreeEditNode").linkbutton({iconCls: "icon-edit"})
 			.tooltip({deltaX:20, content:$A.locale.getItem("btEdit")})
 			.click(function(){
-				alert("edit tree node");
+				treeNodeEditor.open();
 			});
 		pnl.find(".toolBar .btTreeAddNode").linkbutton({iconCls: "icon-add"})
 			.tooltip({content:$A.locale.getItem("btNew")})
@@ -34,7 +34,7 @@
 			});
 	}
 	
-	function buildEditor(pnl, rowEditor, rootID){
+	function buildEditor(pnl, rowEditor, treeNodeEditor, rootID){
 		
 		function deleteRows(rowIDs){
 			if(rowIDs.length){
@@ -64,6 +64,7 @@
 			},
 			onClick: function(node){
 				rowEditor.catID = node.id;
+				treeNodeEditor.catID = node.id;
 				$A.dataSource.getTableColumns(node.id, function(columns){
 					columns = addSysColumns(columns);
 					pnl.find(".dataGridPnl").datagrid({
@@ -74,7 +75,7 @@
 				});
 			}
 		});
-		buildTreeTools(pnl);
+		buildTreeTools(pnl, treeNodeEditor);
 		
 		$A.dataSource.getTableColumns(rootID, function(columns){
 			columns = addSysColumns(columns);
@@ -117,11 +118,13 @@
 		rowEditor.catID = rootID;
 		rowEditor.onSaved = refreshGrid;
 		
+		treeNodeEditor.catID = rootID;
+		
 	}
 
 	$.fn.catalogEditor = (function(rootID){
 		$(this).each(function(i,el){
-			buildEditor($(el), new RowEditor(), rootID);
+			buildEditor($(el), new RowEditor(), new TreeNodeEditor(), rootID);
 		});
 	});
 })(jQuery, Arundo, Html);
