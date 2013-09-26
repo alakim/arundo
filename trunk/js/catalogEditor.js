@@ -2,6 +2,11 @@
 	function template(){with(H){
 		return div({"class":"easyui-layout", style:"width:1200px;height:400px;"},
 			div({"data-options":"region:'west',split:true", title:$A.locale.getItem("catalogs"), style:"width:220px;"},
+				div({"class":"toolBar"},
+					a({"class":"toolButton btTreeEditNode"}),
+					a({"class":"toolButton btTreeAddNode"}),
+					a({"class":"toolButton btTreeDelNode"})
+				),
 				ul({"class":"catTreePnl"})
 			),
 			div({"data-options":"region:'center',title:false"},
@@ -9,6 +14,25 @@
 			)
 		);
 	}}
+	
+	function buildTreeTools(pnl){
+		pnl.find(".toolBar .toolButton").linkbutton({plain: true});
+		pnl.find(".toolBar .btTreeEditNode").linkbutton({iconCls: "icon-edit"})
+			.tooltip({deltaX:20, content:$A.locale.getItem("btEdit")})
+			.click(function(){
+				alert("edit tree node");
+			});
+		pnl.find(".toolBar .btTreeAddNode").linkbutton({iconCls: "icon-add"})
+			.tooltip({content:$A.locale.getItem("btNew")})
+			.click(function(){
+				alert("add tree node");
+			});
+		pnl.find(".toolBar .btTreeDelNode").linkbutton({iconCls: "icon-remove"})
+			.tooltip({content:$A.locale.getItem("btDelete")})
+			.click(function(){
+				alert("delete tree node");
+			});
+	}
 	
 	function buildEditor(pnl, rowEditor, rootID){
 		
@@ -50,6 +74,8 @@
 				});
 			}
 		});
+		buildTreeTools(pnl);
+		
 		$A.dataSource.getTableColumns(rootID, function(columns){
 			columns = addSysColumns(columns);
 			pnl.find(".dataGridPnl").datagrid({

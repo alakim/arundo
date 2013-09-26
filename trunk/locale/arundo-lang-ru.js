@@ -9,6 +9,7 @@ Arundo.locale.addItems("ru", {
 	btCancel: "Отмена",
 	btDelete: "Удалить",
 	btNew: "Создать",
+	btEdit: "Изменить",
 	warning: "Предупреждение",
 	error: "Ошибка",
 	configError: "Ошибка конфигурации",

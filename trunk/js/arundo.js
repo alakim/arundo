@@ -34,6 +34,7 @@ var Arundo = (function($, $H, $P){
 					btCancel: "Cancel",
 					btDelete: "Delete",
 					btNew: "New",
+					btEdit: "Edit",
 					warning: "Warning",
 					error: "Error",
 					configError: "Configuration Error",
