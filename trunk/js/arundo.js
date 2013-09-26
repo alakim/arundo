@@ -33,7 +33,13 @@ var Arundo = (function($, $H, $P){
 					btOK: "OK",
 					btCancel: "Cancel",
 					btDelete: "Delete",
-					btNew: "New"
+					btNew: "New",
+					warning: "Warning",
+					error: "Error",
+					configError: "Configuration Error",
+					confirm: "Confirm",
+					confirmDeleteRows: "Are you sure you want to delete selected records?",
+					warningSelRows2Del: "Select rows to delete."
 				}
 			},
 			addItems: function(lang, items){
@@ -86,7 +92,7 @@ var Arundo = (function($, $H, $P){
 	}
 	
 	function displayConfigError(msg){
-		alert("Configuration Error\n\n"+msg);
+		$.messager.alert(locale.getItem("configError"), msg.message || msg.text || msg, "error");
 	}
 	
 	var __ = {
@@ -105,7 +111,7 @@ var Arundo = (function($, $H, $P){
 			__.view.init();
 		},
 		displayError: function(err){
-			alert("Error: "+(err.message || err));
+			$.messager.alert(locale.getItem("error"), (err.message || err), "error");
 		}
 	};
 	
