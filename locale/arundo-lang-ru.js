@@ -8,5 +8,11 @@ Arundo.locale.addItems("ru", {
 	btOK: "Ввод",
 	btCancel: "Отмена",
 	btDelete: "Удалить",
-	btNew: "Создать"
+	btNew: "Создать",
+	warning: "Предупреждение",
+	error: "Ошибка",
+	configError: "Ошибка конфигурации",
+	confirm: "Подтверждение",
+	confirmDeleteRows: "Вы действительно хотите удалить эти записи?",
+	warningSelRows2Del: "Отметьте записи для удаления."
 });

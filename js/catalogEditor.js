@@ -13,8 +13,14 @@
 	function buildEditor(pnl, rowEditor, rootID){
 		
 		function deleteRows(rowIDs){
-			if(confirm("Delete these rows?"))
-				$A.dataSource.deleteRows(rowIDs, refreshGrid, $A.displayError);
+			if(rowIDs.length){
+				$.messager.confirm($A.locale.getItem("confirm"), $A.locale.getItem("confirmDeleteRows"),function(r){
+					if (r) $A.dataSource.deleteRows(rowIDs, refreshGrid, $A.displayError);
+				});
+			}
+			else{
+				$.messager.alert($A.locale.getItem("warning"), $A.locale.getItem("warningSelRows2Del"), "warning");
+			}
 		}
 		
 		function addSysColumns(columns){
@@ -75,7 +81,9 @@
 					},'-',
 					{
 						iconCls: 'icon-help',
-						handler: function(){alert('help')}
+						handler: function(){
+							$.messager.alert("Under Construction", "See project site for more help", "info");
+						}
 					}
 				]
 			})
