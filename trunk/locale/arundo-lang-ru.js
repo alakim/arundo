@@ -18,6 +18,7 @@ Arundo.locale.addItems("ru", {
 	confirmDeleteRows: "Вы действительно хотите удалить эти записи?",
 	confirmDeleteCat: "Вы действительно хотите удалить этот каталог?",
 	warningSelRows2Del: "Отметьте записи для удаления.",
+	warningSelectAnyCatalog: "Выберите каталог.",
 	errCatNotExist: "Каталог '$' не существует.",
 	errRowNotExist: "Запись '$' не существует.",
 	errRecSaving: "Ошибка сохранения записи."

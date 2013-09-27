@@ -43,6 +43,7 @@ var Arundo = (function($, $H, $P){
 					confirmDeleteRows: "Are you sure you want to delete selected records?",
 					confirmDeleteCat: "Are you sure you want to delete selected catalog?",
 					warningSelRows2Del: "Select rows to delete.",
+					warningSelectAnyCatalog: "Select any catalog.",
 					errCatNotExist: "Catalog '$' does not exists.",
 					errRowNotExist: "Record '$' does not exists.",
 					errRecSaving: "Record saving error."
@@ -124,6 +125,9 @@ var Arundo = (function($, $H, $P){
 		},
 		displayError: function(err){
 			$.messager.alert(locale.getItem("error"), (err.message || err), "error");
+		},
+		displayWarning: function(msg){
+			$.messager.alert(locale.getItem("warning"), msg, "warning")
 		}
 	};
 	

@@ -4,7 +4,12 @@
 	var templates = {
 		dialog: function(data){with(H){
 			return table({border:1, cellpadding:3, cellspacing:0},
-				tr(td())
+				apply(data.node, function(val, k){
+					return tr(
+						td(k),
+						td(val)
+					);
+				})
 			);
 		}}
 	};
@@ -48,7 +53,7 @@
 				
 				if(catID){
 					$A.dataSource.getCatalogProperties(catID, function(data){
-						
+						contentPnl.html(templates.dialog(data));
 					}, $A.displayError);
 				}
 			},
