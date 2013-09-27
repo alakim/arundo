@@ -187,7 +187,11 @@ Arundo.dataSource = (function($, $A, $P){
 			}
 			onSuccess({total:3, rows:[
 				{name:"ID", "value": data.node.id, hidden:true, editor:"none"},
-				{name:"Parent", "value": data.parent, editor:"text"},
+				{name:"Parent", "value": data.parent, editor:{type:"combotree", options:{
+					loader:function(prm, onSuccess, onError){
+						$A.dataSource.getCatalogTree({rootID: null}, onSuccess, onError);
+					}
+				}}},
 				{name:"Name", "value":data.node.text, editor:"text"}
 			]});
 		},
