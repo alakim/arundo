@@ -45,6 +45,12 @@
 				}
 				
 				$("#"+dlgID).dialog("open");
+				
+				if(catID){
+					$A.dataSource.getCatalogProperties(catID, function(data){
+						
+					}, $A.displayError);
+				}
 			},
 			onSaved: function(){}
 		});

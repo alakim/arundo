@@ -42,7 +42,10 @@ var Arundo = (function($, $H, $P){
 					confirm: "Confirm",
 					confirmDeleteRows: "Are you sure you want to delete selected records?",
 					confirmDeleteCat: "Are you sure you want to delete selected catalog?",
-					warningSelRows2Del: "Select rows to delete."
+					warningSelRows2Del: "Select rows to delete.",
+					errCatNotExist: "Catalog '$' does not exists.",
+					errRowNotExist: "Record '$' does not exists.",
+					errRecSaving: "Record saving error."
 				}
 			},
 			addItems: function(lang, items){
@@ -85,7 +88,13 @@ var Arundo = (function($, $H, $P){
 	
 	function checkDataSource(){
 		if(!__.dataSource) displayConfigError("Missing Data Source.");
-		checkInterface(__.dataSource, "function", ["getCatalogTree", "getMenu", "getRecord", "saveRecord", "getTableColumns", "getAllColumns", "deleteRows", "deleteTreeNode"]);
+		checkInterface(__.dataSource, "function", [
+			"getCatalogTree", 
+			"getRecord", "saveRecord", 
+			"getTableColumns", "getAllColumns", 
+			"deleteRows", "deleteCatalog", 
+			"getCatalogProperties"
+		]);
 		checkInterface(__.dataSource, "string", ["name"]);
 	}
 	
