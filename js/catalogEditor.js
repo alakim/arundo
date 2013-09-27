@@ -23,7 +23,9 @@
 			pnl.find(".toolBar .btTreeEditNode").linkbutton({iconCls: "icon-edit"})
 				.tooltip({deltaX:20, content:$A.locale.getItem("btEdit")})
 				.click(function(){
-					treeNodeEditor.open();
+					var selected = pnl.find(".catTreePnl").tree('getSelected');
+					if(!selected){$A.displayWarning($A.locale.getItem("warningSelectAnyCatalog")); return;}
+					treeNodeEditor.open(selected.id);
 				});
 			pnl.find(".toolBar .btTreeAddNode").linkbutton({iconCls: "icon-add"})
 				.tooltip({content:$A.locale.getItem("btNew")})
@@ -46,7 +48,7 @@
 				});
 			}
 			else{
-				$.messager.alert($A.locale.getItem("warning"), $A.locale.getItem("warningSelRows2Del"), "warning");
+				$A.displayWarning($A.locale.getItem("warningSelRows2Del"));
 			}
 		}
 		
