@@ -46,7 +46,8 @@ var Arundo = (function($, $H, $P){
 					warningSelectAnyCatalog: "Select any catalog.",
 					errCatNotExist: "Catalog '$' does not exists.",
 					errRowNotExist: "Record '$' does not exists.",
-					errRecSaving: "Record saving error."
+					errRecSaving: "Record saving error.",
+					errCatSaving: "Catalog saving error."
 				}
 			},
 			addItems: function(lang, items){

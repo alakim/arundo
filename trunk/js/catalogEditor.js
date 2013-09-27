@@ -57,7 +57,7 @@
 		}
 
 		function refreshGrid(){pnl.find(".dataGridPnl").datagrid("reload");}
-		function refreshTree(){};
+		function refreshTree(){pnl.find(".catTreePnl").tree("reload");}
 		
 		pnl.html(template())
 			.find(".easyui-layout").layout();
@@ -123,6 +123,7 @@
 		rowEditor.onSaved = refreshGrid;
 		
 		treeNodeEditor.catID = rootID;
+		treeNodeEditor.onSaved = refreshTree;
 		
 	}
 

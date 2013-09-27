@@ -3,11 +3,16 @@
 	
 	var templates = {
 		dialog: function(data){with(H){
-			return table({border:1, cellpadding:3, cellspacing:0},
+			return table({border:0, cellpadding:3, cellspacing:0},
 				apply(data.node, function(val, k){
+					if(k=="state" || k=="id") return null;
+					var title = k=="text"?$A.locale.getItem("name")
+						:k;
 					return tr(
-						td(k),
-						td(val)
+						td(title),
+						td(
+							input({type:"text", "class":"fldCat", value:val, fldID:k, style:"width:250px;"})
+						)
 					);
 				})
 			);
@@ -43,10 +48,18 @@
 				var contentPnl = $("#"+dlgID+" .dialog-content");
 				contentPnl.html("loading...");
 				
+				function collectData(){
+					var res = {};
+					contentPnl.find(".fldCat").each(function(i, fld){fld=$(fld);
+						var fldID = fld.attr("fldID");
+						res[fldID] = fld.val();
+					});
+					return res;
+				}
+				
 				function saveData(onSuccess){
-					onSuccess();
-					// var data = collectData(contentPnl);
-					// $A.dataSource.saveRecord(_.rowID, _.catID, data, onSuccess, $A.displayError);
+					var data = collectData(contentPnl);
+					$A.dataSource.saveCatalogProperties(_.catID, data, onSuccess, $A.displayError);
 				}
 				
 				$("#"+dlgID).dialog("open");

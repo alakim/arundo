@@ -181,6 +181,12 @@ Arundo.dataSource = (function($, $A){
 			var data = treeNodes[catID];
 			if(data) onSuccess(data);
 				else onError($A.locale.getItem("errCatNotExist").replace("$", catID));
+		},
+		saveCatalogProperties: function(catID, data, onSuccess, onError){
+			var cat = treeNodes[catID];
+			if(!cat){onError($A.locale.getItem("errCatSaving").replace("$", catID)); return;}
+			$.extend(cat.node, data);
+			onSuccess();
 		}
 	};
 	

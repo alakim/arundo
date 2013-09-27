@@ -1,4 +1,5 @@
 Arundo.locale.addItems("ru", {
+	name: "Название",
 	catalogs: "Каталоги",
 	options: "Свойства",
 	menu: "Меню",
@@ -21,5 +22,6 @@ Arundo.locale.addItems("ru", {
 	warningSelectAnyCatalog: "Выберите каталог.",
 	errCatNotExist: "Каталог '$' не существует.",
 	errRowNotExist: "Запись '$' не существует.",
-	errRecSaving: "Ошибка сохранения записи."
+	errRecSaving: "Ошибка сохранения записи.",
+	errCatSaving: "Ошибка сохранения каталога."
 });
