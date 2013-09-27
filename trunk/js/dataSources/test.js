@@ -1,4 +1,4 @@
-Arundo.dataSource = (function($, $A){
+Arundo.dataSource = (function($, $A, $P){
 	var testData = {
 		tree: [
 			{text:"Персоналии", id:"persons", children:[
@@ -57,9 +57,10 @@ Arundo.dataSource = (function($, $A){
 
 	var treeNodes = {};
 	function indexTree(subtree, parentID){
+		if(!subtree) treeNodes = {};
 		subtree = subtree || testData.tree;
 		$.each(subtree, function(i, nd){
-			if(treeNodes[nd.id]) alert("Tree Node '"+nd.id+"' already exists!");
+			if(treeNodes[nd.id]) $.messager.alert("Test Data Source Error", "Tree Node '"+nd.id+"' already exists!", "error");
 			treeNodes[nd.id] = {node:nd, parent:parentID};
 			if(nd.children){
 				indexTree(nd.children, nd.id);
@@ -70,6 +71,7 @@ Arundo.dataSource = (function($, $A){
 	
 	var rowIndex = {};
 	function indexRows(){
+		rowIndex = {};
 		for(var k in testData.rows){
 			var cat = testData.rows[k];
 			for(var i=0; i<cat.length; i++){
@@ -195,6 +197,18 @@ Arundo.dataSource = (function($, $A){
 			$.each(data, function(i, prop){
 				switch(prop.name){
 					case "Name": cat.node.text = prop.value; break;
+					case "Parent":
+						var prt = treeNodes[prop.value].node;
+						$P.set(prt, "children/#*", cat.node);
+						var oldParent = treeNodes[cat.parent].node;
+						var nCh = [];
+						for(var i=0; i<oldParent.children.length; i++){
+							var itm = oldParent.children[i];
+							if(itm.id!=cat.node.id) nCh.push(itm);
+						}
+						oldParent.children = nCh;
+						indexTree();
+						break;
 					default: break;
 				}
 			});
@@ -203,4 +217,4 @@ Arundo.dataSource = (function($, $A){
 	};
 	
 	return __;
-})(jQuery, Arundo);
+})(jQuery, Arundo, JsPath);
