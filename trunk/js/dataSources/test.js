@@ -177,15 +177,27 @@ Arundo.dataSource = (function($, $A){
 		deleteCatalog: function(catID, onSuccess, onError){
 			onError("deleteCatalog: method is not implemented!");
 		},
-		getCatalogProperties: function(catID, onSuccess, onError){
-			var data = treeNodes[catID];
-			if(data) onSuccess(data);
-				else onError($A.locale.getItem("errCatNotExist").replace("$", catID));
+		getCatalogProperties: function(param, onSuccess, onError){
+			var data = treeNodes[param.catID];
+			if(!data){
+				onError($A.locale.getItem("errCatNotExist").replace("$", catID));
+				return;
+			}
+			onSuccess({total:3, rows:[
+				{name:"ID", "value": data.node.id, hidden:true, editor:"none"},
+				{name:"Parent", "value": data.parent, editor:"text"},
+				{name:"Name", "value":data.node.text, editor:"text"}
+			]});
 		},
 		saveCatalogProperties: function(catID, data, onSuccess, onError){
 			var cat = treeNodes[catID];
 			if(!cat){onError($A.locale.getItem("errCatSaving").replace("$", catID)); return;}
-			$.extend(cat.node, data);
+			$.each(data, function(i, prop){
+				switch(prop.name){
+					case "Name": cat.node.text = prop.value; break;
+					default: break;
+				}
+			});
 			onSuccess();
 		}
 	};

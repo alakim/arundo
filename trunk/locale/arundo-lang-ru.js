@@ -1,5 +1,7 @@
 Arundo.locale.addItems("ru", {
 	name: "Название",
+	property: "Свойство",
+	value: "Значение",
 	catalogs: "Каталоги",
 	options: "Свойства",
 	menu: "Меню",

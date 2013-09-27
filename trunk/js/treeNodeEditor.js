@@ -46,28 +46,29 @@
 						});
 				}
 				var contentPnl = $("#"+dlgID+" .dialog-content");
-				contentPnl.html("loading...");
-				
-				function collectData(){
-					var res = {};
-					contentPnl.find(".fldCat").each(function(i, fld){fld=$(fld);
-						var fldID = fld.attr("fldID");
-						res[fldID] = fld.val();
-					});
-					return res;
-				}
+				var propGrid = $(Html.table({"class":"catProp", width:"250"}));
+				contentPnl.html(propGrid);
+				propGrid.propertygrid({
+					loader: $A.dataSource.getCatalogProperties,
+					showGroup: false,
+					columns: [[
+						{field:"name", title:$A.locale.getItem("property"), width:60},
+						{field:"value", title:$A.locale.getItem("value"), width: 100}
+					]],
+					queryParams:{catID:catID}
+				});
 				
 				function saveData(onSuccess){
-					var data = collectData(contentPnl);
+					var data = contentPnl.find('.catProp').propertygrid('getChanges');
 					$A.dataSource.saveCatalogProperties(_.catID, data, onSuccess, $A.displayError);
 				}
 				
 				$("#"+dlgID).dialog("open");
 				
 				if(catID){
-					$A.dataSource.getCatalogProperties(catID, function(data){
-						contentPnl.html(templates.dialog(data));
-					}, $A.displayError);
+					// $A.dataSource.getCatalogProperties(catID, function(data){
+						// contentPnl.html(templates.dialog(data));
+					// }, $A.displayError);
 				}
 			},
 			onSaved: function(){}
