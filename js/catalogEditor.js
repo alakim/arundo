@@ -34,7 +34,7 @@
 				.tooltip({content:$A.locale.getItem("btDelete")})
 				.click(function(){
 					$.messager.confirm($A.locale.getItem("confirm"), $A.locale.getItem("confirmDeleteCat"), function(r){
-						if(r) $A.dataSource.deleteTreeNode(treeNodeEditor.catID, refreshTree, $A.displayError);
+						if(r) $A.dataSource.deleteCatalog(treeNodeEditor.catID, refreshTree, $A.displayError);
 					});
 				});
 		}

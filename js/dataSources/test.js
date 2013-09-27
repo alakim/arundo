@@ -1,4 +1,4 @@
-Arundo.dataSource = (function($){
+Arundo.dataSource = (function($, $A){
 	var testData = {
 		tree: [
 			{text:"Персоналии", id:"persons", children:[
@@ -121,10 +121,13 @@ Arundo.dataSource = (function($){
 				onSuccess(rTree);
 			}
 		}, 
-		getMenu: function(onSuccess, onError){
-		}, 
 		getRecord: function(recID, catID, onSuccess, onError){
-			var row = rowIndex[recID].data;
+			var rec = rowIndex[recID];
+			if(!rec){
+				onError($A.locale.getItem("errRowNotExist").replace("$", recID));
+				return;
+			}
+			var row = rec.data;
 			var res = {
 				columns:{},
 				data:row
@@ -143,10 +146,15 @@ Arundo.dataSource = (function($){
 				testData.rows[catID].push(row);
 				indexRows();
 			}
-			onSuccess();
+			if(false) // придумать условие!
+				onError($A.locale.getItem("errRecSaving"));
+			else
+				onSuccess();
 		},
 		getTable: function(param, onSuccess, onError){
-			onSuccess(testData.rows[param.catID]);
+			var  cat = testData.rows[param.catID];
+			if(!cat) onError($A.locale.getItem("errCatNotExist").replace("$", param.catID));
+			else onSuccess(cat);
 		},
 		getTableColumns: function(catID, onSuccess, onError){
 			onSuccess(findColumns(catID));
@@ -166,10 +174,15 @@ Arundo.dataSource = (function($){
 			});
 			onSuccess();
 		},
-		deleteTreeNode: function(catID, onSuccess, onError){
-			onError("deleteTreeNode: method is not implemented!");
+		deleteCatalog: function(catID, onSuccess, onError){
+			onError("deleteCatalog: method is not implemented!");
+		},
+		getCatalogProperties: function(catID, onSuccess, onError){
+			var data = treeNodes[catID];
+			if(data) onSuccess(data);
+				else onError($A.locale.getItem("errCatNotExist").replace("$", catID));
 		}
 	};
 	
 	return __;
-})(jQuery);
+})(jQuery, Arundo);
