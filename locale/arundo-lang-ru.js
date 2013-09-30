@@ -14,6 +14,7 @@ Arundo.locale.addItems("ru", {
 	btDelete: "Удалить",
 	btNew: "Создать",
 	btEdit: "Изменить",
+	btOpenNewWindow: "Открыть в новом окне",
 	warning: "Предупреждение",
 	error: "Ошибка",
 	configError: "Ошибка конфигурации",
