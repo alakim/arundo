@@ -48,6 +48,7 @@
 				var contentPnl = $("#"+dlgID+" .dialog-content");
 				var propGrid = $(Html.table({"class":"catProp", width:"250"}));
 				contentPnl.html(propGrid);
+				
 				propGrid.propertygrid({
 					loader: $A.dataSource.getCatalogProperties,
 					showGroup: false,
