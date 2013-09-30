@@ -195,22 +195,36 @@ Arundo.dataSource = (function($, $A, $P){
 			onError("deleteCatalog: method is not implemented!");
 		},
 		getCatalogProperties: function(param, onSuccess, onError){
-			var data = treeNodes[param.catID];
-			if(!data){
-				onError($A.locale.getItem("errCatNotExist").replace("$", catID));
-				return;
+			var newMode = param.catID==null;
+			if(newMode){
+				onSuccess({total:3, rows:[
+					{name:"ID", "value": createNewID(), hidden:true, editor:"none"},
+					{name:"Parent", "value": null, editor:{type:"combotree", options:{
+						loader:function(prm, onSuccess, onError){
+							$A.dataSource.getCatalogTree({rootID: null, includeRoot:true}, onSuccess, onError);
+						}
+					}}},
+					{name:"Name", "value":"", editor:"text"}
+				]});
 			}
-			onSuccess({total:3, rows:[
-				{name:"ID", "value": data.node.id, hidden:true, editor:"none"},
-				{name:"Parent", "value": data.parent, editor:{type:"combotree", options:{
-					loader:function(prm, onSuccess, onError){
-						// важно исключать из вывода дерева ветвь данного узла,
-						// чтобы пользователь ошибочно не создал рекурсивных ссылок
-						$A.dataSource.getCatalogTree({rootID: null, excludeBranch:data.node.id, includeRoot:true}, onSuccess, onError);
-					}
-				}}},
-				{name:"Name", "value":data.node.text, editor:"text"}
-			]});
+			else{
+				var data = treeNodes[param.catID];
+				if(!data){
+					onError($A.locale.getItem("errCatNotExist").replace("$", catID));
+					return;
+				}
+				onSuccess({total:3, rows:[
+					{name:"ID", "value": data.node.id, hidden:true, editor:"none"},
+					{name:"Parent", "value": data.parent, editor:{type:"combotree", options:{
+						loader:function(prm, onSuccess, onError){
+							// важно исключать из вывода дерева ветвь данного узла,
+							// чтобы пользователь ошибочно не создал рекурсивных ссылок
+							$A.dataSource.getCatalogTree({rootID: null, excludeBranch:data.node.id, includeRoot:true}, onSuccess, onError);
+						}
+					}}},
+					{name:"Name", "value":data.node.text, editor:"text"}
+				]});
+			}
 		},
 		saveCatalogProperties: function(catID, data, onSuccess, onError){
 			var cat = treeNodes[catID];

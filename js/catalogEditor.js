@@ -31,7 +31,7 @@
 			pnl.find(".toolBar .btTreeAddNode").linkbutton({iconCls: "icon-add"})
 				.tooltip({content:$A.locale.getItem("btNew")})
 				.click(function(){
-					alert("add tree node");
+					treeNodeEditor.open();
 				});
 			pnl.find(".toolBar .btTreeDelNode").linkbutton({iconCls: "icon-remove"})
 				.tooltip({content:$A.locale.getItem("btDelete")})
