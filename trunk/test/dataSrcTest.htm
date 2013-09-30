@@ -1,0 +1,34 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=utf-8"/>
+<title>Тесты источника данных</title>
+<script type="text/javascript" src="lib/jsUnit.js"></script>
+<script type="text/javascript" src="../ui/jquery.min.js"></script>
+<script type="text/javascript" src="../js/lib/jspath.js"></script>
+	<!--script type="text/javascript" src="../ui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../js/lib/html.js"></script>
+	<script type="text/javascript" src="../js/arundo.js"></script>
+	<script type="text/javascript" src="../locale/arundo-lang-ru.js"></script-->
+
+<script type="text/javascript" src="../js/dataSources/iDataSource.js"></script>
+<script type="text/javascript" src="mockArundo.js"></script>
+<script type="text/javascript" src="../js/dataSources/test.js"></script>
+<script type="text/javascript">
+new JSUnit.Test("Подключение модуля Arundo", "Configuration").run = function(){
+	this.assert(typeof(Arundo), "object");
+	this.assert(typeof(Arundo.dataSource), "object");
+}
+
+
+function init(){
+	IDataSource.check(Arundo.dataSource);
+	JSUnit.init();
+}
+</script>
+
+</head>
+<body onload="init()">
+	<h1>Тесты источника данных</h1>
+	<div id="out"></div>
+</body>
+</html>

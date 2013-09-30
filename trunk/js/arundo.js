@@ -1,5 +1,7 @@
 var Arundo = (function($, $H, $P){
 
+	IDataSource.displayConfigError = displayConfigError;
+
 	var dateUtility = {
 		format: function(d){
 			var y = d.getFullYear();
@@ -85,20 +87,8 @@ var Arundo = (function($, $H, $P){
 	function checkInterface(obj, type, members){
 		$.each(members, function(i, m){
 			if(typeof(obj[m])!=type)
-				displayConfigError("Missing Data Source interface member "+type+"::"+m);
+				displayConfigError("Missing interface member "+type+"::"+m);
 		})
-	}
-	
-	function checkDataSource(){
-		if(!__.dataSource) displayConfigError("Missing Data Source.");
-		checkInterface(__.dataSource, "function", [
-			"getCatalogTree", 
-			"getRecord", "saveRecord", 
-			"getTableColumns", "getAllColumns", 
-			"deleteRows", "deleteCatalog", 
-			"getCatalogProperties"
-		]);
-		checkInterface(__.dataSource, "string", ["name"]);
 	}
 	
 	function checkView(){
@@ -121,7 +111,7 @@ var Arundo = (function($, $H, $P){
 		},
 		init: function(){
 			__.locale.localize("body");
-			checkDataSource();
+			IDataSource.check(__.dataSource);
 			checkView();
 			__.view.init();
 		},
