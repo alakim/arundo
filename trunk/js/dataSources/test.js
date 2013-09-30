@@ -135,6 +135,7 @@ Arundo.dataSource = (function($, $A, $P){
 						:subtree;
 			}
 			if(param.excludeBranch) res = excludeBranch(res, param.excludeBranch);
+			if(param.includeRoot) res = [{id:null, text:"/"}].concat(res);
 			onSuccess(res);
 		}, 
 		getRecord: function(recID, catID, onSuccess, onError){
@@ -205,7 +206,7 @@ Arundo.dataSource = (function($, $A, $P){
 					loader:function(prm, onSuccess, onError){
 						// важно исключать из вывода дерева ветвь данного узла,
 						// чтобы пользователь ошибочно не создал рекурсивных ссылок
-						$A.dataSource.getCatalogTree({rootID: null, excludeBranch:data.node.id}, onSuccess, onError);
+						$A.dataSource.getCatalogTree({rootID: null, excludeBranch:data.node.id, includeRoot:true}, onSuccess, onError);
 					}
 				}}},
 				{name:"Name", "value":data.node.text, editor:"text"}
@@ -218,8 +219,9 @@ Arundo.dataSource = (function($, $A, $P){
 				switch(prop.name){
 					case "Name": cat.node.text = prop.value; break;
 					case "Parent":
-						var prt = treeNodes[prop.value].node;
-						$P.set(prt, "children/#*", cat.node);
+						var prt = prop.value?treeNodes[prop.value].node:null;
+						if(prt) $P.set(prt, "children/#*", cat.node);
+							else testData.tree.push(cat.node);
 						var oldParent = (cat.parent && treeNodes[cat.parent])?treeNodes[cat.parent].node:null;
 						var nCh = [];
 						var oldSubTree = oldParent?oldParent.children:testData.tree;
