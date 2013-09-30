@@ -102,6 +102,19 @@ Arundo.dataSource = (function($, $A, $P){
 	function createNewID(){
 		return "itm"+(new Date()).getTime();
 	}
+	
+	function excludeBranch(tree, branchRoot){
+		if(!tree) return;
+		var res = [];
+		$.each(tree, function(i, nd){
+			if(nd.id!=branchRoot){
+				res.push(nd);
+				if(nd.children)
+					nd.children = excludeBranch(nd.children, branchRoot);
+			}
+		});
+		return res;
+	}
 
 	
 	var __ = {
@@ -109,19 +122,20 @@ Arundo.dataSource = (function($, $A, $P){
 		getCatalogTree: function(param, onSuccess, onError){
 			var root = param.rootID?treeNodes[param.rootID].node:null;
 			var subtree = root?root.children : testData.tree;
+			var res;
 			
 			if(param.depth==1){
-				var res = [];
+				res = [];
 				$.each(subtree, function(i, itm){
 					res.push({id: itm.id, text: itm.text});
 				});
-				onSuccess(res);
 			}
 			else{
-				var rTree = root?[{id:param.rootID, text:root.text, children: subtree}]
+				res = root?[{id:param.rootID, text:root.text, children: subtree}]
 						:subtree;
-				onSuccess(rTree);
 			}
+			if(param.excludeBranch) res = excludeBranch(res, param.excludeBranch);
+			onSuccess(res);
 		}, 
 		getRecord: function(recID, catID, onSuccess, onError){
 			var rec = rowIndex[recID];
@@ -189,7 +203,9 @@ Arundo.dataSource = (function($, $A, $P){
 				{name:"ID", "value": data.node.id, hidden:true, editor:"none"},
 				{name:"Parent", "value": data.parent, editor:{type:"combotree", options:{
 					loader:function(prm, onSuccess, onError){
-						$A.dataSource.getCatalogTree({rootID: null}, onSuccess, onError);
+						// важно исключать из вывода дерева ветвь данного узла,
+						// чтобы пользователь ошибочно не создал рекурсивных ссылок
+						$A.dataSource.getCatalogTree({rootID: null, excludeBranch:data.node.id}, onSuccess, onError);
 					}
 				}}},
 				{name:"Name", "value":data.node.text, editor:"text"}
@@ -204,13 +220,15 @@ Arundo.dataSource = (function($, $A, $P){
 					case "Parent":
 						var prt = treeNodes[prop.value].node;
 						$P.set(prt, "children/#*", cat.node);
-						var oldParent = treeNodes[cat.parent].node;
+						var oldParent = (cat.parent && treeNodes[cat.parent])?treeNodes[cat.parent].node:null;
 						var nCh = [];
-						for(var i=0; i<oldParent.children.length; i++){
-							var itm = oldParent.children[i];
+						var oldSubTree = oldParent?oldParent.children:testData.tree;
+						for(var i=0; i<oldSubTree.length; i++){
+							var itm = oldSubTree[i];
 							if(itm.id!=cat.node.id) nCh.push(itm);
 						}
-						oldParent.children = nCh;
+						if(oldParent) oldParent.children = nCh; 
+							else testData.tree = nCh;
 						indexTree();
 						break;
 					default: break;
