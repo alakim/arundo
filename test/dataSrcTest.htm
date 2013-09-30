@@ -19,6 +19,67 @@ new JSUnit.Test("Подключение модуля Arundo", "Configuration").r
 	this.assert(typeof(Arundo.dataSource), "object");
 }
 
+new JSUnit.Test("Получение поддерева", "getCatalogTree").run = function(){var _=this;
+	Arundo.dataSource.getCatalogTree({rootID:"persons"}, function(data){
+		_.assert(data, [{id:"persons", text:"Персоналии", children:[
+			{id:"management", text:"Руководство"},
+			{id:"developers", text:"Отдел разработки"},
+			{id:"accDep", text:"Бухгалтерия"},
+			{id:"economy", text:"АХО"}
+		]}]);
+	})
+}
+
+new JSUnit.Test("Поддерево 1-го уровня", "getCatalogTree").run = function(){var _=this;
+	Arundo.dataSource.getCatalogTree({rootID:null, depth:1}, function(data){
+		_.assert(data, [
+			{id:"persons", text:"Персоналии"},
+			{id:"news", text:"Новости"},
+			{id:"goods", text:"Товары"}
+		]);
+	})
+}
+
+new JSUnit.Test("Исключение поддерева", "getCatalogTree").run = function(){var _=this;
+	Arundo.dataSource.getCatalogTree({rootID:null, excludeBranch:"persons"}, function(data){
+		_.assert(data, [
+			{id:"news", text:"Новости"},
+			{id:"goods", text:"Товары"}
+		]);
+	})
+}
+
+new JSUnit.Test("Добавление корневого уровня", "getCatalogTree").run = function(){var _=this;
+	Arundo.dataSource.getCatalogTree({rootID:null, includeRoot:true, depth:1}, function(data){
+		_.assert(data, [
+			{id:null, text:"/"},
+			{id:"persons", text:"Персоналии"},
+			{id:"news", text:"Новости"},
+			{id:"goods", text:"Товары"}
+		]);
+	})
+}
+
+new JSUnit.Test("getRecord", "Records").run = function(){var _=this;
+	Arundo.dataSource.getRecord("PPS", "persons", function(data){
+		_.assert(data, {
+			columns:{
+				id:{field:"id", title:"Row ID", type:"rowID"},
+				fio:{field:"fio", title:"ФИО", type:"text"}
+			},
+			data:{id:"PPS", fio:"Петренко П.С."}
+		});
+	})
+}
+
+new JSUnit.Test("saveRecord", "Records").run = function(){var _=this;
+	Arundo.dataSource.saveRecord("PPS", "persons", {fio:"Петренков П.С."}, function(){
+		// проверим, что сохранилось
+		Arundo.dataSource.getRecord("PPS", "persons", function(data){
+			_.assert(data.data.fio, "Петренков П.С.");
+		});
+	})
+}
 
 function init(){
 	IDataSource.check(Arundo.dataSource);
