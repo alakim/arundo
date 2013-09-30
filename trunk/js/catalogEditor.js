@@ -5,7 +5,8 @@
 				div({"class":"toolBar"},
 					a({"class":"toolButton btTreeEditNode"}),
 					a({"class":"toolButton btTreeAddNode"}),
-					a({"class":"toolButton btTreeDelNode"})
+					a({"class":"toolButton btTreeDelNode"}),
+					a({"class":"toolButton btTreeOpenNode"})
 				),
 				ul({"class":"catTreePnl"})
 			),
@@ -38,6 +39,14 @@
 					$.messager.confirm($A.locale.getItem("confirm"), $A.locale.getItem("confirmDeleteCat"), function(r){
 						if(r) $A.dataSource.deleteCatalog(treeNodeEditor.catID, refreshTree, $A.displayError);
 					});
+				});
+			pnl.find(".toolBar .btTreeOpenNode").linkbutton({iconCls: "icon-redo"})
+				.tooltip({content:$A.locale.getItem("btOpenNewWindow")})
+				.click(function(){
+					var selected = pnl.find(".catTreePnl").tree('getSelected');
+					if(!selected){$A.displayWarning($A.locale.getItem("warningSelectAnyCatalog")); return;}
+					$A.view.addPanel(selected.id+"pnl", selected.text);
+					$A.view.getSelectedTab().catalogEditor(selected.id);
 				});
 		}
 		
