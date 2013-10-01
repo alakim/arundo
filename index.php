@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="js/catalogEditor.js"></script>
 	
 	<script type="text/javascript" src="locale/arundo-lang-ru.js"></script>
-	<script type="text/javascript" src="js/dataSources/test.js"></script>
+	<script type="text/javascript" src="js/dataSources/dataSource.js"></script>
 	<script type="text/javascript" src="js/mainForm.js"></script>
 </head>
 
