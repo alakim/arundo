@@ -5,10 +5,6 @@
 <script type="text/javascript" src="lib/jsUnit.js"></script>
 <script type="text/javascript" src="../ui/jquery.min.js"></script>
 <script type="text/javascript" src="../js/lib/jspath.js"></script>
-	<!--script type="text/javascript" src="../ui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="../js/lib/html.js"></script>
-	<script type="text/javascript" src="../js/arundo.js"></script>
-	<script type="text/javascript" src="../locale/arundo-lang-ru.js"></script-->
 
 <script type="text/javascript" src="../js/dataSources/iDataSource.js"></script>
 <script type="text/javascript" src="mockArundo.js"></script>
@@ -79,6 +75,12 @@ new JSUnit.Test("saveRecord", "Records").run = function(){var _=this;
 			_.assert(data.data.fio, "Петренков П.С.");
 		});
 	})
+}
+
+new JSUnit.Test("getTable", "Tables").run = function(){var _=this;
+	Arundo.dataSource.getTable({catID:"developers"}, function(data){
+		_.assert(data, [{id:"SSS", fio:"Сидоров С.С."}]);
+	});
 }
 
 function init(){
