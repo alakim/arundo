@@ -86,24 +86,116 @@ new JSUnit.Test("getRecord", "Records").run = function(){with(JSFlow){var _=this
 }}
 
 new JSUnit.Test("saveRecord", "Records").run = function(){with(JSFlow){var _=this;
-	sequence(function(){var go = new Continuation();
-		Arundo.dataSource.saveRecord("PPS", "persons", {fio:"Петренков П.С."}, function(){
+	sequence(
+		function(){var go = new Continuation();
+			Arundo.dataSource.saveRecord("PPS", "persons", {fio:"Петренков П.С."}, go);
+		},
+		function(){var go = new Continuation();
 			// проверим, что сохранилось
 			Arundo.dataSource.getRecord("PPS", "persons", function(data){
 				_.assert(data.data.fio, "Петренков П.С.");
 				go();
 			});
-		})
-	}).run();
+		}
+	).run();
+}}
+
+new JSUnit.Test("deleteRows", "Records").run = function(){with(JSFlow){var _=this;
+	sequence(
+		function(){var go = new Continuation();
+			Arundo.dataSource.getTable({catID:"management"}, function(data){
+				_.assert(data.length, 2);
+				go();
+			});
+		},
+		function(){var go = new Continuation();
+			Arundo.dataSource.deleteRows(["III","PPP"], go);
+		},
+		function(){var go = new Continuation();
+			Arundo.dataSource.getTable({catID:"management"}, function(data){
+				_.assert(data.length, 0);
+				go();
+			});
+		}
+	).run();
 }}
 
 new JSUnit.Test("getTable", "Tables").run = function(){with(JSFlow){var _=this;
 	sequence(function(){var go = new Continuation();
 		Arundo.dataSource.getTable({catID:"developers"}, function(data){
-			_.assert(data, [{id:"SSS", fio:"Сидоров С.С."}]);
+			_.assert(data, [
+				{id:"SSS", fio:"Сидоров С.С."}
+			]);
 			go();
 		});
 	}).run();
+}}
+
+new JSUnit.Test("getTableColumns", "Tables").run = function(){with(JSFlow){var _=this;
+	sequence(function(){var go = new Continuation();
+		Arundo.dataSource.getTableColumns("developers", function(data){
+			_.assert(data,  [
+				{field:"id", title:"Row ID"},
+				{field:"fio", title:"ФИО"}
+			]);
+			go();
+		});
+	}).run();
+}}
+
+new JSUnit.Test("getAllColumns", "Tables").run = function(){with(JSFlow){var _=this;
+	sequence(function(){var go = new Continuation();
+		Arundo.dataSource.getAllColumns("developers", function(data){
+			_.assert(data,  [
+				{field:"id", title:"Row ID", type:"rowID"},
+				{field:"fio", title:"ФИО", type:"text"}
+			]);
+			go();
+		});
+	}).run();
+}}
+
+new JSUnit.Test("deleteCatalog", "Catalogs").run = function(){with(JSFlow){var _=this;
+	sequence(function(){var go = new Continuation();
+		Arundo.dataSource.deleteCatalog("developers", function(){}, function(){
+			_.assert(true, false, "Method isn't implemented");
+			go();
+		});
+	}).run();
+}}
+
+new JSUnit.Test("getCatalogProperties", "Catalogs").run = function(){with(JSFlow){var _=this;
+	sequence(function(){var go = new Continuation();
+		Arundo.dataSource.getCatalogProperties({catID:"persons"}, function(data){
+			_.assert(data.total, 3);
+			_.assert(data.rows[0], {name:"ID", value:"persons", hidden:true, editor:"none"});
+			_.assert(data.rows[1].name, "Parent");
+			_.assert(data.rows[1].value, null);
+			_.assert(data.rows[1].editor.type, "combotree");
+			_.assert(data.rows[2], {name:"Name", value:"Персоналии", editor:"text"});
+			go();
+		});
+	}).run();
+}}
+
+new JSUnit.Test("saveCatalogProperties", "Catalogs").run = function(){with(JSFlow){var _=this;
+	sequence(
+		function(){var go=new Continuation();
+			Arundo.dataSource.getCatalogProperties({catID:"persons"}, function(data){
+				_.assert(data.rows[2].value, "Персоналии");
+				go();
+			});
+		},
+		function(){var go=new Continuation();
+			Arundo.dataSource.saveCatalogProperties("persons", [{name:"Name", value:"Персоналии1"}], go);
+		},
+		function(){var go=new Continuation();
+			Arundo.dataSource.getCatalogProperties({catID:"persons"}, function(data){
+				_.assert(data.rows[2].value, "Персоналии1");
+				go();
+			});
+		}
+	).run();
 }}
 
 function init(){
