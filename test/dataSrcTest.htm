@@ -20,11 +20,11 @@ new JSUnit.Test("Подключение модуля Arundo", "Configuration").r
 new JSUnit.Test("Получение поддерева", "getCatalogTree").run = function(){with(JSFlow){var _=this;
 	sequence(function(){var go = new Continuation();
 		Arundo.dataSource.getCatalogTree({rootID:"persons"}, function(data){
-			_.assert(data, [{id:"persons", text:"Персоналии", children:[
-				{id:"management", text:"Руководство"},
-				{id:"developers", text:"Отдел разработки"},
-				{id:"accDep", text:"Бухгалтерия"},
-				{id:"economy", text:"АХО"}
+			_.assert(data, [{id:"persons", text:"Персоналии", priority:100, children:[
+				{id:"management", text:"Руководство", priority:100},
+				{id:"developers", text:"Отдел разработки", priority:90},
+				{id:"accDep", text:"Бухгалтерия", priority:80},
+				{id:"economy", text:"АХО", priority:70}
 			]}]);
 			go();
 		})
@@ -48,8 +48,8 @@ new JSUnit.Test("Исключение поддерева", "getCatalogTree").run
 	sequence(function(){var go = new Continuation();
 		Arundo.dataSource.getCatalogTree({rootID:null, excludeBranch:"persons"}, function(data){
 			_.assert(data, [
-				{id:"news", text:"Новости"},
-				{id:"goods", text:"Товары"}
+				{id:"news", text:"Новости", priority:80},
+				{id:"goods", text:"Товары", priority:60}
 			]);
 			go();
 		})
@@ -178,12 +178,13 @@ new JSUnit.Test("deleteCatalog", "Catalogs").run = function(){with(JSFlow){var _
 new JSUnit.Test("getCatalogProperties", "Catalogs").run = function(){with(JSFlow){var _=this;
 	sequence(function(){var go = new Continuation();
 		Arundo.dataSource.getCatalogProperties({catID:"persons"}, function(data){
-			_.assert(data.total, 3);
+			_.assert(data.total, 4);
 			_.assert(data.rows[0], {name:"ID", value:"persons", hidden:true, editor:"none"});
 			_.assert(data.rows[1].name, "Parent");
 			_.assert(data.rows[1].value, null);
 			_.assert(data.rows[1].editor.type, "combotree");
 			_.assert(data.rows[2], {name:"Name", value:"Персоналии", editor:"text"});
+			_.assert(data.rows[3], {name:"Priority", value:100, editor:"text"});
 			go();
 		});
 	}).run();

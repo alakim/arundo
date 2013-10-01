@@ -1,14 +1,14 @@
 Arundo.dataSource = (function($, $A, $P){
 	var testData = {
 		tree: [
-			{text:"Персоналии", id:"persons", children:[
-				{text:"Руководство", id:"management"},
-				{text:"Отдел разработки", id:"developers"},
-				{text:"Бухгалтерия", id:"accDep"},
-				{text:"АХО", id:"economy"}
+			{text:"Персоналии", id:"persons", priority:100, children:[
+				{text:"Руководство", id:"management", priority:100},
+				{text:"Отдел разработки", id:"developers", priority:90},
+				{text:"Бухгалтерия", id:"accDep", priority:80},
+				{text:"АХО", id:"economy", priority:70}
 			]},
-			{text:"Новости", id:"news"},
-			{text:"Товары", id:"goods"}
+			{text:"Новости", id:"news", priority:80},
+			{text:"Товары", id:"goods", priority:60}
 		], 
 		rows:{
 			persons:[
@@ -131,7 +131,7 @@ Arundo.dataSource = (function($, $A, $P){
 				});
 			}
 			else{
-				res = root?[{id:param.rootID, text:root.text, children: subtree}]
+				res = root?[{id:param.rootID, text:root.text, priority:root.priority, children: subtree}]
 						:subtree;
 			}
 			if(param.excludeBranch) res = excludeBranch(res, param.excludeBranch);
@@ -210,14 +210,15 @@ Arundo.dataSource = (function($, $A, $P){
 		getCatalogProperties: function(param, onSuccess, onError){
 			var newMode = param.catID==null;
 			if(newMode){
-				onSuccess({total:3, rows:[
+				onSuccess({total:4, rows:[
 					{name:"ID", "value": createNewID(), hidden:true, editor:"none"},
 					{name:"Parent", "value": null, editor:{type:"combotree", options:{
 						loader:function(prm, onSuccess, onError){
 							$A.dataSource.getCatalogTree({rootID: null, includeRoot:true}, onSuccess, onError);
 						}
 					}}},
-					{name:"Name", "value":"", editor:"text"}
+					{name:"Name", "value":"", editor:"text"},
+					{name:"Priority", "value":0, editor:"text"}
 				]});
 			}
 			else{
@@ -226,7 +227,7 @@ Arundo.dataSource = (function($, $A, $P){
 					onError($A.locale.getItem("errCatNotExist").replace("$", catID));
 					return;
 				}
-				onSuccess({total:3, rows:[
+				onSuccess({total:4, rows:[
 					{name:"ID", "value": data.node.id, hidden:true, editor:"none"},
 					{name:"Parent", "value": data.parent, editor:{type:"combotree", options:{
 						loader:function(prm, onSuccess, onError){
@@ -235,7 +236,8 @@ Arundo.dataSource = (function($, $A, $P){
 							$A.dataSource.getCatalogTree({rootID: null, excludeBranch:data.node.id, includeRoot:true}, onSuccess, onError);
 						}
 					}}},
-					{name:"Name", "value":data.node.text, editor:"text"}
+					{name:"Name", "value":data.node.text, editor:"text"},
+					{name:"Priority", "value":data.node.priority, editor:"text"}
 				]});
 			}
 		},
@@ -245,6 +247,7 @@ Arundo.dataSource = (function($, $A, $P){
 			$.each(data, function(i, prop){
 				switch(prop.name){
 					case "Name": cat.node.text = prop.value; break;
+					case "Priority": cat.node.priority = parseInt(prop.value); break;
 					case "Parent":
 						var prt = prop.value?treeNodes[prop.value].node:null;
 						if(prt) $P.set(prt, "children/#*", cat.node);
