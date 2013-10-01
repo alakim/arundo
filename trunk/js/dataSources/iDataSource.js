@@ -33,8 +33,8 @@ var IDataSource = (function(){
 				__.displayConfigError("Missing Data Source interface member "+type+"::"+m);
 		});
 		for(var k in obj){
-			var t = iTypes[k];
-			if(!t) __.displayConfigError("Member "+type+"::"+k+" is not defined in interface IDataSource.");
+			if(!iTypes[k])
+				__.displayConfigError("Member "+type+"::"+k+" is not defined in interface IDataSource.");
 		}
 	}
 
