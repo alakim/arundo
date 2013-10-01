@@ -156,12 +156,23 @@ new JSUnit.Test("getAllColumns", "Tables").run = function(){with(JSFlow){var _=t
 }}
 
 new JSUnit.Test("deleteCatalog", "Catalogs").run = function(){with(JSFlow){var _=this;
-	sequence(function(){var go = new Continuation();
-		Arundo.dataSource.deleteCatalog("developers", function(){}, function(){
-			_.assert(true, false, "Method isn't implemented");
-			go();
-		});
-	}).run();
+	sequence(
+		function(){var go=new Continuation();
+			Arundo.dataSource.getCatalogTree("persons", function(data){
+				_.assert(data[0].children.length, 4);
+				go();
+			});
+		},
+		function(){var go = new Continuation();
+			Arundo.dataSource.deleteCatalog("developers", go);
+		},
+		function(){var go=new Continuation();
+			Arundo.dataSource.getCatalogTree("persons", function(data){
+				_.assert(data[0].children.length, 3);
+				go();
+			});
+		}
+	).run();
 }}
 
 new JSUnit.Test("getCatalogProperties", "Catalogs").run = function(){with(JSFlow){var _=this;
