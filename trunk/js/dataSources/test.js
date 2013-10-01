@@ -192,7 +192,20 @@ Arundo.dataSource = (function($, $A, $P){
 			onSuccess();
 		},
 		deleteCatalog: function(catID, onSuccess, onError){
-			onError("deleteCatalog: method is not implemented!");
+			var cat = treeNodes[catID];
+			if(!cat){
+				onError($A.locale.getItem("errCatNotExist"));
+				return;
+			}
+			var parent = cat.parent?treeNodes[cat.parent].node:null;
+			var subTree = parent?parent.children:testData.tree;
+			var res = [];
+			for(var i=0; i<subTree.length; i++){var itm = subTree[i];
+				if(itm.id!=catID) res.push(itm);
+			}
+			if(parent) parent.children = res;
+				else testData.tree = res;
+			onSuccess();
 		},
 		getCatalogProperties: function(param, onSuccess, onError){
 			var newMode = param.catID==null;
