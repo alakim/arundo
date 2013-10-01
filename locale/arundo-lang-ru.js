@@ -15,6 +15,7 @@ Arundo.locale.addItems("ru", {
 	btNew: "Создать",
 	btEdit: "Изменить",
 	btOpenNewWindow: "Открыть в новом окне",
+	btRefresh: "Обновить",
 	warning: "Предупреждение",
 	error: "Ошибка",
 	configError: "Ошибка конфигурации",

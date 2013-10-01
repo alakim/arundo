@@ -6,7 +6,8 @@
 					a({"class":"toolButton btTreeEditNode"}),
 					a({"class":"toolButton btTreeAddNode"}),
 					a({"class":"toolButton btTreeDelNode"}),
-					a({"class":"toolButton btTreeOpenNode"})
+					a({"class":"toolButton btTreeOpenNode"}),
+					a({"class":"toolButton btRefreshTree"})
 				),
 				ul({"class":"catTreePnl"})
 			),
@@ -48,6 +49,9 @@
 					$A.view.addPanel(selected.id+"pnl", selected.text);
 					$A.view.getSelectedTab().catalogEditor(selected.id);
 				});
+			pnl.find(".toolBar .btRefreshTree").linkbutton({iconCls: "icon-reload"})
+				.tooltip({content:$A.locale.getItem("btRefresh")})
+				.click(refreshTree);
 		}
 		
 		function deleteRows(rowIDs){

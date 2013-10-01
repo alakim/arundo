@@ -39,6 +39,7 @@ var Arundo = (function($, $H, $P){
 					btNew: "New",
 					btEdit: "Edit",
 					btOpenNewWindow: "Open in new window",
+					btRefresh: "Refresh",
 					warning: "Warning",
 					error: "Error",
 					configError: "Configuration Error",
