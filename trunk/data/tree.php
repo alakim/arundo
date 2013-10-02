@@ -1,5 +1,4 @@
-[
-<?php 
+[<?php 
 	$rootID = $_REQUEST["rootID"];
 	$depth = $_REQUEST["depth"];
 	$includeRoot = $_REQUEST["includeRoot"];
@@ -14,8 +13,10 @@
 	$elements = $xpath->query("//catalog");
 	
 	if(!is_null($elements)){
+		$first = true;
 		foreach($elements as $el){
-			echo("{'id':'".$el->getAttribute("id")."', 'text':'".$el->getAttribute("name")."', 'priority':".$el->getAttribute("priority")."},");
+			if($first) $first = false; else echo(",");
+			echo("{\"id\":\"".$el->getAttribute("id")."\", \"text\":\"".$el->getAttribute("name")."\", \"priority\":".$el->getAttribute("priority")."}");
 		}
 	}
 
