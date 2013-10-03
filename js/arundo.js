@@ -48,6 +48,8 @@ var Arundo = (function($, $H, $P){
 					confirmDeleteCat: "Are you sure you want to delete selected catalog?",
 					warningSelRows2Del: "Select rows to delete.",
 					warningSelectAnyCatalog: "Select any catalog.",
+					errLoadingTree: "Error loading catalog tree.",
+					errLoadingColumns: "Error loading table columns",
 					errCatNotExist: "Catalog '$' does not exists.",
 					errRowNotExist: "Record '$' does not exists.",
 					errRecSaving: "Record saving error.",
