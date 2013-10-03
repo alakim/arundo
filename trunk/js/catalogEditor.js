@@ -89,7 +89,7 @@
 						columns:[columns],
 						queryParams:{catID:node.id}
 					});
-				});
+				}, $A.displayError);
 			}
 		});
 		buildTreeTools(pnl, treeNodeEditor);
@@ -131,7 +131,7 @@
 					}
 				]
 			})
-		});
+		}, $A.displayError);
 		rowEditor.catID = rootID;
 		rowEditor.onSaved = refreshGrid;
 		
