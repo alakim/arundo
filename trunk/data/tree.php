@@ -16,9 +16,7 @@ function conv($str){
 	return iconv("UTF-8", "windows-1251", $str);
 }
 
-function writeElements($elements, $recursive){
-	global $xpath;
-	echo("[");
+function writeElements($elements, $recursive, $xpath){
 	if($includeRoot){
 		echo("{\"id\":null, \"text\":\"/\"}");
 	}
@@ -33,20 +31,38 @@ function writeElements($elements, $recursive){
 			$name = conv($el->getAttribute("name"));
 			$priority = $el->getAttribute("priority"); if($priority=="") $priority = 0;
 			
-			$lnks = $xpath->query("link", $el);
-			if(!is_null($lnks) && $lnks->length>0) {$name .= " =>";}
-			
 			echo("{\"id\":\"".$id."\", \"text\":\"".$name."\", \"priority\":".$priority);
 			
-			$childCats = $xpath->query("catalog", $el);
-			if($recursive && $childCats->length>0){
-				echo(",\"children\":");
-				writeElements($childCats, true);
+			if($recursive && $el->hasChildNodes()){
+				echo(",\"children\":[");
+				writeElements($xpath->query("catalog", $el), true, $xpath);
+				addLinkedTree($el, $xpath);
+				echo("]");
 			}
 			echo("}");
 		}
 	}
-	echo("]");
 }
 
-writeElements($elements, $depth!="1");
+function addLinkedTree($el, $xpath){
+	$lnks = $xpath->query("link", $el);
+	if(is_null($lnks) || $lnks->length==0) return;
+	$link = $lnks->item(0);
+	
+	$xmldb = $link->getAttribute("xmldb");
+	if(!is_null($xmldb))
+		addLinkedXmlDB($xmldb, $link->getAttribute("table"));
+}
+
+function addLinkedXmlDB($db, $tableName){
+	$doc = new DOMDocument('1.0', 'UTF-8');
+	$doc->load($db);
+	$xp = new DOMXPath($doc);
+	$table = $xp->query('//table[@name="'.$tableName.'"]');
+	$catalogs = $xp->query('data/catalog', $table->item(0));
+	writeElements($catalogs, true, $xp);
+}
+
+echo("[");
+writeElements($elements, $depth!="1", $xpath);
+echo("]");

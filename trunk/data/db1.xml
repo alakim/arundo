@@ -1,35 +1,37 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <dataBase>
-  <table name="Production">
-    <columns>
-      <col id="name" name="Наименование"/>
-      <col id="description" name="Описание"/>
-    </columns>
-    <data>
-      <row id="r1" name="Clarinet Selmer CL301" description="Boehm system clarinet B, 17 keys 6 rings"/>
-      <catalog id="c1" name="Reeds" priority="100">
-        <row id="r2" name="Forestone #3"/>
-        <catalog id="c2" name="Vandoren Reeds">
-          <catalog id="c21" name="Vandoren V12 Reeds">
-            <row id="c21r1" name="Vandoren V12 #2.5" description="10 reeds in box"/>
-            <row id="c21r2" name="Vandoren V12 #3" description="10 reeds in box"/>
-            <row id="c21r3" name="Vandoren V12 #3.5" description="10 reeds in box"/>
-          </catalog>
-        </catalog>
-        <catalog id="c3" name="Rico Reeds">
-          <row id="c3r1" name="Rico Reserve #2"/>
-          <row id="c3r1" name="Rico Reserve #2.5"/>
-        </catalog>
-      </catalog>
-    </data>
-  </table>
-  <table name="Persons">
-    <columns>
-      <col id="fio" name="ФИО"/>
-      <col id="phone" name="Телефон"/>
-    </columns>
-    <row id="pers1" fio="Иванов И.И." phone="444-4444"/>
-    <row id="pers2" fio="Петров П.П." phone="333-3333"/>
-    <row id="pers3" fio="Сидоров С.С." phone="222-2222"/>
-  </table>
+	<table name="Production">
+		<columns>
+			<col id="name" name="Наименование"/>
+			<col id="description" name="Описание"/>
+		</columns>
+		<data>
+			<row id="r1" name="Clarinet Selmer CL301" description="Boehm system clarinet B, 17 keys 6 rings"/>
+			<catalog id="c1" name="Reeds" priority="100">
+				<row id="r2" name="Forestone #3"/>
+				<catalog id="c2" name="Vandoren Reeds">
+					<catalog id="c21" name="Vandoren V12 Reeds">
+						<row id="c21r1" name="Vandoren V12 #2.5" description="10 reeds in box"/>
+						<row id="c21r2" name="Vandoren V12 #3" description="10 reeds in box"/>
+						<row id="c21r3" name="Vandoren V12 #3.5" description="10 reeds in box"/>
+					</catalog>
+				</catalog>
+				<catalog id="c3" name="Rico Reeds">
+					<row id="c3r1" name="Rico Reserve #2"/>
+					<row id="c3r1" name="Rico Reserve #2.5"/>
+				</catalog>
+			</catalog>
+		</data>
+	</table>
+	<table name="Persons">
+		<columns>
+			<col id="fio" name="ФИО"/>
+			<col id="phone" name="Телефон"/>
+		</columns>
+		<data>
+			<row id="pers1" fio="Иванов И.И." phone="444-4444"/>
+			<row id="pers2" fio="Петров П.П." phone="333-3333"/>
+			<row id="pers3" fio="Сидоров С.С." phone="222-2222"/>
+		</data>
+	</table>
 </dataBase>
