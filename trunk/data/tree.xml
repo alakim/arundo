@@ -2,7 +2,12 @@
 <tree>
   <catalog id="users" name="Пользователи" priority="100"/>
   <catalog id="content" name="Контент" priority="90">
-	<catalog id="productions" name="Продукция" priority="100"/>
+	<catalog id="productions" name="Продукция" priority="100">
+	  <link db="db1.xml" table="Production"/>
+	</catalog>
+	<catalog id="phoneBook" name="Телефонный справочник">
+	  <link db="db1.xml" table="Persons"/>
+	</catalog>
 	<catalog id="standards" name="Стандарты" priority="90"/>
   </catalog>
 </tree>
