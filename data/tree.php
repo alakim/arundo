@@ -17,6 +17,7 @@ function conv($str){
 }
 
 function writeElements($elements, $recursive){
+	global $xpath;
 	echo("[");
 	if($includeRoot){
 		echo("{\"id\":null, \"text\":\"/\"}");
@@ -29,10 +30,18 @@ function writeElements($elements, $recursive){
 			if($excludeBranch==$id) continue;
 			
 			if($first) $first = false; else echo(",");
-			echo("{\"id\":\"".$id."\", \"text\":\"".conv($el->getAttribute("name"))."\", \"priority\":".$el->getAttribute("priority"));
-			if($recursive && $el->hasChildNodes()){
+			$name = conv($el->getAttribute("name"));
+			$priority = $el->getAttribute("priority"); if($priority=="") $priority = 0;
+			
+			$lnks = $xpath->query("link", $el);
+			if(!is_null($lnks) && $lnks->length>0) {$name .= " =>";}
+			
+			echo("{\"id\":\"".$id."\", \"text\":\"".$name."\", \"priority\":".$priority);
+			
+			$childCats = $xpath->query("catalog", $el);
+			if($recursive && $childCats->length>0){
 				echo(",\"children\":");
-				writeElements($el->childNodes, true);
+				writeElements($childCats, true);
 			}
 			echo("}");
 		}
