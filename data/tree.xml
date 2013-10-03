@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <tree>
   <catalog id="users" name="Пользователи" priority="100"/>
-  <catalog id="content" name="Контент" priority="90"/>
+  <catalog id="content" name="Контент" priority="90">
+	<catalog id="productions" name="Продукция" priority="100"/>
+	<catalog id="standards" name="Стандарты" priority="90"/>
+  </catalog>
 </tree>
