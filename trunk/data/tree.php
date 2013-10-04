@@ -1,4 +1,6 @@
 <?php 
+require('treeUtil.php');
+
 $rootID = $_REQUEST["rootID"];
 $depth = $_REQUEST["depth"];
 $includeRoot = $_REQUEST["includeRoot"];
@@ -11,10 +13,6 @@ $xpath = new DOMXPath($xmlDoc);
 $query = "/tree/catalog";
 if($rootID) $query = "//catalog[@id='".$rootID."']";
 $elements = $xpath->query($query);
-
-function conv($str){
-	return iconv("UTF-8", "windows-1251", $str);
-}
 
 function writeElements($elements, $recursive, $xpath, $parentID){
 	if($includeRoot){
@@ -29,7 +27,7 @@ function writeElements($elements, $recursive, $xpath, $parentID){
 			$prefix = $parentID?$parentID.'/':'';
 			
 			if($first) $first = false; else echo(",");
-			$name = conv($el->getAttribute("name"));
+			$name = TreeUtility::conv($el->getAttribute("name"));
 			$priority = $el->getAttribute("priority"); if($priority=="") $priority = 0;
 			
 			echo("{\"id\":\"".$prefix.$id."\", \"text\":\"".$name."\", \"priority\":".$priority);
