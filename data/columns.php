@@ -1,4 +1,4 @@
 <?php 
 $catID = $_REQUEST["catID"];
 
-echo('[]');
+echo("[{\"catID\":\"$catID\"}]");
