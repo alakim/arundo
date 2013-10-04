@@ -8,6 +8,7 @@ $dbCatID = $catRef[1];
 
 function writeTableRows($treeCatID, $dbCatID){
 	$tblRef = TreeUtility::getTableRef($treeCatID);
+	if($tblRef['dbID']=='') return;
 	
 	$dbDoc = new DOMDocument('1.0', 'UTF-8');
 	$dbDoc->load($tblRef['dbID']);
