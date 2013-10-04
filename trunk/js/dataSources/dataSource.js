@@ -8,7 +8,20 @@ Arundo.dataSource = (function($, $A, $P){
 				onError($A.locale.getItem("errLoadingTree"));
 			});
 		}, 
-		getRecord: function(recID, catID, onSuccess, onError){onError("Method 'getRecord' not implemented.");},
+		getRecord: function(recID, catID, onSuccess, onError){
+			$.getJSON("data/record.php", {recID:recID, catID:catID}, function(data){
+				console.log(data);
+				if(data.error){
+					var errCode = data.error=="RecordMissing"?"errRecordMissing"
+						:"errLoadingRecord";
+					onError($A.locale.getItem(errCode).replace("$", recID));
+				}
+				else
+					onSuccess(data);
+			}, function(){
+				onError($A.locale.getItem("errLoadingRecord"));
+			});
+		},
 		saveRecord: function(recID, catID, data, onSuccess, onError){onError("Method 'saveRecord' not implemented.");},
 		getTable: function(param, onSuccess, onError){
 			$.getJSON("data/table.php", param, function(data){
