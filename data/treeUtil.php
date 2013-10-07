@@ -4,7 +4,7 @@ class TreeUtility{
 		return iconv("UTF-8", "windows-1251", $str);
 	}
 	
-	static function getTableRef($treeCatID){
+	static function getTableRef($treeCatID, $dbCatID){
 		$treeDoc = new DOMDocument('1.0', 'UTF-8');
 		$treeDoc->load("tree.xml");
 		$treePath = new DOMXPath($treeDoc);
@@ -16,15 +16,18 @@ class TreeUtility{
 		if($xmlDBID!=''){
 			$tableID = $link->getAttribute('table');
 			return array(
-				"xmlDBID"=>$xmlDBID,
-				"tableID"=>$tableID
+				'srcType'=>'XmlDB',
+				'xmlDBID'=>$xmlDBID,
+				'tableID'=>$tableID
 			);
 		}
 		
-		$usersDBID = $link->getAttribute('xmldb');
+		$usersDBID = $link->getAttribute('xmlUsersDB');
 		if($usersDBID!=''){
 			return array(
-				"usersDBID"=>$usersDBID
+				'srcType'=>'XmlUsersDB',
+				'usersDBID'=>$usersDBID,
+				'section'=>$dbCatID
 			);
 		}
 	}

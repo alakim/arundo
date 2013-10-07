@@ -7,7 +7,7 @@ $dbCatID = $catRef[1];
 
 
 function writeTableRows($treeCatID, $dbCatID){
-	$tblRef = TreeUtility::getTableRef($treeCatID);
+	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
 	if($tblRef['xmlDBID']=='') return;
 	
 	$dbDoc = new DOMDocument('1.0', 'UTF-8');
