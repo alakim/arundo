@@ -49,7 +49,7 @@ function addLinkedTree($el, $xpath){
 	$link = $lnks->item(0);
 	
 	addLinkedXmlDB($link->getAttribute("xmldb"), $link->getAttribute("table"), $el->getAttribute("id"));
-	addLinkedUsersDB($link->getAttribute("usersDB"), $el->getAttribute("id"));
+	addLinkedXmlUsersDB($link->getAttribute("xmlUsersDB"), $el->getAttribute("id"));
 }
 
 function addLinkedXmlDB($db, $tableName, $parentID){
@@ -62,7 +62,7 @@ function addLinkedXmlDB($db, $tableName, $parentID){
 	writeElements($catalogs, true, $xp, $parentID);
 }
 
-function addLinkedUsersDB($db, $parentID){
+function addLinkedXmlUsersDB($db, $parentID){
 	if($db=='') return;
 	$doc = new DOMDocument('1.0', 'UTF-8');
 	$doc->load($db);
