@@ -10,7 +10,7 @@ $dbCatID = $catRef[1];
 
 function writeResult($treeCatID, $dbCatID, $recID){
 	$tblRef = TreeUtility::getTableRef($treeCatID);
-	if($tblRef['dbID']=='') return;
+	if($tblRef['xmlDBID']=='') return;
 	
 	echo("{\"error\":\"errSavingRecord\"}");
 }

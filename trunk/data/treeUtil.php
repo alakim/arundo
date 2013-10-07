@@ -12,12 +12,21 @@ class TreeUtility{
 		if($links->length==0){echo("[]"); return;}
 
 		$link = $links->item(0);
-		$dbID = $link->getAttribute('xmldb');
-		$tableID = $link->getAttribute('table');
-		return array(
-			"dbID"=>$dbID,
-			"tableID"=>$tableID
-		);
+		$xmlDBID = $link->getAttribute('xmldb');
+		if($xmlDBID!=''){
+			$tableID = $link->getAttribute('table');
+			return array(
+				"xmlDBID"=>$xmlDBID,
+				"tableID"=>$tableID
+			);
+		}
+		
+		$usersDBID = $link->getAttribute('xmldb');
+		if($usersDBID!=''){
+			return array(
+				"usersDBID"=>$usersDBID
+			);
+		}
 	}
 }
 

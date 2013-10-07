@@ -71,11 +71,11 @@ function addLinkedUsersDB($db, $parentID){
 	$users = $xp->query('//users');
 	
 	if($groups->length>0){
-		echo("{\"id\":\"userGroups\", \"text\":\"Группы пользователей\"}");
+		echo("{\"id\":\"$parentID/userGroups\", \"text\":\"Группы пользователей\"}");
 	}
 	if($groups->length>0 && $users->length>0){echo(',');}
 	if($users->length>0){
-		echo("{\"id\":\"userAccounts\", \"text\":\"Пользователи\"}");
+		echo("{\"id\":\"$parentID/userAccounts\", \"text\":\"Пользователи\"}");
 	}
 }
 
