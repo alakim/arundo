@@ -48,18 +48,35 @@ function addLinkedTree($el, $xpath){
 	if(is_null($lnks) || $lnks->length==0) return;
 	$link = $lnks->item(0);
 	
-	$xmldb = $link->getAttribute("xmldb");
-	if(!is_null($xmldb))
-		addLinkedXmlDB($xmldb, $link->getAttribute("table"), $el->getAttribute("id"));
+	addLinkedXmlDB($link->getAttribute("xmldb"), $link->getAttribute("table"), $el->getAttribute("id"));
+	addLinkedUsersDB($link->getAttribute("usersDB"), $el->getAttribute("id"));
 }
 
 function addLinkedXmlDB($db, $tableName, $parentID){
+	if($db=='') return;
 	$doc = new DOMDocument('1.0', 'UTF-8');
 	$doc->load($db);
 	$xp = new DOMXPath($doc);
 	$table = $xp->query('//table[@name="'.$tableName.'"]');
 	$catalogs = $xp->query('data/catalog', $table->item(0));
 	writeElements($catalogs, true, $xp, $parentID);
+}
+
+function addLinkedUsersDB($db, $parentID){
+	if($db=='') return;
+	$doc = new DOMDocument('1.0', 'UTF-8');
+	$doc->load($db);
+	$xp = new DOMXPath($doc);
+	$groups = $xp->query('//groups');
+	$users = $xp->query('//users');
+	
+	if($groups->length>0){
+		echo("{\"id\":\"userGroups\", \"text\":\"Группы пользователей\"}");
+	}
+	if($groups->length>0 && $users->length>0){echo(',');}
+	if($users->length>0){
+		echo("{\"id\":\"userAccounts\", \"text\":\"Пользователи\"}");
+	}
 }
 
 echo("[");

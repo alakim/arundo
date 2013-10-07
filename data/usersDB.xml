@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<usersDB>
+	<groups>
+		<group id="admins" />
+		<group id="editors" />
+		<group id="managers" />
+	</groups>
+	<users>
+		<user id="sa" name="Системный администратор">
+			<member group="admins"/>
+		</user>
+		<user id="iii" name="Иванов И.И.">
+			<member group="editors"/>
+			<member group="managers"/>
+		</user>
+	</users>
+</usersDB>
