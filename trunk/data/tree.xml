@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <tree>
-  <catalog id="users" name="Пользователи" priority="100"/>
+  <catalog id="users" name="Пользователи" priority="100">
+	<link usersDB="usersDB.xml"/>
+  </catalog>
   <catalog id="content" name="Контент" priority="90">
     <catalog id="productions" name="Продукция" priority="100">
       <link xmldb="db1.xml" table="Production"/>
