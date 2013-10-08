@@ -71,22 +71,18 @@
 				$("#"+dlgID).dialog("open");
 				if(_.rowID){
 					$A.dataSource.getRecord(_.rowID, _.catID, function(data){
-						contentPnl.html(templates.dialog(data))
-							.find(".dateFld").datebox({
-								formatter: $A.date.format,
-								parser: $A.date.parse
-							});
+						contentPnl.html(templates.dialog(data));
 					}, $A.displayError);
 				}
 				else{
 					$A.dataSource.getAllColumns(_.catID, function(data){
-						contentPnl.html(templates.dialog({columns:data}))
-							.find(".dateFld").datebox({
-								formatter: $A.date.format,
-								parser: $A.date.parse
-							});
+						contentPnl.html(templates.dialog({columns:data}));
 					});
 				}
+				contentPnl.find(".dateFld").datebox({
+					formatter: $A.date.format,
+					parser: $A.date.parse
+				});
 			},
 			onSaved: function(){}
 		});
