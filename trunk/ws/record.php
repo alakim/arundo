@@ -9,11 +9,11 @@ $dbCatID = $catRef[1];
 
 
 function writeRecordData($treeCatID, $dbCatID, $recID){
-	$tblRef = TreeUtility::getTableRef($treeCatID);
+	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
 	if($tblRef['xmlDBID']=='') return;
 	
 	$dbDoc = new DOMDocument('1.0', 'UTF-8');
-	$dbDoc->load($tblRef['xmlDBID']);
+	$dbDoc->load('xmlData/'.$tblRef['xmlDBID']);
 	$dbPath = new DOMXPath($dbDoc);
 	
 	$table = $dbPath->query("//table[@name='{$tblRef['tableID']}']")->item(0);

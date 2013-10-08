@@ -7,7 +7,7 @@ $includeRoot = $_REQUEST["includeRoot"];
 $excludeBranch = $_REQUEST["excludeBranch"];
 
 $xmlDoc = new DOMDocument('1.0', 'UTF-8');
-$xmlDoc->load("tree.xml");
+$xmlDoc->load("xmlData/tree.xml");
 
 $xpath = new DOMXPath($xmlDoc);
 $query = "/tree/catalog";
@@ -55,7 +55,7 @@ function addLinkedTree($el, $xpath){
 function addLinkedXmlDB($db, $tableName, $parentID){
 	if($db=='') return;
 	$doc = new DOMDocument('1.0', 'UTF-8');
-	$doc->load($db);
+	$doc->load('xmlData/'.$db);
 	$xp = new DOMXPath($doc);
 	$table = $xp->query('//table[@name="'.$tableName.'"]');
 	$catalogs = $xp->query('data/catalog', $table->item(0));
@@ -65,7 +65,7 @@ function addLinkedXmlDB($db, $tableName, $parentID){
 function addLinkedXmlUsersDB($db, $parentID){
 	if($db=='') return;
 	$doc = new DOMDocument('1.0', 'UTF-8');
-	$doc->load($db);
+	$doc->load('xmlData/'.$db);
 	$xp = new DOMXPath($doc);
 	$groups = $xp->query('//groups');
 	$users = $xp->query('//users');
