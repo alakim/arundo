@@ -1,0 +1,70 @@
+*{
+	font-size:12px;
+}
+body {
+    font-family:helvetica,tahoma,verdana,sans-serif;
+    padding:20px;
+    font-size:13px;
+    margin:0;
+}
+h2 {
+    font-size:18px;
+    font-weight:bold;
+    margin:0;
+    margin-bottom:15px;
+}
+/*.demo-info{
+	background:#FFFEE6;
+	color:#8F5700;
+	padding:12px;
+}
+.demo-tip{
+	width:16px;
+	height:16px;
+	margin-right:8px;
+	float:left;
+}*/
+
+.header{
+	height:60px;
+	/*background:#B3DFDA;*/
+	background: url(arundo_bg.png);
+	color: #0fc;
+	font-size: 38px;
+	font-weight: bold;
+	padding: 20px 0 5px 240px;
+	padding:10x
+}
+
+.footer{
+	height:15px;
+	background:#A9FACD;
+	text-align: right;
+	padding: 10px 70px 10px 10px;
+}
+
+.west{
+	width:150px;
+	padding:10px;
+}
+
+.east{
+	width:100px;
+	padding:10px;
+}
+
+.mainMenu{
+	font-weight: normal;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+}
+.mainMenu li{
+	display: inline;
+}
+.fieldName{
+	font-weight:bold;
+}
+.gridTools{
+	padding: 2px;
+}
