@@ -56,6 +56,36 @@ class XmlUsersDB{
 		}
 		echo(']');
 	}
+	
+	function writeRecordData($tblRef, $dbCatID, $recID){
+		$db = $tblRef['usersDBID'];
+		$sectID = $tblRef['section'];
+		
+		if($db=='') return;
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc->load('xmlData/'.$db);
+		$xp = new DOMXPath($doc);
+		
+		$q = $sectID=='userGroups'?"//groups/group[@id='$recID']":(
+			$sectID=='userAccounts'?"//users/user[@id='$recID']":'');
+			
+		if($q=='') return;
+		$rows = $xp->query($q);
+		if($rows->length<1){echo("{\"error\":\"errUserOrGrpNotExist\"}"); return;}
+		$row = $rows->item(0);
+		
+		$itmName = TreeUtility::conv($row->getAttribute('name'));
+		
+		echo("{\"columns\":{");
+		echo("\"id\":{\"field\":\"id\",\"title\":\"Идентификатор\",\"type\":\"text\"},");
+		echo("\"name\":{\"field\":\"name\",\"title\":\"Название\",\"type\":\"text\"}");
+		echo('},');
+		echo("\"data\":{\"id\":\"$recID\",");
+		echo("\"id\":\"{$row->getAttribute('id')}\",");
+		echo("\"name\":\"{$itmName}\"");
+		echo('}');
+		echo('}');
+	}
 }
 
 

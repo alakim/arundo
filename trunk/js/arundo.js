@@ -57,7 +57,8 @@ var Arundo = (function($, $H, $P){
 					errCatNotExist: "Catalog '$' does not exists.",
 					errRowNotExist: "Record '$' does not exists.",
 					errRecSaving: "Record saving error.",
-					errCatSaving: "Catalog saving error."
+					errCatSaving: "Catalog saving error.",
+					errUserOrGrpNotExist: "User or User Group does not exists."
 				}
 			},
 			addItems: function(lang, items){
