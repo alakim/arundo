@@ -81,11 +81,17 @@ class XmlUsersDB{
 		
 		echo("{\"columns\":{");
 		echo("\"id\":{\"field\":\"id\",\"title\":\"Идентификатор\",\"type\":\"text\"},");
-		echo("\"name\":{\"field\":\"name\",\"title\":\"Название\",\"type\":\"text\"}");
+		echo("\"name\":{\"field\":\"name\",\"title\":\"Название\",\"type\":\"text\"},");
+		echo("\"bgnDate\":{\"field\":\"bgnDate\",\"title\":\"Дата начала регистрации\",\"type\":\"date\"},");
+		echo("\"endDate\":{\"field\":\"endDate\",\"title\":\"Дата конца регистрации\",\"type\":\"date\"},");
+		echo("\"groups\":{\"field\":\"groups\",\"title\":\"Группы\",\"type\":\"refList\"}");
 		echo('},');
 		echo("\"data\":{\"id\":\"$recID\",");
 		echo("\"id\":\"{$row->getAttribute('id')}\",");
-		echo("\"name\":\"{$itmName}\"");
+		echo("\"name\":\"{$itmName}\",");
+		echo("\"bgnDate\":\"{$row->getAttribute('bgnDate')}\",");
+		echo("\"endDate\":\"{$row->getAttribute('endDate')}\",");
+		echo("\"groups\":\"\"");
 		echo('}');
 		echo('}');
 	}
