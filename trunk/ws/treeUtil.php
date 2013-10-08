@@ -31,5 +31,35 @@ class TreeUtility{
 			);
 		}
 	}
+	
+
+	function writeElements($elements, $recursive, $xpath, $parentID){
+		if($includeRoot){
+			echo("{\"id\":null, \"text\":\"/\"}");
+		}
+		if(!is_null($elements)){
+			$first = true && !$includeRoot;
+			foreach($elements as $el){
+				if($el->nodeType!=1) continue; // исключаем текстовые узлы
+				$id = $el->getAttribute("id");
+				if($excludeBranch==$id) continue;
+				$prefix = $parentID?$parentID.'/':'';
+				
+				if($first) $first = false; else echo(",");
+				$name = TreeUtility::conv($el->getAttribute("name"));
+				$priority = $el->getAttribute("priority"); if($priority=="") $priority = 0;
+				
+				echo("{\"id\":\"".$prefix.$id."\", \"text\":\"".$name."\", \"priority\":".$priority);
+				
+				if($recursive && $el->hasChildNodes()){
+					echo(",\"children\":[");
+					TreeUtility::writeElements($xpath->query("catalog", $el), true, $xpath, $parentID);
+					addLinkedTree($el, $xpath);
+					echo("]");
+				}
+				echo("}");
+			}
+		}
+	}
 }
 
