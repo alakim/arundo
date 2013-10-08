@@ -9,7 +9,9 @@ $dbCatID = $catRef[1];
 
 function writeColumns($treeCatID, $dbCatID){
 	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
-	$provider = new $tblRef['srcType'];
+	$provName = $tblRef['srcType'];
+	if($provName=='') return;
+	$provider = new $provName;
 	$provider->writeColumns($tblRef);
 }
 
