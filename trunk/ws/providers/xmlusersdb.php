@@ -23,7 +23,10 @@ class XmlUsersDB{
 	}
 	
 	function writeColumns($tblRef){
-		if($tblRef['usersDBID']=='') return;
+		$db = $tblRef['usersDBID'];
+		$sectID = $tblRef['section'];
+		
+		if($db=='' || $sectID==''){echo('[]'); return;}
 		
 		echo('[');
 		echo("{\"field\":\"id\",\"title\":\"Идентификатор\"},");
@@ -43,7 +46,7 @@ class XmlUsersDB{
 		$q = $sectID=='userGroups'?'//groups/group':(
 			$sectID=='userAccounts'?'//users/user':'');
 			
-		if($q=='') return;
+		if($q=='') {echo('[]'); return;}
 		$rows = $xp->query($q);
 		
 		echo('[');
