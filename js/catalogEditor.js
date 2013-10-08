@@ -87,7 +87,10 @@
 					pnl.find(".dataGridPnl").datagrid({
 						loader: $A.dataSource.getTable,
 						columns:[columns],
-						queryParams:{catID:node.id}
+						queryParams:{catID:node.id},
+						onClickRow: function(rowIdx, rowData){
+							rowEditor.open(rowData.id);
+						}
 					});
 				}, $A.displayError);
 			}

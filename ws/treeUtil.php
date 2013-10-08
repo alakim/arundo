@@ -6,7 +6,7 @@ class TreeUtility{
 	
 	static function getTableRef($treeCatID, $dbCatID){
 		$treeDoc = new DOMDocument('1.0', 'UTF-8');
-		$treeDoc->load("tree.xml");
+		$treeDoc->load('xmlData/tree.xml');
 		$treePath = new DOMXPath($treeDoc);
 		$links = $treePath->query("//catalog[@id='$treeCatID']/link");
 		if($links->length==0){echo("[]"); return;}
