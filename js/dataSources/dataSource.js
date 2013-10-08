@@ -51,7 +51,11 @@ Arundo.dataSource = (function($, $A, $P){
 		deleteRows: function(rowIDs, onSuccess, onError){onError("Method 'deleteRows' not implemented.");},
 		deleteCatalog: function(catID, onSuccess, onError){onError("Method 'deleteCatalog' not implemented.");},
 		getCatalogProperties: function(param, onSuccess, onError){onError("Method 'getCatalogProperties' not implemented.");},
-		saveCatalogProperties: function(catID, data, onSuccess, onError){onError("Method 'saveCatalogProperties' not implemented.");}
+		saveCatalogProperties: function(catID, data, onSuccess, onError){onError("Method 'saveCatalogProperties' not implemented.");},
+		
+		getRefRows: function(prm, onSuccess, onError){
+			onError("Method 'getRefRows' not implemented.");
+		}
 	};
 	
 	return __;

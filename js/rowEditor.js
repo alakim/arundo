@@ -21,6 +21,7 @@
 				type=="text"?input({"class":"editField", type:"text", value:val, fldID:id})
 				:type=="date"?input({"class":"editField dateFld", type:"text", value:val, fldID:id})
 				:type=="textHTML"?textarea({"class":"editField", fldID:id}, val)
+				:type=="refList"?input({"class":"editField refList", type:"text", value:val, fldID:id})
 				:span(val)
 			);
 		}}
@@ -68,21 +69,33 @@
 					$A.dataSource.saveRecord(_.rowID, _.catID, data, onSuccess, $A.displayError);
 				}
 				
+				function buildFieldControls(){
+					contentPnl.find(".dateFld").datebox({
+						formatter: $A.date.format,
+						parser: $A.date.parse
+					}).end().find(".refList").combobox({
+						valueField:'id',
+						textField:'text',
+						multiple:true,
+						loader:function(prm, onSuccess, onError){
+							$A.dataSource.getRefRows({rootID: rootID}, onSuccess, onError);
+						}
+					});
+				}
+				
 				$("#"+dlgID).dialog("open");
 				if(_.rowID){
 					$A.dataSource.getRecord(_.rowID, _.catID, function(data){
 						contentPnl.html(templates.dialog(data));
+						buildFieldControls();
 					}, $A.displayError);
 				}
 				else{
 					$A.dataSource.getAllColumns(_.catID, function(data){
 						contentPnl.html(templates.dialog({columns:data}));
+						buildFieldControls();
 					});
 				}
-				contentPnl.find(".dateFld").datebox({
-					formatter: $A.date.format,
-					parser: $A.date.parse
-				});
 			},
 			onSaved: function(){}
 		});
