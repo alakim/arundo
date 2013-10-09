@@ -28,6 +28,7 @@ var Arundo = (function($, $H, $P){
 		var _Loc = {
 			items:{
 				en:{
+					Logoff: "Logoff",
 					catalogs: "Catalogs",
 					mainPage: "Main",
 					wholeTree: "Whole Tree",
