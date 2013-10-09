@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<usersDB>
+	<groups>
+		<group id="admins" name="Администраторы"/>
+		<group id="contentEditors" name="Редакторы"/>
+		<group id="salesManagers" name="Менеджеры по продажам" />
+	</groups>
+	<users>
+		<user id="sa" name="Системный администратор" bgnDate="01.01.2012" endDate="31.12.2015">
+			<member group="admins"/>
+		</user>
+		<user id="iii" name="Иванов И.И." bgnDate="01.01.2013" endDate="31.12.2013">
+			<member group="contentEditors"/>
+			<member group="salesManagers"/>
+		</user>
+	</users>
+</usersDB>
