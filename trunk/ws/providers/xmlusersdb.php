@@ -109,13 +109,19 @@ class XmlUsersDB{
 		$xp = new DOMXPath($doc);
 		
 		$groups = $xp->query("//groups/group");
+		$usrGroups = $xp->query("//users/user[@id='$recID']/member/@group");
+		
 		$first = true;
 		echo('[');
 		foreach($groups as $grp){
 			if($first) $first = false; else echo(',');
 			$grID = $grp->getAttribute('id');
 			$grNm = TreeUtility::conv($grp->getAttribute('name'));
-			echo("{\"id\":\"$grID\", \"text\":\"$grNm\"}");
+			echo("{\"id\":\"$grID\", \"text\":\"$grNm\"");
+			foreach($usrGroups as $uGrp){
+				if($grID==$uGrp->textContent){echo(',"selected":true'); break;}
+			}
+			echo("}");
 		}
 		echo(']');
 	
