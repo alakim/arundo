@@ -98,6 +98,28 @@ class XmlUsersDB{
 		echo('}');
 		echo('}');
 	}
+	
+	function writeRefRows($tblRef, $dbCatID, $recID){
+		$db = $tblRef['usersDBID'];
+		$sectID = $tblRef['section'];
+		
+		if($db=='') return;
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc->load('xmlData/'.$db);
+		$xp = new DOMXPath($doc);
+		
+		$groups = $xp->query("//groups/group");
+		$first = true;
+		echo('[');
+		foreach($groups as $grp){
+			if($first) $first = false; else echo(',');
+			$grID = $grp->getAttribute('id');
+			$grNm = TreeUtility::conv($grp->getAttribute('name'));
+			echo("{\"id\":\"$grID\", \"text\":\"$grNm\"}");
+		}
+		echo(']');
+	
+	}
 }
 
 

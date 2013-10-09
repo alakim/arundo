@@ -54,7 +54,16 @@ Arundo.dataSource = (function($, $A, $P){
 		saveCatalogProperties: function(catID, data, onSuccess, onError){onError("Method 'saveCatalogProperties' not implemented.");},
 		
 		getRefRows: function(prm, onSuccess, onError){
-			onError("Method 'getRefRows' not implemented.");
+			$.getJSON("ws/refrows.php", {recID:prm.rowID, catID:prm.catID}, function(data){
+				if(data.error){
+					var errCode = "errLoadingReferences";
+					onError($A.locale.getItem(errCode).replace("$", recID));
+				}
+				else
+					onSuccess(data);
+			}, function(){
+				onError($A.locale.getItem("errLoadingReferences"));
+			});
 		}
 	};
 	

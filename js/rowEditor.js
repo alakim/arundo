@@ -78,7 +78,7 @@
 						textField:'text',
 						multiple:true,
 						loader:function(prm, onSuccess, onError){
-							$A.dataSource.getRefRows({rootID: rootID}, onSuccess, onError);
+							$A.dataSource.getRefRows({rowID:_.rowID, catID:_.catID}, onSuccess, onError);
 						}
 					});
 				}
