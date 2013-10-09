@@ -1,7 +1,23 @@
-﻿<!DOCTYPE html>
+<?php
+	session_start(); 
+	$ticket = $_SESSION["ticket"];
+	if($ticket==''){
+		header('Location: logon.php');
+		die();
+	}
+?>
+<!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?php
+	// $ticket = $_SESSION["ticket"];
+	// if($ticket==''){
+	// 	echo('<meta http-equiv="refresh" content="0; url=logon.php">'); 
+	// 	echo('</head></html>');
+	// 	die();
+	// }
+?>
+	<meta http-equiv="Content-Type" content="text/html; windows-1251" />
 	<title>Arundo CMS</title>
 	<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">

@@ -1,54 +1,55 @@
-п»ї<html>
+<?php
+	session_start(); 
+	$ticket = $_SESSION["ticket"];
+	if($ticket!=''){
+		// header('Location: index.php');
+		// die();
+	}
+?>
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>РџСЂРёРјРµСЂ Р°РІС‚РѕСЂРёР·Р°С†РёРё</title>
+	<title>Авторизация пользователя</title>
 
 </head>
 <body>
-	<h1>РџСЂРёРјРµСЂ Р°РІС‚РѕСЂРёР·Р°С†РёРё</h1>
-	<p>Р­С‚Рѕ РїСЂРёРјРµСЂ Р°РІС‚РѕСЂРёР·Р°С†РёРё СЃ РїРѕРјРѕС‰СЊСЋ РїРµСЂРµРґР°С‡Рё ticket'Р°.</p>
-	<p><a href="logon.php">Reload</a></p>
+	<h1>Авторизация пользователя</h1>
 	
 	<?php
-		include ("test/db.php");
-		
-		$db = new UsersDB();
-			
+
 		$usr = $_POST["tbLogin"];
 		$psw = $_POST["tbPassword"];
 		$action = $_POST["hAction"];
-		$ticket = $_SESSION["ticket"];
-		echo("ticket 1:".$ticket);
-		$user = $db->getAuthorizedUser($ticket);
 		
+		echo("<p>action: $action</p>");
 		if($action=="logoff"){
-			$db->logoff($ticket);
+			$ticket = '';
 		}
 		else if($action="logon"){
-			$ticket = $db->logon($usr, $psw);
-			echo("ticket 2:".$ticket);
-			$_SESSION["ticket"] = $ticket;
-			$user = $db->getAuthorizedUser($ticket);
-				
+			$ticket = 'ttt';
 		}
-		if($user==null){
+		$_SESSION["ticket"] = $ticket;
+		
+		echo("ticket 1: '$ticket'");
+		
+		if($ticket==''){
 	?>
 		
 	<div id="authorizationPanel">
-		<form action="index.php" method="post">
-			<div>Р›РѕРіРёРЅ: <input type="text" name="tbLogin"/></div>
-			<div>РџР°СЂРѕР»СЊ: <input type="password" name="tbPassword"/></div>
+		<form action="logon.php" method="post">
+			<div>Логин: <input type="text" name="tbLogin"/></div>
+			<div>Пароль: <input type="password" name="tbPassword"/></div>
 			<input type="hidden" name="hAction" value="logon"/>
-			<div><input type="submit" value="РђРІС‚РѕСЂРёР·РѕРІР°С‚СЊСЃСЏ"/></div>
+			<div><input type="submit" value="Вход"/></div>
 		</form>
 	</div>
 	<?php }
 		else{
 		?>
-		<form action="index.php" method="post">
-			<div>Hello, <?=$user->attributes->getNamedItem("login")->value?></div>
+		<form action="logon.php" method="post">
+			<div>Hello,</div>
 			<input type="hidden" name="hAction" value="logoff"/>
-			<div><input type="submit" value="Р’С‹С…РѕРґ"/></div>
+			<div><input type="submit" value="Выход"/></div>
 		</form>
 		
 		<?php
