@@ -9,7 +9,7 @@ $includeRoot = $_REQUEST["includeRoot"];
 $excludeBranch = $_REQUEST["excludeBranch"];
 
 $xmlDoc = new DOMDocument('1.0', 'UTF-8');
-$xmlDoc->load("xmlData/tree.xml");
+$xmlDoc->load(TreeUtility::$treeDoc);
 
 $xpath = new DOMXPath($xmlDoc);
 $query = "/tree/catalog";

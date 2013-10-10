@@ -126,6 +126,10 @@ class XmlUsersDB{
 		echo(']');
 	
 	}
+	
+	function checkUser($usrID, $password){
+		
+	}
 }
 
 

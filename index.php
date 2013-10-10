@@ -37,6 +37,10 @@
 	<script type="text/javascript" src="locale/arundo-lang-ru.js"></script>
 	<script type="text/javascript" src="js/dataSources/dataSource.js"></script>
 	<script type="text/javascript" src="js/mainForm.js"></script>
+	
+	<script type="text/javascript">
+		var ticket = "<?php echo($_SESSION['ticket']);?>";
+	</script>
 </head>
 
 <body class="easyui-layout">
