@@ -1,9 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <usersDB>
 	<groups>
-		<group id="admins" name="Администраторы"/>
-		<group id="contentEditors" name="Редакторы"/>
-		<group id="salesManagers" name="Менеджеры по продажам" />
+		<group id="admins" name="Администраторы">
+			<permissions>
+				<cat id="users">rw</cat>
+				<cat id="content">rw</cat>
+			</permissions>
+		</group>
+		<group id="contentEditors" name="Редакторы">
+			<permissions>
+				<cat id="content">rw</cat>
+			</permissions>
+		</group>
+		<group id="salesManagers" name="Менеджеры по продажам">
+			<permissions>
+				<cat id="content">r</cat>
+				<cat id="productions">rw</cat>
+			</permissions>
+		</group>
 	</groups>
 	<users>
 		<!-- в качестве пароля пользователей использованы их идентификаторы -->
@@ -12,6 +26,12 @@
 		</user>
 		<user id="iii" name="Иванов И.И." bgnDate="01.01.2013" endDate="31.12.2013" password="36347412c7d30ae6fde3742bbc4f21b9">
 			<member group="contentEditors"/>
+			<member group="salesManagers"/>
+		</user>
+		<user id="ppp" name="Петров П.П." bgnDate="01.01.2013" endDate="31.12.2013" password="f27f6f1c7c5cbf4e3e192e0a47b85300">
+			<member group="contentEditors"/>
+		</user>
+		<user id="sss" name="Сидоров С.С." bgnDate="01.01.2013" endDate="31.12.2013" password="9f6e6800cfae7749eb6c486619254b9c">
 			<member group="salesManagers"/>
 		</user>
 	</users>
