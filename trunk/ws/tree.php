@@ -1,5 +1,6 @@
 <?php 
 require('treeUtil.php');
+require('providers/factory.php');
 require('providers/xmldb.php');
 require('providers/xmlusersdb.php');
 require('providers/xmlUserSessions.php');
@@ -10,13 +11,7 @@ $includeRoot = $_REQUEST["includeRoot"];
 $excludeBranch = $_REQUEST["excludeBranch"];
 $ticket = $_REQUEST["ticket"];
 
-$sessions = new XmlUsersSessions('xmlData/');
-$userID = $sessions->getAuthorizedUser($ticket);
-
-if($userID==null){
-	echo('{error:"errAuthorizationRequired"}');
-	die();
-}
+$permissions = Util::getUserPermissions($ticket);
 
 $xmlDoc = new DOMDocument('1.0', 'UTF-8');
 $xmlDoc->load(TreeUtility::$treeDoc);

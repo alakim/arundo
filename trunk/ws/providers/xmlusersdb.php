@@ -137,6 +137,11 @@ class XmlUsersDB{
 		if($users->length==0) return false;
 		return $users->item(0)->getAttribute('password')==md5($password);
 	}
+	
+	function getUserPermissions($usrID){
+		
+	}
+	
 }
 
 
