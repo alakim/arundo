@@ -7,7 +7,7 @@ class XmlUsersSessions{
 	
 	private function getDoc(){
 		$xmlDoc = new DOMDocument('1.0', 'UTF-8');
-		$xmlDoc->load(XmlUsersSessions::$storageDoc);
+		$xmlDoc->load(self::$storageDoc);
 		return $xmlDoc;
 	}
 	
@@ -15,13 +15,6 @@ class XmlUsersSessions{
 		$xpath = new DOMXPath($xmlDoc);
 		return $xpath->query("/userSessions/user[@id='$usrID']");
 	}
-	
-	// function checkSession($usrID, $ticket){
-	// 	$user = getUser(getDoc(), $usrID);
-	// 	if($user->length==0) return false;
-	// 	if($user->item(0).getAttribute('ticket')!=$ticket) return false;
-	// 	return true;
-	// }
 	
 	function getAuthorizedUser($ticket){
 		$xDoc = self::getDoc();
@@ -44,14 +37,17 @@ class XmlUsersSessions{
 			$user->setAttribute('id', $usrID);
 		}
 		$user->setAttribute('ticket', $ticket);
+		$xDoc->save(self::$storageDoc);
 	}
 	
-	function closeSession($usrID){
+	function closeSession($ticket){
 		$xDoc = self::getDoc();
-		$user = self::getUser($xDoc, $usrID);
+		$xpath = new DOMXPath($xDoc);
+		$user = $xpath->query("/userSessions/user[@ticket='$ticket']");
 		if($user->length==0) return;
 		
 		$user = $user->item(0);
-		$user.setAttribute('ticket', '');
+		$user->setAttribute('ticket', '');
+		$xDoc->save(self::$storageDoc);
 	}
 }

@@ -3,10 +3,6 @@
 	
 	session_start(); 
 	$ticket = $_SESSION["ticket"];
-	if($ticket!=''){
-		// header('Location: index.php');
-		// die();
-	}
 ?>
 
 <?php 
@@ -18,19 +14,33 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Авторизация пользователя</title>
-
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans-Serif;
+			font-size: 14px;
+			text-align: center;
+			margin: 20px;
+			
+		}
+		h1{
+			margin-top: 80px;
+			text-align: center;
+		}
+		#authorizationPanel{
+			border:1px solid #888;
+			/*width: 300px;*/
+			padding:25px;
+			margin:50px 350px 0 350px;
+		}
+	</style>
 </head>
 <body>
 	<h1>Авторизация пользователя</h1>
-	<p><a href="/">main page</a></p>
 	<?php
 
 		$usr = $_POST["tbLogin"];
 		$psw = $_POST["tbPassword"];
 		$action = $_POST["hAction"];
-		
-		$sessionProvider = new XmlUsersSessions();
-		$authorizedUser = $sessionProvider->getAuthorizedUser($ticket);
 		
 		function getUserHash(){
 			return md5(generateCode(10));
@@ -46,31 +56,24 @@
 			}
 			return $code;
 		}
+		
+		$sessionProvider = new XmlUsersSessions();
 
-		
-		
-		
-		echo("<p>action: $action</p>");
-		
-		
-		
 		if($action=="logoff"){
+			$sessionProvider->closeSession($ticket);
 			$ticket = '';
-			$sessionProvider->closeSession($usr);
 		}
 		else if($action="logon"){
 			$userProvider = new XmlUsersDB();
 			if($userProvider->checkUser($userDB, $usr, $psw)){
 				$ticket = getUserHash();
+				$sessionProvider->setSession($usr, $ticket);
 			}
 		}
 		$_SESSION["ticket"] = $ticket;
 		
-		echo("ticket 1: '$ticket'");
+		$authorizedUser = $sessionProvider->getAuthorizedUser($ticket);
 		
-		// function checkSession(){
-		// 	// $'userSessions.xml';
-		// }
 		
 		if($ticket==''){
 	?>
@@ -91,6 +94,11 @@
 			<input type="hidden" name="hAction" value="logoff"/>
 			<div><input type="submit" value="Выход"/></div>
 		</form>
+		<script type="text/javascript">
+			setTimeout(function(){
+				window.location.href = "index.php";
+			}, 1000);
+		</script>
 		
 		<?php
 		}
