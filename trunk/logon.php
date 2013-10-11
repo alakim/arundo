@@ -1,4 +1,6 @@
 <?php
+	$userDB = 'usersDB.xml';
+	
 	session_start(); 
 	$ticket = $_SESSION["ticket"];
 	if($ticket!=''){
@@ -7,7 +9,10 @@
 	}
 ?>
 
-<?php require('/ws/xmlData/userSessions.xml'); ?>
+<?php 
+	require('ws/providers/xmlusersdb.php');
+	require('ws/providers/xmlUserSessions.php');
+?>
 
 <html>
 <head>
@@ -27,6 +32,24 @@
 		$sessionProvider = new XmlUsersSessions();
 		$authorizedUser = $sessionProvider->getAuthorizedUser($ticket);
 		
+		function getUserHash(){
+			return md5(generateCode(10));
+		}
+		
+		# Функция для генерации случайной строки
+		function generateCode($length=6) {
+			$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
+			$code = "";
+			$clen = strlen($chars) - 1;  
+			while (strlen($code) < $length) {
+				$code .= $chars[mt_rand(0,$clen)];  
+			}
+			return $code;
+		}
+
+		
+		
+		
 		echo("<p>action: $action</p>");
 		
 		
@@ -36,15 +59,18 @@
 			$sessionProvider->closeSession($usr);
 		}
 		else if($action="logon"){
-			$ticket = 'ttt';
+			$userProvider = new XmlUsersDB();
+			if($userProvider->checkUser($userDB, $usr, $psw)){
+				$ticket = getUserHash();
+			}
 		}
 		$_SESSION["ticket"] = $ticket;
 		
 		echo("ticket 1: '$ticket'");
 		
-		function checkSession(){
-			//$'userSessions.xml';
-		}
+		// function checkSession(){
+		// 	// $'userSessions.xml';
+		// }
 		
 		if($ticket==''){
 	?>
