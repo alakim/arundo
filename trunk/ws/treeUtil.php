@@ -1,11 +1,9 @@
 <?php 
+require('util.php');
+
 class TreeUtility{
 	// ƒокумент, содержащий описание дерева
 	static $treeDoc = 'xmlData/tree.xml';
-	
-	static function conv($str){
-		return iconv("UTF-8", "windows-1251", $str);
-	}
 	
 	static function getTableRef($treeCatID, $dbCatID){
 		$treeDoc = new DOMDocument('1.0', 'UTF-8');
@@ -49,7 +47,7 @@ class TreeUtility{
 				$prefix = $parentID?$parentID.'/':'';
 				
 				if($first) $first = false; else echo(",");
-				$name = TreeUtility::conv($el->getAttribute("name"));
+				$name = Util::conv($el->getAttribute("name"));
 				$priority = $el->getAttribute("priority"); if($priority=="") $priority = 0;
 				
 				echo("{\"id\":\"".$prefix.$id."\", \"text\":\"".$name."\", \"priority\":".$priority);

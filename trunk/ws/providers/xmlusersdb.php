@@ -53,7 +53,7 @@ class XmlUsersDB{
 		$first = true;
 		foreach($rows as $row){
 			$rID = $row->getAttribute('id');
-			$rNm = TreeUtility::conv($row->getAttribute('name'));
+			$rNm = Util::conv($row->getAttribute('name'));
 			if($first) $first = false; else echo(',');
 			echo("{\"id\":\"$rID\",\"name\":\"$rNm\"}");
 		}
@@ -77,7 +77,7 @@ class XmlUsersDB{
 		if($rows->length<1){echo("{\"error\":\"errUserOrGrpNotExist\"}"); return;}
 		$row = $rows->item(0);
 		
-		$itmName = TreeUtility::conv($row->getAttribute('name'));
+		$itmName = Util::conv($row->getAttribute('name'));
 		
 		echo("{\"columns\":{");
 		echo("\"id\":{\"field\":\"id\",\"title\":\"Идентификатор\",\"type\":\"text\"},");
@@ -116,7 +116,7 @@ class XmlUsersDB{
 		foreach($groups as $grp){
 			if($first) $first = false; else echo(',');
 			$grID = $grp->getAttribute('id');
-			$grNm = TreeUtility::conv($grp->getAttribute('name'));
+			$grNm = Util::conv($grp->getAttribute('name'));
 			echo("{\"id\":\"$grID\", \"text\":\"$grNm\"");
 			foreach($usrGroups as $uGrp){
 				if($grID==$uGrp->textContent){echo(',"selected":true'); break;}

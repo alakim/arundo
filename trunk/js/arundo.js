@@ -55,6 +55,7 @@ var Arundo = (function($, $H, $P){
 					confirmDeleteCat: "Are you sure you want to delete selected catalog?",
 					warningSelRows2Del: "Select rows to delete.",
 					warningSelectAnyCatalog: "Select any catalog.",
+					errAuthorizationRequired: "Authorization Required",
 					errLoadingTree: "Error loading catalog tree.",
 					errLoadingColumns: "Error loading table columns",
 					errLoadingTable: "Error loading table rows",
@@ -117,6 +118,7 @@ var Arundo = (function($, $H, $P){
 	}
 	
 	var __ = {
+		ticket: null,
 		locale: locale,
 		date: dateUtility,
 		dataSource: null,

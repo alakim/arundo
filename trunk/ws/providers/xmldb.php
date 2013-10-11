@@ -29,7 +29,7 @@ class XmlDB{
 		$first = true;
 		foreach($columns as $col){
 			$colID = $col->getAttribute('id');
-			$colNm = TreeUtility::conv($col->getAttribute('name'));
+			$colNm = Util::conv($col->getAttribute('name'));
 			
 			if($first) $first = false; else echo(',');
 			echo("{\"field\":\"$colID\",\"title\":\"$colNm\"}");
@@ -62,7 +62,7 @@ class XmlDB{
 			foreach($columns as $col){
 				if($firstCol) $firstCol=false; else echo(',');
 				$colID = $col->getAttribute('id');
-				$val = TreeUtility::conv($row->getAttribute($colID));
+				$val = Util::conv($row->getAttribute($colID));
 				echo("\"$colID\":\"$val\"");
 			}
 			echo('}');
@@ -90,7 +90,7 @@ class XmlDB{
 		foreach($columns as $col){
 			if($firstCol) $firstCol=false; else echo(',');
 			$id = $col->getAttribute("id");
-			$name = TreeUtility::conv($col->getAttribute("name"));
+			$name = Util::conv($col->getAttribute("name"));
 			$type = $col->getAttribute("type");
 			if($type=='') $type = "text";
 			echo("\"$id\":{\"field\":\"$id\",\"title\":\"$name\",\"type\":\"$type\"}");
@@ -101,7 +101,7 @@ class XmlDB{
 		foreach($columns as $col){
 			if($firstCol) $firstCol=false; else echo(',');
 			$colID = $col->getAttribute('id');
-			$val = TreeUtility::conv($rec->getAttribute($colID));
+			$val = Util::conv($rec->getAttribute($colID));
 			echo("\"$colID\":\"$val\"");
 		}
 		echo('}');
