@@ -127,8 +127,15 @@ class XmlUsersDB{
 	
 	}
 	
-	function checkUser($usrID, $password){
+	function checkUser($db, $usrID, $password){
+		if($db=='') return;
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc->load('ws/xmlData/'.$db);
+		$xp = new DOMXPath($doc);
 		
+		$users = $xp->query("//users/user[@id='$usrID']");
+		if($users->length==0) return false;
+		return $users->item(0)->getAttribute('password')==md5($password);
 	}
 }
 

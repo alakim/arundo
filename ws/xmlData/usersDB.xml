@@ -6,10 +6,11 @@
 		<group id="salesManagers" name="Менеджеры по продажам" />
 	</groups>
 	<users>
-		<user id="sa" name="Системный администратор" bgnDate="01.01.2012" endDate="31.12.2015">
+		<!-- в качестве пароля пользователей использованы их идентификаторы -->
+		<user id="sa" name="Системный администратор" bgnDate="01.01.2012" endDate="31.12.2015" password="c12e01f2a13ff5587e1e9e4aedb8242d">
 			<member group="admins"/>
 		</user>
-		<user id="iii" name="Иванов И.И." bgnDate="01.01.2013" endDate="31.12.2013">
+		<user id="iii" name="Иванов И.И." bgnDate="01.01.2013" endDate="31.12.2013" password="36347412c7d30ae6fde3742bbc4f21b9">
 			<member group="contentEditors"/>
 			<member group="salesManagers"/>
 		</user>

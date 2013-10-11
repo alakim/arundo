@@ -3,7 +3,7 @@
 class XmlUsersSessions{
 	// отдельный файл для хранения сессий чтобы не засорять SVN-репозиторий 
 	// постоянно меняющимися значениями тикетов
-	static $storageDoc = '/ws/xmlData/userSessions.xml';
+	static $storageDoc = 'ws/xmlData/userSessions.xml';
 	
 	private function getDoc(){
 		$xmlDoc = new DOMDocument('1.0', 'UTF-8');
@@ -24,7 +24,7 @@ class XmlUsersSessions{
 	// }
 	
 	function getAuthorizedUser($ticket){
-		$xDoc = getDoc();
+		$xDoc = self::getDoc();
 		$xpath = new DOMXPath($xDoc);
 		$user = $xpath->query("/userSessions/user[@ticket='$ticket']");
 		if($user->length==0) return;
@@ -32,8 +32,8 @@ class XmlUsersSessions{
 	}
 	
 	function setSession($usrID, $ticket){
-		$xDoc = getDoc();
-		$user = getUser($xDoc, $usrID);
+		$xDoc = self::getDoc();
+		$user = self::getUser($xDoc, $usrID);
 		if($user->length!=0)
 			$user = $user->item(0);
 		else{
@@ -47,8 +47,8 @@ class XmlUsersSessions{
 	}
 	
 	function closeSession($usrID){
-		$xDoc = getDoc();
-		$user = getUser($xDoc, $usrID);
+		$xDoc = self::getDoc();
+		$user = self::getUser($xDoc, $usrID);
 		if($user->length==0) return;
 		
 		$user = $user->item(0);
