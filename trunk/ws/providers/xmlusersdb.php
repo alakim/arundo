@@ -2,6 +2,12 @@
 
 class XmlUsersDB{
 
+	static $defaultDoc = 'usersDB.xml';
+	
+	function __construct(){
+		$this->dbDoc = self::$defaultDoc;
+	}
+	
 	function writeLinkedNodes($link, $el){
 		$db = $link->getAttribute("xmlUsersDB");
 		$parentID = $el->getAttribute("id");
@@ -127,7 +133,8 @@ class XmlUsersDB{
 	
 	}
 	
-	function checkUser($db, $usrID, $password){
+	function checkUser($usrID, $password){
+		$db = $this->dbDoc;
 		if($db=='') return;
 		$doc = new DOMDocument('1.0', 'UTF-8');
 		$doc->load('ws/xmlData/'.$db);
@@ -136,6 +143,18 @@ class XmlUsersDB{
 		$users = $xp->query("//users/user[@id='$usrID']");
 		if($users->length==0) return false;
 		return $users->item(0)->getAttribute('password')==md5($password);
+	}
+	
+	function getUserName($usrID){
+		$db = $this->dbDoc;
+		if($db=='') return;
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc->load('ws/xmlData/'.$db);
+		$xp = new DOMXPath($doc);
+		
+		$users = $xp->query("//users/user[@id='$usrID']");
+		if($users->length==0) return;
+		return Util::conv($users->item(0)->getAttribute('name'));
 	}
 	
 	function getUserPermissions($usrID){

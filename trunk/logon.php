@@ -1,11 +1,11 @@
 <?php
-	$userDB = 'usersDB.xml';
-	
 	session_start(); 
 	$ticket = $_SESSION["ticket"];
 ?>
 
 <?php 
+	require('ws/util.php');
+	require('ws/providers/factory.php');
 	require('ws/providers/xmlusersdb.php');
 	require('ws/providers/xmlUserSessions.php');
 ?>
@@ -73,7 +73,7 @@
 			return $code;
 		}
 		
-		$sessionProvider = new XmlUsersSessions();
+		$sessionProvider = ProviderFactory::getSessions(null);
 
 		if($action=="logoff"){
 			$sessionProvider->closeSession($ticket);
@@ -81,7 +81,7 @@
 		}
 		else if($action="logon"){
 			$userProvider = new XmlUsersDB();
-			if($userProvider->checkUser($userDB, $usr, $psw)){
+			if($userProvider->checkUser($usr, $psw)){
 				$ticket = getUserHash();
 				$sessionProvider->setSession($usr, $ticket);
 			}
@@ -89,6 +89,9 @@
 		$_SESSION["ticket"] = $ticket;
 		
 		$authorizedUser = $sessionProvider->getAuthorizedUser($ticket);
+		$userProvider = ProviderFactory::getUsers();
+		$authorizedUserName = $userProvider->getUserName($authorizedUser);
+		
 		
 		
 		if($ticket==''){
@@ -106,7 +109,7 @@
 		else{
 		?>
 		<form action="logon.php" method="post">
-			<div><span class="local" ar-locale-id="hello">Hello</span>, <?php echo($authorizedUser); ?></div>
+			<div><span class="local" ar-locale-id="hello">Hello</span>, <?php echo($authorizedUserName); ?></div>
 			<input type="hidden" name="hAction" value="logoff"/>
 			<div><input class="local" ar-locale-id="logoff" ar-locale-target="value" type="submit" value="Выход"/></div>
 		</form>
