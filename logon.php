@@ -14,6 +14,22 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Авторизация пользователя</title>
+	<script type="text/javascript" src="ui/jquery.min.js"></script>
+	<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/lib/html.js"></script>
+	<script type="text/javascript" src="js/lib/jspath.js"></script>
+	<script type="text/javascript" src="js/arundo.js"></script>
+	
+	<script type="text/javascript">
+		Arundo.view = {init: function(){}};
+		$(function(){
+			var title = Arundo.locale.getItem("userAuthorization");
+			document.title = title;
+		});
+	</script>
+	
+	<script type="text/javascript" src="locale/arundo-lang-ru.js"></script>
+	
 	<style type="text/css">
 		body{
 			font-family: Verdana, Arial, Sans-Serif;
@@ -35,7 +51,7 @@
 	</style>
 </head>
 <body>
-	<h1>Авторизация пользователя</h1>
+	<h1 class="local" ar-locale-id="userAuthorization">Авторизация пользователя</h1>
 	<?php
 
 		$usr = $_POST["tbLogin"];
@@ -80,19 +96,19 @@
 		
 	<div id="authorizationPanel">
 		<form action="logon.php" method="post">
-			<div>Логин: <input type="text" name="tbLogin"/></div>
-			<div>Пароль: <input type="password" name="tbPassword"/></div>
+			<div><span class="local" ar-locale-id="login">Логин</span>: <input type="text" name="tbLogin"/></div>
+			<div><span class="local" ar-locale-id="password">Пароль</span>: <input type="password" name="tbPassword"/></div>
 			<input type="hidden" name="hAction" value="logon"/>
-			<div><input type="submit" value="Вход"/></div>
+			<div><input class="local" ar-locale-id="logon" ar-locale-target="value" type="submit" value="Вход"/></div>
 		</form>
 	</div>
 	<?php }
 		else{
 		?>
 		<form action="logon.php" method="post">
-			<div>Hello, <?php echo($authorizedUser); ?></div>
+			<div><span class="local" ar-locale-id="hello">Hello</span>, <?php echo($authorizedUser); ?></div>
 			<input type="hidden" name="hAction" value="logoff"/>
-			<div><input type="submit" value="Выход"/></div>
+			<div><input class="local" ar-locale-id="logoff" ar-locale-target="value" type="submit" value="Выход"/></div>
 		</form>
 		<script type="text/javascript">
 			setTimeout(function(){

@@ -1,4 +1,10 @@
 Arundo.locale.addItems("ru", {
+	userAuthorization: "Авторизация пользователя",
+	logon: "Вход",
+	logoff: "Выход",
+	login: "Логин",
+	password: "Пароль",
+	hello: "Добро пожаловать",
 	name: "Название",
 	property: "Свойство",
 	value: "Значение",

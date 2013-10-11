@@ -1,6 +1,6 @@
 var Arundo = (function($, $H, $P){
 
-	IDataSource.displayConfigError = displayConfigError;
+	if(typeof(IDataSource)=="object") IDataSource.displayConfigError = displayConfigError;
 
 	var dateUtility = {
 		format: function(d){
@@ -28,6 +28,12 @@ var Arundo = (function($, $H, $P){
 		var _Loc = {
 			items:{
 				en:{
+					userAuthorization: "User Authorization",
+					logon: "LogOn",
+					logoff: "LogOff",
+					login: "Login",
+					password: "Password",
+					hello: "Hello",
 					Logoff: "Logoff",
 					catalogs: "Catalogs",
 					mainPage: "Main",
@@ -121,7 +127,7 @@ var Arundo = (function($, $H, $P){
 		},
 		init: function(){
 			__.locale.localize("body");
-			IDataSource.check(__.dataSource);
+			if(typeof(IDataSource)=="object") IDataSource.check(__.dataSource);
 			checkView();
 			__.view.init();
 		},
