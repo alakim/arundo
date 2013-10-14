@@ -1,7 +1,7 @@
 <?php 
 
 class XmlDB{
-	function writeLinkedNodes($link, $el){
+	function writeLinkedNodes($link, $el, $permissions, $defaultVisibility){
 		$db = $link->getAttribute("xmldb");
 		$tableName = $link->getAttribute("table");
 		$parentID = $el->getAttribute("id");
@@ -12,7 +12,7 @@ class XmlDB{
 		$xp = new DOMXPath($doc);
 		$table = $xp->query('//table[@name="'.$tableName.'"]');
 		$catalogs = $xp->query('data/catalog', $table->item(0));
-		TreeUtility::writeElements($catalogs, true, $xp, $parentID);
+		TreeUtility::writeElements($catalogs, true, $xp, $parentID, $permissions, $defaultVisibility);
 	}
 	
 	function writeColumns($tblRef){
