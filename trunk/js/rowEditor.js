@@ -88,8 +88,8 @@
 						},
 						columns:[[
 							{field:"name", title:"Catalog", width:200},
-							{field:"read", title:"Read", width:80},
-							{field:"write", title:"Write", width:80}
+							{field:"read", title:"Read", width:80, editor:"checkbox"},
+							{field:"write", title:"Write", width:80, editor:"checkbox"}
 						]]
 					});
 				}
