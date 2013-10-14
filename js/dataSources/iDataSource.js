@@ -12,7 +12,8 @@ var IDataSource = (function(){
 			"deleteCatalog", 
 			"getCatalogProperties",
 			"saveCatalogProperties",
-			"getRefRows"
+			"getRefRows",
+			"getPermissions"
 		],
 		"string":[
 			"name"

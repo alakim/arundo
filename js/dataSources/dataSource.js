@@ -66,6 +66,18 @@ Arundo.dataSource = (function($, $A, $P){
 			}, function(){
 				onError($A.locale.getItem("errLoadingReferences"));
 			});
+		},
+		getPermissions: function(groupID, onSuccess, onError){
+			$.getJSON("ws/permissions.php", {grpID:groupID, ticket:$A.ticket}, function(data){
+				if(data.error){
+					var errCode = "errLoadingPermissions";
+					onError($A.locale.getItem(errCode).replace("$", recID));
+				}
+				else
+					onSuccess(data);
+			}, function(){
+				onError($A.locale.getItem("errLoadingPermissions"));
+			});
 		}
 	};
 	
