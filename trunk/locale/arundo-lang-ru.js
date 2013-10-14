@@ -37,6 +37,7 @@ Arundo.locale.addItems("ru", {
 	errLoadingTable: "Ошибка загрузки записей таблицы",
 	errLoadingRecord: "Ошибка загрузки записи",
 	errLoadingReferences: "Ошибка загрузки списка ссылок",
+	errLoadingPermissions: "Ошибка загрузки данных о правах пользователя",
 	errRecordMissing: "Запись '$' не существует.",
 	errSavingRecord: "Ошибка сохранения записи '$'",
 	errCatNotExist: "Каталог '$' не существует.",

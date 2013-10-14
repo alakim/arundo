@@ -61,6 +61,7 @@ var Arundo = (function($, $H, $P){
 					errLoadingTable: "Error loading table rows",
 					errLoadingRecord: "Error loading record",
 					errLoadingReferences: "Error loading reference list",
+					errLoadingPermissions: "Error loading user permissions",
 					errRecordMissing: "Record '$' does not exists.",
 					errSavingRecord: "Error saving record '$'",
 					errCatNotExist: "Catalog '$' does not exists.",

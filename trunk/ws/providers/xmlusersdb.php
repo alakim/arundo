@@ -88,7 +88,11 @@ class XmlUsersDB{
 		echo("{\"columns\":{");
 		echo("\"id\":{\"field\":\"id\",\"title\":\"Идентификатор\",\"type\":\"text\"},");
 		echo("\"name\":{\"field\":\"name\",\"title\":\"Название\",\"type\":\"text\"}");
-		if($sectID=='userAccounts'){
+		if($sectID=='userGroups'){
+			echo(',');
+			echo("\"permissions\":{\"field\":\"permissions\",\"title\":\"Права пользователя\",\"type\":\"rights\"}");
+		}
+		else if($sectID=='userAccounts'){
 			echo(',');
 			echo("\"bgnDate\":{\"field\":\"bgnDate\",\"title\":\"Дата начала регистрации\",\"type\":\"date\"},");
 			echo("\"endDate\":{\"field\":\"endDate\",\"title\":\"Дата конца регистрации\",\"type\":\"date\"},");
@@ -98,11 +102,23 @@ class XmlUsersDB{
 		echo("\"data\":{\"id\":\"$recID\",");
 		echo("\"id\":\"{$row->getAttribute('id')}\",");
 		echo("\"name\":\"{$itmName}\",");
-		echo("\"bgnDate\":\"{$row->getAttribute('bgnDate')}\",");
-		echo("\"endDate\":\"{$row->getAttribute('endDate')}\",");
-		echo("\"groups\":\"\"");
+		if($sectID=='userGroups'){
+			echo("\"permissions\":[]");
+		}
+		else if($sectID=='userAccounts'){
+			echo("\"bgnDate\":\"{$row->getAttribute('bgnDate')}\",");
+			echo("\"endDate\":\"{$row->getAttribute('endDate')}\",");
+			echo("\"groups\":\"\"");
+		}
 		echo('}');
 		echo('}');
+	}
+	
+	function writeUserPermissions($grpID){
+		echo("[{\"id\":\"g1\",\"name\":\"Group1\",\"read\":true,\"write\":false,\"children\":[");
+		echo("{\"id\":\"g11\",\"name\":\"Group11\",\"read\":false,\"write\":false},");
+		echo("{\"id\":\"g12\",\"name\":\"Group12\",\"read\":false,\"write\":true}");
+		echo("]}]");
 	}
 	
 	function writeRefRows($tblRef, $dbCatID, $recID){

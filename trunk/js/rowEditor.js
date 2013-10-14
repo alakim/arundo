@@ -22,6 +22,7 @@
 				:type=="date"?input({"class":"editField dateFld", type:"text", value:val, fldID:id})
 				:type=="textHTML"?textarea({"class":"editField", fldID:id}, val)
 				:type=="refList"?input({"class":"editField refList", type:"text", value:val, fldID:id})
+				:type=="rights"?table({"class":"rightsTable", style:style({width:400, height:300})})
 				:span(val)
 			);
 		}}
@@ -80,6 +81,16 @@
 						loader:function(prm, onSuccess, onError){
 							$A.dataSource.getRefRows({rowID:_.rowID, catID:_.catID}, onSuccess, onError);
 						}
+					}).end().find(".rightsTable").treegrid({
+						treeField:"name",
+						loader:function(groupID, onSuccess, onError){
+							$A.dataSource.getPermissions(groupID, onSuccess, onError);
+						},
+						columns:[[
+							{field:"name", title:"Catalog", width:200},
+							{field:"read", title:"Read", width:80},
+							{field:"write", title:"Write", width:80}
+						]]
 					});
 				}
 				
