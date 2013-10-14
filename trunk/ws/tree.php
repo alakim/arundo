@@ -22,5 +22,5 @@ if($rootID) $query = "//catalog[@id='".$rootID."']";
 $elements = $xpath->query($query);
 
 echo("[");
-TreeUtility::writeElements($elements, $depth!="1", $xpath, null);
+TreeUtility::writeElements($elements, $depth!="1", $xpath, null, $permissions, false);
 echo("]");

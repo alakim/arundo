@@ -34,7 +34,7 @@ class TreeUtility{
 	}
 	
 
-	static function addLinkedTree($el, $xpath){
+	static function addLinkedTree($el, $xpath, $permissions, $defaultVisibility){
 		$lnks = $xpath->query("link", $el);
 		if(is_null($lnks) || $lnks->length==0) return;
 		$link = $lnks->item(0);
@@ -42,11 +42,11 @@ class TreeUtility{
 		if($link->getAttribute("xmldb")!='') $provider = new XmlDB();
 		if($link->getAttribute("xmlUsersDB")!='') $provider = new XmlUsersDB();
 		
-		if(!is_null($provider)) $provider->writeLinkedNodes($link, $el);
+		if(!is_null($provider)) $provider->writeLinkedNodes($link, $el, $permissions, $defaultVisibility);
 	}
 
 
-	function writeElements($elements, $recursive, $xpath, $parentID){
+	function writeElements($elements, $recursive, $xpath, $parentID, $permissions, $defaultVisibility){
 		if($includeRoot){
 			echo("{\"id\":null, \"text\":\"/\"}");
 		}
@@ -55,6 +55,13 @@ class TreeUtility{
 			foreach($elements as $el){
 				if($el->nodeType!=1) continue; // исключаем текстовые узлы
 				$id = $el->getAttribute("id");
+				if(!is_null($permissions)){
+					if($permissions[$id]!=null){
+						if(!($permissions[$id]["r"])) continue;
+						else $defaultVisibility = true;
+					}
+					else if(!$defaultVisibility) continue;
+				}
 				if($excludeBranch==$id) continue;
 				$prefix = $parentID?$parentID.'/':'';
 				
@@ -66,8 +73,8 @@ class TreeUtility{
 				
 				if($recursive && $el->hasChildNodes()){
 					echo(",\"children\":[");
-					self::writeElements($xpath->query("catalog", $el), true, $xpath, $parentID);
-					self::addLinkedTree($el, $xpath);
+					self::writeElements($xpath->query("catalog", $el), true, $xpath, $parentID, $permissions, $defaultVisibility);
+					self::addLinkedTree($el, $xpath, $permissions, $defaultVisibility);
 					echo("]");
 				}
 				echo("}");
