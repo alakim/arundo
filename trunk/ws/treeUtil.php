@@ -7,7 +7,7 @@ class TreeUtility{
 	
 	static function getTableRef($treeCatID, $dbCatID){
 		$treeDoc = new DOMDocument('1.0', 'UTF-8');
-		$treeDoc->load(TreeUtility::$treeDoc);
+		$treeDoc->load(self::$treeDoc);
 		$treePath = new DOMXPath($treeDoc);
 		$links = $treePath->query("//catalog[@id='$treeCatID']/link");
 		if($links->length==0){echo("[]"); return;}
@@ -34,6 +34,18 @@ class TreeUtility{
 	}
 	
 
+	static function addLinkedTree($el, $xpath){
+		$lnks = $xpath->query("link", $el);
+		if(is_null($lnks) || $lnks->length==0) return;
+		$link = $lnks->item(0);
+		
+		if($link->getAttribute("xmldb")!='') $provider = new XmlDB();
+		if($link->getAttribute("xmlUsersDB")!='') $provider = new XmlUsersDB();
+		
+		if(!is_null($provider)) $provider->writeLinkedNodes($link, $el);
+	}
+
+
 	function writeElements($elements, $recursive, $xpath, $parentID){
 		if($includeRoot){
 			echo("{\"id\":null, \"text\":\"/\"}");
@@ -54,8 +66,8 @@ class TreeUtility{
 				
 				if($recursive && $el->hasChildNodes()){
 					echo(",\"children\":[");
-					TreeUtility::writeElements($xpath->query("catalog", $el), true, $xpath, $parentID);
-					addLinkedTree($el, $xpath);
+					self::writeElements($xpath->query("catalog", $el), true, $xpath, $parentID);
+					self::addLinkedTree($el, $xpath);
 					echo("]");
 				}
 				echo("}");
