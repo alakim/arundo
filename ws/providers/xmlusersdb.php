@@ -158,7 +158,29 @@ class XmlUsersDB{
 	}
 	
 	function getUserPermissions($usrID){
+		$db = $this->dbDoc;
+		if($db=='') return;
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc->load('xmlData/'.$db);
+		$xp = new DOMXPath($doc);
 		
+		$res = array();
+		$groups = $xp->query("//users/user[@id='$usrID']/member/@group");
+		
+		foreach($groups as $grp){
+			$grpID = $grp->value;
+			$catPermissions = $xp->query("//groups/group[@id='$grpID']/permissions/cat");
+			foreach($catPermissions as $catPerm){
+				$catID = $catPerm->getAttribute('id');
+				$perm = $catPerm->getAttribute('permissions');
+				$res[$catID] = array(
+					'r'=>strpos($perm, 'r')!==false,
+					'w'=>strpos($perm, 'w')!==false
+				);
+			}
+		}
+		
+		return $res;
 	}
 	
 }

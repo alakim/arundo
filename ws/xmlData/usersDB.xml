@@ -3,19 +3,19 @@
 	<groups>
 		<group id="admins" name="Администраторы">
 			<permissions>
-				<cat id="users">rw</cat>
-				<cat id="content">rw</cat>
+				<cat id="users" permissions="rw"/>
+				<cat id="content" permissions="rw"/>
 			</permissions>
 		</group>
 		<group id="contentEditors" name="Редакторы">
 			<permissions>
-				<cat id="content">rw</cat>
+				<cat id="content" permissions="rw"/>
 			</permissions>
 		</group>
 		<group id="salesManagers" name="Менеджеры по продажам">
 			<permissions>
-				<cat id="content">r</cat>
-				<cat id="productions">rw</cat>
+				<cat id="content" permissions="r"/>
+				<cat id="productions" permissions="rw"/>
 			</permissions>
 		</group>
 	</groups>
