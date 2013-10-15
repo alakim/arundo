@@ -82,14 +82,29 @@
 							$A.dataSource.getRefRows({rowID:_.rowID, catID:_.catID}, onSuccess, onError);
 						}
 					}).end().find(".rightsTable").treegrid({
+						idField:'id',
 						treeField:"name",
+						onClickRow: function(row){
+							//console.log(row);
+							$(this).treegrid('beginEdit', row.id);
+						},
 						loader:function(groupID, onSuccess, onError){
 							$A.dataSource.getPermissions(groupID, onSuccess, onError);
 						},
 						columns:[[
 							{field:"name", title:"Catalog", width:200},
-							{field:"read", title:"Read", width:80, editor:"checkbox"},
-							{field:"write", title:"Write", width:80, editor:"checkbox"}
+							{field:"read", title:"Read", width:80, editor:{type:"combobox", options:{
+								data:[
+									{id:"on", text:"on"},
+									{id:"off", text:"off"}
+								]
+							}}},
+							{field:"write", title:"Write", width:80, editor:{type:"combobox", options:{
+								data:[
+									{id:"on", text:"on"},
+									{id:"off", text:"off"}
+								]
+							}}}
 						]]
 					});
 				}
