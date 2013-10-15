@@ -115,9 +115,9 @@ class XmlUsersDB{
 	}
 	
 	function writeUserPermissions($grpID){
-		echo("[{\"id\":\"g1\",\"name\":\"Group1\",\"read\":true,\"write\":false,\"children\":[");
-		echo("{\"id\":\"g11\",\"name\":\"Group11\",\"read\":false,\"write\":false},");
-		echo("{\"id\":\"g12\",\"name\":\"Group12\",\"read\":false,\"write\":true}");
+		echo("[{\"id\":\"g1\",\"name\":\"Group1\",\"read\":\"on\",\"write\":\"off\",\"children\":[");
+		echo("{\"id\":\"g11\",\"name\":\"Group11\",\"read\":\"off\",\"write\":\"off\"},");
+		echo("{\"id\":\"g12\",\"name\":\"Group12\",\"read\":\"off\",\"write\":\"on\"}");
 		echo("]}]");
 	}
 	
