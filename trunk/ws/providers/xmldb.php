@@ -15,7 +15,7 @@ class XmlDB{
 		TreeUtility::writeElements($catalogs, true, $xp, $parentID, $permissions, $defaultVisibility);
 	}
 	
-	function writeColumns($tblRef){
+	function writeColumns($tblRef, $allMode){
 		if($tblRef['xmlDBID']=='') return;
 	
 		$dbDoc = new DOMDocument('1.0', 'UTF-8');
@@ -32,7 +32,13 @@ class XmlDB{
 			$colNm = Util::conv($col->getAttribute('name'));
 			
 			if($first) $first = false; else echo(',');
-			echo("{\"field\":\"$colID\",\"title\":\"$colNm\"}");
+			echo("{\"field\":\"$colID\",\"title\":\"$colNm\"");
+			if($allMode){
+				$colType = $col->getAttribute('type');
+				if($colType=='') $colType = 'text';
+				echo(",\"type\":\"$colType\"");
+			}
+			echo('}');
 		}
 		echo(']');
 	}

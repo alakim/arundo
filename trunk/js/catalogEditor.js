@@ -75,34 +75,11 @@
 		pnl.html(template())
 			.find(".easyui-layout").layout();
 		
-		pnl.find(".catTreePnl").tree({
-			loader: function(prm, onSuccess, onError){
-				$A.dataSource.getCatalogTree({rootID: rootID}, onSuccess, onError);
-			},
-			onClick: function(node){
-				rowEditor.catID = node.id;
-				treeNodeEditor.catID = node.id;
-				$A.dataSource.getTableColumns(node.id, function(columns){
-					columns = addSysColumns(columns);
-					pnl.find(".dataGridPnl").datagrid({
-						loader: $A.dataSource.getTable,
-						columns:[columns],
-						queryParams:{catID:node.id},
-						onClickRow: function(rowIdx, rowData){
-							rowEditor.open(rowData.id);
-						}
-					});
-				}, $A.displayError);
-			}
-		});
-		buildTreeTools(pnl, treeNodeEditor);
-		
-		$A.dataSource.getTableColumns(rootID, function(columns){
-			columns = addSysColumns(columns);
-			pnl.find(".dataGridPnl").datagrid({
+		function dataGridSettings(columns, catID){
+			return {
 				loader: $A.dataSource.getTable,
 				columns: [columns],
-				queryParams:{catID:rootID},
+				queryParams:{catID:catID},
 				singleSelect: true,
 				selectOnCheck: false,
 				onClickRow: function(rowIdx, rowData){
@@ -133,7 +110,27 @@
 						}
 					}
 				]
-			})
+			};
+		}
+		
+		pnl.find(".catTreePnl").tree({
+			loader: function(prm, onSuccess, onError){
+				$A.dataSource.getCatalogTree({rootID: rootID}, onSuccess, onError);
+			},
+			onClick: function(node){
+				rowEditor.catID = node.id;
+				treeNodeEditor.catID = node.id;
+				$A.dataSource.getTableColumns(node.id, function(columns){
+					columns = addSysColumns(columns);
+					pnl.find(".dataGridPnl").datagrid(dataGridSettings(columns, node.id));
+				}, $A.displayError);
+			}
+		});
+		buildTreeTools(pnl, treeNodeEditor);
+		
+		$A.dataSource.getTableColumns(rootID, function(columns){
+			columns = addSysColumns(columns);
+			pnl.find(".dataGridPnl").datagrid(dataGridSettings(columns, rootID))
 		}, $A.displayError);
 		rowEditor.catID = rootID;
 		rowEditor.onSaved = refreshGrid;

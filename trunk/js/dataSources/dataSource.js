@@ -42,13 +42,19 @@ Arundo.dataSource = (function($, $A, $P){
 			});
 		},
 		getTableColumns: function(catID, onSuccess, onError){
-			$.getJSON("ws/columns.php", {catID:catID, ticket:$A.ticket}, function(data){
+			$.getJSON("ws/columns.php", {catID:catID, ticket:$A.ticket, all:0}, function(data){
 				onSuccess(data);
 			}, function(){
 				onError($A.locale.getItem("errLoadingColumns"));
 			});
 		},
-		getAllColumns: function(catID, onSuccess, onError){onError("Method 'getAllColumns' not implemented.");},
+		getAllColumns: function(catID, onSuccess, onError){
+			$.getJSON("ws/columns.php", {catID:catID, ticket:$A.ticket, all:1}, function(data){
+				onSuccess(data);
+			}, function(){
+				onError($A.locale.getItem("errLoadingColumns"));
+			});
+		},
 		deleteRows: function(rowIDs, onSuccess, onError){onError("Method 'deleteRows' not implemented.");},
 		deleteCatalog: function(catID, onSuccess, onError){onError("Method 'deleteCatalog' not implemented.");},
 		getCatalogProperties: function(param, onSuccess, onError){onError("Method 'getCatalogProperties' not implemented.");},
