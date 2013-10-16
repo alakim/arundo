@@ -120,7 +120,7 @@
 					$A.dataSource.getAllColumns(_.catID, function(data){
 						contentPnl.html(templates.dialog({columns:data}));
 						buildFieldControls();
-					});
+					}, $A.displayError);
 				}
 			},
 			onSaved: function(){}
