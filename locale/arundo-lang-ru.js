@@ -44,5 +44,6 @@ Arundo.locale.addItems("ru", {
 	errRowNotExist: "Запись '$' не существует.",
 	errRecSaving: "Ошибка сохранения записи.",
 	errCatSaving: "Ошибка сохранения каталога.",
-	errUserOrGrpNotExist: "Пользователь или группа не существует."
+	errUserOrGrpNotExist: "Пользователь или группа не существует.",
+	errMissingDataProvider: "Отсутствует провайдер данных"
 });

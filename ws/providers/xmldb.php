@@ -107,6 +107,21 @@ class XmlDB{
 		echo('}');
 		echo('}');
 	}
+	
+	function saveRecordData($tblRef, $dbCatID, $recID, $data){
+		$dbDoc = new DOMDocument('1.0', 'UTF-8');
+		$dbDocFile = 'xmlData/'.$tblRef['xmlDBID'];
+		$dbDoc->load($dbDocFile);
+		$dbPath = new DOMXPath($dbDoc);
+		
+		foreach($dbPath->query("//data//row[@id='$recID']") as $row){
+			foreach(array_keys($data) as $fld){
+				$row->setAttribute($fld, $data[$fld]);
+			}
+		}
+		$dbDoc->save($dbDocFile);
+		echo("[]");
+	}
 }
 
 
