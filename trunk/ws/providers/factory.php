@@ -11,7 +11,10 @@ class ProviderFactory{
 	
 	static function getTable($tblRef){
 		$provName = $tblRef['srcType'];
-		if($provName=='') return;
+		if($provName==''){
+			echo("{\"error\":\"errMissingDataProvider\"}");
+			die();
+		};
 		$provider = new $provName;
 		return $provider;
 	}

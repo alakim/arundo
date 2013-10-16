@@ -9,6 +9,7 @@ $recID = $_REQUEST["recID"];
 $catRef = explode("/", $_REQUEST["catID"]);
 $treeCatID = $catRef[0];
 $dbCatID = $catRef[1];
+$data = $_REQUEST["data"];
 
 function writeRefRows($treeCatID, $dbCatID, $recID){
 	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
