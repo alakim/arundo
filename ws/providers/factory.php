@@ -9,5 +9,11 @@ class ProviderFactory{
 		return new XmlUsersDB();
 	}
 	
+	static function getTable($tblRef){
+		$provName = $tblRef['srcType'];
+		if($provName=='') return;
+		$provider = new $provName;
+		return $provider;
+	}
 	
 }

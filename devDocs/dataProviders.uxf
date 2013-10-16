@@ -7,14 +7,14 @@
       <x>240</x>
       <y>510</y>
       <w>170</w>
-      <h>70</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>ProviderFactory
 --
 --
 getSessions()
 getUsers()
-</panel_attributes>
+getTable($tblRef)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -108,8 +108,8 @@ getUsers()
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>760</x>
-      <y>260</y>
+      <x>730</x>
+      <y>650</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -213,17 +213,6 @@ getPermissions()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>560</x>
-      <y>250</y>
-      <w>220</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>200;30;30;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
       <x>310</x>
       <y>330</y>
       <w>200</w>
@@ -253,5 +242,38 @@ getPermissions()
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;140;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>490</x>
+      <y>650</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/TableProvider/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>380</x>
+      <y>560</y>
+      <w>130</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>110;110;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>630</x>
+      <y>630</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;100;30</additional_attributes>
   </element>
 </diagram>
