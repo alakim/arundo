@@ -145,6 +145,24 @@ class XmlDB{
 		$dbDoc->save($dbDocFile);
 		echo("[]");
 	}
+	
+	function deleteRows($tblRef, $rowIDs){
+		$dbDoc = new DOMDocument('1.0', 'UTF-8');
+		$dbDocFile = 'xmlData/'.$tblRef['xmlDBID'];
+		$dbDoc->load($dbDocFile);
+		$xp = new DOMXPath($dbDoc);
+		
+		$rowIDs = explode(';', $rowIDs);
+		foreach($rowIDs as $rowID){
+			$row = $xp->query("//data//row[@id='$rowID']");
+			if($row->length<1) continue;
+			$row = $row->item(0);
+			$cat = $row->parentNode;
+			$cat->removeChild($row);
+		}
+		$dbDoc->save($dbDocFile);
+		echo('[]');
+	}
 }
 
 

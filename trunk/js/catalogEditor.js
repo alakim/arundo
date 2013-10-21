@@ -54,10 +54,10 @@
 				.click(refreshTree);
 		}
 		
-		function deleteRows(rowIDs){
+		function deleteRows(catID, rowIDs){
 			if(rowIDs.length){
 				$.messager.confirm($A.locale.getItem("confirm"), $A.locale.getItem("confirmDeleteRows"),function(r){
-					if(r) $A.dataSource.deleteRows(rowIDs, refreshGrid, $A.displayError);
+					if(r) $A.dataSource.deleteRows(catID, rowIDs, refreshGrid, $A.displayError);
 				});
 			}
 			else{
@@ -100,7 +100,7 @@
 							$.each(rows, function(i, row){
 								rowIDs.push(row.id);
 							});
-							deleteRows(rowIDs);
+							deleteRows(catID, rowIDs);
 						}
 					},'-',
 					{
