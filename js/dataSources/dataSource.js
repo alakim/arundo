@@ -57,7 +57,13 @@ Arundo.dataSource = (function($, $A, $P){
 				onError($A.locale.getItem("errLoadingColumns"));
 			});
 		},
-		deleteRows: function(rowIDs, onSuccess, onError){onError("Method 'deleteRows' not implemented.");},
+		deleteRows: function(catID, rowIDs, onSuccess, onError){
+			$.post("ws/delrows.php", {catID:catID, rowIDs:rowIDs.join(";"), ticket:$A.ticket}, function(res){
+				res = JSON.parse(res);
+				if(res.error) onError($A.locale.getItem("errDeleteRow"));
+				onSuccess(res);
+			});
+		},
 		deleteCatalog: function(catID, onSuccess, onError){onError("Method 'deleteCatalog' not implemented.");},
 		getCatalogProperties: function(param, onSuccess, onError){onError("Method 'getCatalogProperties' not implemented.");},
 		saveCatalogProperties: function(catID, data, onSuccess, onError){onError("Method 'saveCatalogProperties' not implemented.");},
