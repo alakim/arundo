@@ -24,8 +24,10 @@ Arundo.dataSource = (function($, $A, $P){
 		},
 		saveRecord: function(recID, catID, data, onSuccess, onError){
 			$.post("ws/saverec.php", {recID:recID, catID:catID, data:data, ticket:$A.ticket}, function(res){
+				res = JSON.parse(res);
 				if(res.error){
 					var errCode = res.error=="RecordMissing"?"errRecordMissing"
+						:res.error=="errCatNotExist"?"errCatNotExist"
 						:"errSavingRecord";
 					onError($A.locale.getItem(errCode).replace("$", recID));
 				}

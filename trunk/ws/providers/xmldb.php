@@ -119,11 +119,28 @@ class XmlDB{
 		$dbDocFile = 'xmlData/'.$tblRef['xmlDBID'];
 		$dbDoc->load($dbDocFile);
 		$dbPath = new DOMXPath($dbDoc);
-		
-		foreach($dbPath->query("//data//row[@id='$recID']") as $row){
+		if($recID==''){
+			$cat = $dbPath->query("//data//catalog[@id='$dbCatID']");
+			if($cat->length<1){
+				echo("{\"error\":\"errCatNotExist\"}"); return;
+			}
+			$cat = $cat->item(0);
+			$row = $dbDoc->createElement('row');
+			$cat->appendChild($row);
+			$row->setAttribute('id', com_create_guid());
+		}
+		else{
+			$rows = $dbPath->query("//data//row[@id='$recID']");
+			if($rows->length<1){
+				echo("{\"error\":\"RecordMissing\"}"); return;
+			}
+			$row = $rows->item(0);
 			foreach(array_keys($data) as $fld){
 				$row->setAttribute($fld, $data[$fld]);
 			}
+		}
+		foreach(array_keys($data) as $fld){
+			$row->setAttribute($fld, $data[$fld]);
 		}
 		$dbDoc->save($dbDocFile);
 		echo("[]");
