@@ -9,7 +9,7 @@ class Util{
 		$sessions = ProviderFactory::getSessions('xmlData/');
 		$userID = $sessions->getAuthorizedUser($ticket);
 		if($userID==null){
-			echo('{error:"errAuthorizationRequired"}');
+			self::writeError('errAuthorizationRequired');
 			die();
 		}
 		return true;
@@ -20,12 +20,16 @@ class Util{
 		$userID = $sessions->getAuthorizedUser($ticket);
 
 		if($userID==null){
-			echo('{error:"errAuthorizationRequired"}');
+			self::writeError('errAuthorizationRequired');
 			die();
 		}
 
 		$userProvider = ProviderFactory::getUsers();
 		return $userProvider->getUserPermissions($userID);
+	}
+	
+	static function writeError($errCode){
+		echo("{\"error\":\"$errCode\"}");
 	}
 }
 
