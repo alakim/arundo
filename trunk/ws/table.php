@@ -11,6 +11,7 @@ $dbCatID = $catRef[1];
 
 function writeTableRows($treeCatID, $dbCatID){
 	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
+	if($tblRef['srcType']=='') die();
 	$provider = ProviderFactory::getTable($tblRef);
 	$provider->writeTableRows($tblRef, $dbCatID);
 }

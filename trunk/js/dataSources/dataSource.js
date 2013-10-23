@@ -61,12 +61,20 @@ Arundo.dataSource = (function($, $A, $P){
 			$.post("ws/delrows.php", {catID:catID, rowIDs:rowIDs.join(";"), ticket:$A.ticket}, function(res){
 				res = JSON.parse(res);
 				if(res.error) onError($A.locale.getItem("errDeleteRow"));
-				onSuccess(res);
+				else onSuccess(res);
 			});
 		},
 		deleteCatalog: function(catID, onSuccess, onError){onError("Method 'deleteCatalog' not implemented.");},
-		getCatalogProperties: function(param, onSuccess, onError){onError("Method 'getCatalogProperties' not implemented.");},
-		saveCatalogProperties: function(catID, data, onSuccess, onError){onError("Method 'saveCatalogProperties' not implemented.");},
+		getCatalogProperties: function(param, onSuccess, onError){
+			$.post("ws/catdata.php", {catID:param.catID, ticket:$A.ticket}, function(res){
+				res = JSON.parse(res);
+				if(res.error) onError($A.locale.getItem(res.error));
+				else onSuccess(res);
+			});
+		},
+		saveCatalogProperties: function(catID, data, onSuccess, onError){
+			onError("Method 'saveCatalogProperties' not implemented.");
+		},
 		
 		getRefRows: function(prm, onSuccess, onError){
 			$.getJSON("ws/refrows.php", {recID:prm.rowID, catID:prm.catID, ticket:$A.ticket}, function(data){

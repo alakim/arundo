@@ -3,21 +3,23 @@ require('treeUtil.php');
 require('providers/factory.php');
 require('providers/xmldb.php');
 require('providers/xmlusersdb.php');
+require('providers/xmlUserSessions.php');
 
-$recID = $_REQUEST["recID"];
 
 $catRef = explode("/", $_REQUEST["catID"]);
 $treeCatID = $catRef[0];
 $dbCatID = $catRef[1];
-$data = $_REQUEST["data"];
+$ticket = $_REQUEST["ticket"];
 
-function writeRefRows($treeCatID, $dbCatID, $recID){
+function writeCatData($treeCatID, $dbCatID){
 	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
 	if($tblRef['srcType']=='') die();
 	$provider = ProviderFactory::getTable($tblRef);
-	$provider->writeRefRows($tblRef, $dbCatID, $recID);
+	if(Util::checkAccess($ticket, $catRef)){
+		$provider->writeCatData($tblRef, $dbCatID);
+	}
 }
 
+writeCatData($treeCatID, $dbCatID);
 
-writeRefRows($treeCatID, $dbCatID, $recID);
 

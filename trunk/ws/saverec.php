@@ -15,6 +15,7 @@ $data = $_REQUEST["data"];
 
 function writeResult($treeCatID, $dbCatID, $recID, $data){
 	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
+	if($tblRef['srcType']=='') die();
 	$provider = ProviderFactory::getTable($tblRef);
 	if(Util::checkAccess($ticket, $catRef)){
 		$provider->saveRecordData($tblRef, $dbCatID, $recID, $data);

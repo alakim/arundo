@@ -56,6 +56,7 @@ var Arundo = (function($, $H, $P){
 					warningSelRows2Del: "Select rows to delete.",
 					warningSelectAnyCatalog: "Select any catalog.",
 					errAuthorizationRequired: "Authorization Required",
+					errNotImplemented: "Not Implemented",
 					errLoadingTree: "Error loading catalog tree.",
 					errLoadingColumns: "Error loading table columns",
 					errLoadingTable: "Error loading table rows",
