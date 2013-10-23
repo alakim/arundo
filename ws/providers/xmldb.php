@@ -86,7 +86,7 @@ class XmlDB{
 		$table = $dbPath->query("//table[@name='{$tblRef['tableID']}']")->item(0);
 
 		$rec = $dbPath->query("//table[@name='{$tblRef['tableID']}']/data//row[@id='$recID']");
-		if($rec->length==0){Util::writeError('RecordMissing'); return;}
+		if($rec->length==0){Util::writeErrorData('RecordMissing', $recID); return;}
 		$rec = $rec->item(0);
 		
 		$columns = $dbPath->query("//table[@name='{$tblRef['tableID']}']/columns/col");
@@ -122,7 +122,7 @@ class XmlDB{
 		if($recID==''){
 			$cat = $dbPath->query("//data//catalog[@id='$dbCatID']");
 			if($cat->length<1){
-				Util::writeError('errCatNotExist'); return;
+				Util::writeErrorData('errCatNotExist', $dbCatID); return;
 			}
 			$cat = $cat->item(0);
 			$row = $dbDoc->createElement('row');
@@ -132,7 +132,7 @@ class XmlDB{
 		else{
 			$rows = $dbPath->query("//data//row[@id='$recID']");
 			if($rows->length<1){
-				Util::writeError('RecordMissing'); return;
+				Util::writeErrorData('RecordMissing', $recID); return;
 			}
 			$row = $rows->item(0);
 			foreach(array_keys($data) as $fld){
@@ -171,7 +171,7 @@ class XmlDB{
 		$xp = new DOMXPath($dbDoc);
 		
 		$cat = $xp->query("//data//catalog[@id='$dbCatID']");
-		if($cat->length<1){Util::writeError('errCatNotExist'); die();}
+		if($cat->length<1){Util::writeErrorData('errCatNotExist', $dbCatID); die();}
 		$cat = $cat->item(0);
 		$cNm = $cat->getAttribute('name');
 		$cPrt = $cat->parentNode->getAttribute("id");
