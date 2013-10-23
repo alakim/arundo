@@ -51,7 +51,23 @@
 				
 				propGrid.propertygrid({
 					loader: function(param, onSuccess){
-						$A.dataSource.getCatalogProperties(param, onSuccess, $A.displayError);
+						$A.dataSource.getCatalogProperties(param, function(data){
+							//console.log(data);
+							$.each(data.rows, function(i, row){
+								if(row.editor || row.editor.type=="combotree")
+									row.editor.options = {
+										loader: function(param, onSucces, onError){
+											$A.dataSource.getCatalogTree({
+												ticket: $A.ticket,
+												thisDBOnly: true
+											}, onSucces, $A.displayError)
+										},
+										queryParams:{catID:catID}
+									};
+							});
+							//console.log(data);
+							onSuccess(data);
+						}, $A.displayError);
 					},
 					showGroup: false,
 					columns: [[

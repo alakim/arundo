@@ -10,6 +10,7 @@ $depth = $_REQUEST["depth"];
 $includeRoot = $_REQUEST["includeRoot"];
 $excludeBranch = $_REQUEST["excludeBranch"];
 $ticket = $_REQUEST["ticket"];
+$thisDBOnly = $_REQUEST["thisDBOnly"]=='true';
 
 $permissions = Util::getUserPermissions($ticket);
 
