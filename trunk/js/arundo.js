@@ -71,7 +71,8 @@ var Arundo = (function($, $H, $P){
 					errCatSaving: "Catalog saving error.",
 					errUserOrGrpNotExist: "User or User Group does not exists.",
 					errMissingDataProvider: "Missing Data Provider",
-					errDeleteRow: "Error removing row"
+					errDeleteRow: "Error removing row",
+					errCatPropertiesNotAvailable: "Catalog properties not available"
 				}
 			},
 			addItems: function(lang, items){
@@ -138,7 +139,11 @@ var Arundo = (function($, $H, $P){
 			__.view.init();
 		},
 		displayError: function(err){
-			$.messager.alert(locale.getItem("error"), (err.message || err), "error");
+			console.log(err);
+			var errCode = err.error || err.message || err;
+			var msg = __.locale.getItem(errCode);
+			msg = msg.replace("$", err.data || '');
+			$.messager.alert(locale.getItem("error"), msg, "error");
 		},
 		displayWarning: function(msg){
 			$.messager.alert(locale.getItem("warning"), msg, "warning")

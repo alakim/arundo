@@ -68,7 +68,7 @@ Arundo.dataSource = (function($, $A, $P){
 		getCatalogProperties: function(param, onSuccess, onError){
 			$.post("ws/catdata.php", {catID:param.catID, ticket:$A.ticket}, function(res){
 				res = JSON.parse(res);
-				if(res.error) onError($A.locale.getItem(res.error));
+				if(res.error) onError(res);
 				else onSuccess(res);
 			});
 		},

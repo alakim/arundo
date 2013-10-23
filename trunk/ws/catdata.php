@@ -13,7 +13,7 @@ $ticket = $_REQUEST["ticket"];
 
 function writeCatData($treeCatID, $dbCatID){
 	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
-	if($tblRef==null){Util::writeError("errCatDataNotAvailable"); die();}
+	if($tblRef==null){Util::writeError("errCatPropertiesNotAvailable"); die();}
 	if($tblRef['srcType']=='') die();
 	$provider = ProviderFactory::getTable($tblRef);
 	if(Util::checkAccess($ticket, $catRef)){

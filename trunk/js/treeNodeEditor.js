@@ -50,7 +50,9 @@
 				contentPnl.html(propGrid);
 				
 				propGrid.propertygrid({
-					loader: $A.dataSource.getCatalogProperties,
+					loader: function(param, onSuccess){
+						$A.dataSource.getCatalogProperties(param, onSuccess, $A.displayError);
+					},
 					showGroup: false,
 					columns: [[
 						{field:"name", title:$A.locale.getItem("property"), width:60},
@@ -68,7 +70,7 @@
 				
 				if(catID){
 					// $A.dataSource.getCatalogProperties(catID, function(data){
-						// contentPnl.html(templates.dialog(data));
+					// 	contentPnl.html(templates.dialog(data));
 					// }, $A.displayError);
 				}
 			},

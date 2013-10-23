@@ -31,5 +31,17 @@ class Util{
 	static function writeError($errCode){
 		echo("{\"error\":\"$errCode\"}");
 	}
+	
+	static function writeErrorData($errCode, $errData){
+		echo("{\"error\":\"$errCode\",\"data\":\"$errData\"}");
+	}
+	
+	static function writeWarning($errCode){
+		echo("{\"warning\":\"$errCode\"}");
+	}
+	
+	static function writeWarningData($errCode, $errData){
+		echo("{\"warning\":\"$errCode\",\"data\":\"$errData\"}");
+	}
 }
 
