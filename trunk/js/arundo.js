@@ -72,7 +72,9 @@ var Arundo = (function($, $H, $P){
 					errUserOrGrpNotExist: "User or User Group does not exists.",
 					errMissingDataProvider: "Missing Data Provider",
 					errDeleteRow: "Error removing row",
-					errCatPropertiesNotAvailable: "Catalog properties not available"
+					errCatPropertiesNotAvailable: "Catalog properties not available",
+					fldName: "Name",
+					fldParent: "Parent"
 				}
 			},
 			addItems: function(lang, items){
