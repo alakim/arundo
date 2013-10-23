@@ -54,6 +54,7 @@
 						$A.dataSource.getCatalogProperties(param, function(data){
 							//console.log(data);
 							$.each(data.rows, function(i, row){
+								row.name = $A.locale.getItem("fld"+row.name);
 								if(row.editor || row.editor.type=="combotree")
 									row.editor.options = {
 										loader: function(param, onSucces, onError){
