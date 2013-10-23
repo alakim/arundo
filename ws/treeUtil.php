@@ -10,7 +10,7 @@ class TreeUtility{
 		$treeDoc->load(self::$treeDoc);
 		$treePath = new DOMXPath($treeDoc);
 		$links = $treePath->query("//catalog[@id='$treeCatID']/link");
-		if($links->length==0){echo("[]"); return;}
+		if($links->length==0){return;}
 
 		$link = $links->item(0);
 		$xmlDBID = $link->getAttribute('xmldb');
