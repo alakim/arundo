@@ -32,6 +32,7 @@ Arundo.locale.addItems("ru", {
 	warningSelRows2Del: "Отметьте записи для удаления.",
 	warningSelectAnyCatalog: "Выберите каталог.",
 	errAuthorizationRequired: "Требуется авторизация",
+	errNotImplemented: "Функция не реализована",
 	errLoadingTree: "Ошибка загрузки дерева каталогов",
 	errLoadingColumns: "Ошибка загрузки колонок таблицы",
 	errLoadingTable: "Ошибка загрузки записей таблицы",

@@ -13,6 +13,7 @@ $dbCatID = $catRef[1];
 
 function writeRecordData($treeCatID, $dbCatID, $recID){
 	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
+	if($tblRef['srcType']=='') die();
 	$provider = ProviderFactory::getTable($tblRef);
 	$provider->writeRecordData($tblRef, $dbCatID, $recID);
 }

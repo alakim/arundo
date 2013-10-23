@@ -14,6 +14,7 @@ $ticket = $_REQUEST["ticket"];
 
 function writeColumns($treeCatID, $dbCatID, $allMode){
 	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
+	if($tblRef['srcType']=='') die();
 	$provider = ProviderFactory::getTable($tblRef);
 	if(Util::checkAccess($ticket, $catRef)){
 		$provider->writeColumns($tblRef, $allMode);

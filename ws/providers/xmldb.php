@@ -102,7 +102,7 @@ class XmlDB{
 			echo("\"$id\":{\"field\":\"$id\",\"title\":\"$name\",\"type\":\"$type\"}");
 		}
 		echo('},');
-		echo("\"data\":{\"id\":\"$recID\",");
+		echo("\"data\":{\"id\":\"$recID\",\"catID\":\"$dbCatID\",");
 		$firstCol = true;
 		foreach($columns as $col){
 			if($firstCol) $firstCol=false; else echo(',');
@@ -162,6 +162,29 @@ class XmlDB{
 		}
 		$dbDoc->save($dbDocFile);
 		echo('[]');
+	}
+	
+	function writeCatData($tblRef, $dbCatID){
+		$dbDoc = new DOMDocument('1.0', 'UTF-8');
+		$dbDocFile = 'xmlData/'.$tblRef['xmlDBID'];
+		$dbDoc->load($dbDocFile);
+		$xp = new DOMXPath($dbDoc);
+		
+		$cat = $xp->query("//data//catalog[@id='$dbCatID']");
+		if($cat->length<1){echo("{\"error\":\"errerrCatNotExist\"}"); die();}
+		$cat = $cat->item(0);
+		$cNm = $cat->getAttribute('name');
+		$cPrt = $cat->parentNode->getAttribute("id");
+		$cPriority = $cat->getAttribute("priority");
+		echo("{\"total\":4,");
+		echo("\"rows\":[");
+		//echo("{\"name\":\"ID\", \"value\":\"$dbCatID\", \"hidden\":true, \"editor\":\"none\"}");
+		echo("{\"name\":\"Name\", \"value\":\"$cNm\", \"editor\":\"text\"}");
+		if($cPrt!='')
+			echo(",{\"name\":\"Parent\", \"value\":\"$cPrt\", \"editor\":{\"type\":\"combotree\"}}");
+		if($cPriority!='')
+			echo(",{\"name\":\"Priority\", \"value\":$cPriority, \"editor\":\"text\"}");
+		echo(']}');
 	}
 }
 
