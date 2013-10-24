@@ -73,8 +73,10 @@ var Arundo = (function($, $H, $P){
 					errMissingDataProvider: "Missing Data Provider",
 					errDeleteRow: "Error removing row",
 					errCatPropertiesNotAvailable: "Catalog properties not available",
+					fldID: "ID",
 					fldName: "Name",
-					fldParent: "Parent"
+					fldParent: "Parent",
+					fldPriority: "Priority"
 				}
 			},
 			addItems: function(lang, items){

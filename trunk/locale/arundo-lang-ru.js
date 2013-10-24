@@ -49,6 +49,8 @@ Arundo.locale.addItems("ru", {
 	errMissingDataProvider: "Отсутствует провайдер данных",
 	errDeleteRow: "Ошибка удаления записи",
 	errCatPropertiesNotAvailable: "Свойства каталога недоступны",
+	fldID: "Идентификатор",
 	fldName: "Название",
-	fldParent: "Родительский узел"
+	fldParent: "Родительский узел",
+	fldPriority: "Приоритет"
 });

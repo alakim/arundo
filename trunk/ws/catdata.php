@@ -7,17 +7,22 @@ $treeCatID = $catRef[0];
 $dbCatID = $catRef[1];
 $ticket = $_REQUEST["ticket"];
 
-function writeCatData($treeCatID, $dbCatID){
+function writeCatData($treeCatID, $dbCatID, $ticket){
 	$treeProvider = ProviderFactory::getTree();
-	$tblRef = $treeProvider->getTableRef($treeCatID, $dbCatID);
-	if($tblRef==null){Util::writeError("errCatPropertiesNotAvailable"); die();}
-	if($tblRef['srcType']=='') die();
-	$provider = ProviderFactory::getTable($tblRef);
-	if(Util::checkAccess($ticket, $catRef)){
-		$provider->writeCatData($tblRef, $dbCatID);
+	if($dbCatID==null){
+		$treeProvider->writeCatData($treeCatID);
+	}
+	else{
+		$tblRef = $treeProvider->getTableRef($treeCatID, $dbCatID);
+		if($tblRef==null){Util::writeError("errCatPropertiesNotAvailable"); die();}
+		if($tblRef['srcType']=='') die();
+		$provider = ProviderFactory::getTable($tblRef);
+		if(Util::checkAccess($ticket, $catRef)){
+			$provider->writeCatData($tblRef, $dbCatID);
+		}
 	}
 }
 
-writeCatData($treeCatID, $dbCatID);
+writeCatData($treeCatID, $dbCatID, $ticket);
 
 

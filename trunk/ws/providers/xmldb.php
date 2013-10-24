@@ -7,15 +7,16 @@ class XmlDB{
 		$parentID = $el->getAttribute("id");
 		
 		if($db=='') return;
-		// $doc = new DOMDocument('1.0', 'UTF-8');
-		// $doc->load('xmlData/'.$db);
-		// $xp = new DOMXPath($doc);
-		// $table = $xp->query('//table[@name="'.$tableName.'"]');
-		// $catalogs = $xp->query('data/catalog', $table->item(0));
-		//TreeUtility::writeElements($catalogs, true, $xp, $parentID, $permissions, $defaultVisibility);
-		
-		$treeProvider = ProviderFactory::getTree();
-		$treeProvider->writeTableTree($db, $tableName, $parentID);
+		$this->writeTableTree($db, $tableName, $parentID);
+	}
+	
+	function writeTableTree($db, $tableName, $parentID){
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc->load('xmlData/'.$db);
+		$xp = new DOMXPath($doc);
+		$table = $xp->query('//table[@name="'.$tableName.'"]');
+		$catalogs = $xp->query('data/catalog', $table->item(0));
+		XmlTree::writeElements($catalogs, true, $xp, $parentID, $permissions, $defaultVisibility);
 	}
 	
 	function writeColumns($tblRef, $allMode){
@@ -179,13 +180,13 @@ class XmlDB{
 		$cNm = $cat->getAttribute('name');
 		$cPrt = $cat->parentNode->getAttribute("id");
 		$cPriority = $cat->getAttribute("priority");
-		echo("{\"total\":4,");
+		echo("{\"total\":3,");
 		echo("\"rows\":[");
 		//echo("{\"name\":\"ID\", \"value\":\"$dbCatID\", \"hidden\":true, \"editor\":\"none\"}");
 		echo("{\"name\":\"Name\", \"value\":\"$cNm\", \"editor\":\"text\"}");
-		if($cPrt!='')
+		//if($cPrt!='')
 			echo(",{\"name\":\"Parent\", \"value\":\"$cPrt\", \"editor\":{\"type\":\"combotree\"}}");
-		if($cPriority!='')
+		//if($cPriority!='')
 			echo(",{\"name\":\"Priority\", \"value\":$cPriority, \"editor\":\"text\"}");
 		echo(']}');
 	}

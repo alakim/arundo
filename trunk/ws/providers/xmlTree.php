@@ -45,13 +45,29 @@ class XmlTree{
 		self::writeElements($elements, $recursive, $xpath, $parentID, $permissions, $defaultVisibility);
 	}
 	
-	function writeTableTree($db, $tableName, $parentID){
-		$doc = new DOMDocument('1.0', 'UTF-8');
-		$doc->load('xmlData/'.$db);
-		$xp = new DOMXPath($doc);
-		$table = $xp->query('//table[@name="'.$tableName.'"]');
-		$catalogs = $xp->query('data/catalog', $table->item(0));
-		self::writeElements($catalogs, true, $xp, $parentID, $permissions, $defaultVisibility);
+	function writeCatData($treeCatID){
+		$xmlDoc = new DOMDocument('1.0', 'UTF-8');
+		$xmlDoc->load(self::$treeDoc);
+		$xpath = new DOMXPath($xmlDoc);
+		
+		$cat = $xpath->query("//catalog[@id='$treeCatID']");
+		if($cat->length<1){Util::writeErrorData('errCatNotExist', $treeCatID); die();}
+		$cat = $cat->item(0);
+	
+		$cNm = Util::conv($cat->getAttribute("name"));
+		$cPriority = $cat->getAttribute("priority");
+		$cPrt = $cat->parentNode->getAttribute("id");
+		
+		echo("{\"total\":4,");
+		echo("\"rows\":[");
+		echo("{\"name\":\"ID\", \"value\":\"$treeCatID\", \"editor\":\"text\"}");
+		echo(",{\"name\":\"Name\", \"value\":\"$cNm\", \"editor\":\"text\"}");
+		//if($cPrt!='')
+			echo(",{\"name\":\"Parent\", \"value\":\"$cPrt\", \"editor\":{\"type\":\"combotree\"}}");
+		//if($cPriority!='')
+			echo(",{\"name\":\"Priority\", \"value\":$cPriority, \"editor\":\"text\"}");
+		echo(']}');
+		
 	}
 
 	private static function addLinkedTree($el, $xpath, $permissions, $defaultVisibility){
@@ -66,7 +82,7 @@ class XmlTree{
 	}
 
 
-	private static function writeElements($elements, $recursive, $xpath, $parentID, $permissions, $defaultVisibility){
+	static function writeElements($elements, $recursive, $xpath, $parentID, $permissions, $defaultVisibility){
 		if($includeRoot){
 			echo("{\"id\":null, \"text\":\"/\"}");
 		}
