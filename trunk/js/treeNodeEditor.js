@@ -55,8 +55,9 @@
 							//console.log(data);
 							$.each(data.rows, function(i, row){
 								row.name = $A.locale.getItem("fld"+row.name);
-								if(row.editor || row.editor.type=="combotree")
-									row.editor.options = {
+								if(row.group) row.group = $A.locale.getItem("grp"+row.group);
+								if(row.editor){ 
+									if(row.editor.type=="combotree") row.editor.options = {
 										loader: function(param, onSucces, onError){
 											$A.dataSource.getCatalogTree({
 												ticket: $A.ticket,
@@ -65,12 +66,25 @@
 										},
 										queryParams:{catID:catID}
 									};
+									else if(row.editor.type=="linkTypes") row.editor = {
+										type:"combobox", 
+										options:{
+											data:[
+												"",
+												"xmldb",
+												"xmlUsersDB"
+											]
+										}
+									};
+									
+									
+								}
 							});
 							//console.log(data);
 							onSuccess(data);
 						}, $A.displayError);
 					},
-					showGroup: false,
+					showGroup: true,
 					columns: [[
 						{field:"name", title:$A.locale.getItem("property"), width:60},
 						{field:"value", title:$A.locale.getItem("value"), width: 100}

@@ -180,14 +180,16 @@ class XmlDB{
 		$cNm = $cat->getAttribute('name');
 		$cPrt = $cat->parentNode->getAttribute("id");
 		$cPriority = $cat->getAttribute("priority");
+		if($cPriority=='') $cPriority = 0;
+		
 		echo("{\"total\":3,");
 		echo("\"rows\":[");
 		//echo("{\"name\":\"ID\", \"value\":\"$dbCatID\", \"hidden\":true, \"editor\":\"none\"}");
-		echo("{\"name\":\"Name\", \"value\":\"$cNm\", \"editor\":\"text\"}");
+		echo("{\"name\":\"Name\", \"group\":\"TreeNode\", \"value\":\"$cNm\", \"editor\":\"text\"}");
 		//if($cPrt!='')
-			echo(",{\"name\":\"Parent\", \"value\":\"$cPrt\", \"editor\":{\"type\":\"combotree\"}}");
+			echo(",{\"name\":\"Parent\", \"group\":\"TreeNode\", \"value\":\"$cPrt\", \"editor\":{\"type\":\"combotree\"}}");
 		//if($cPriority!='')
-			echo(",{\"name\":\"Priority\", \"value\":$cPriority, \"editor\":\"text\"}");
+			echo(",{\"name\":\"Priority\", \"group\":\"TreeNode\", \"value\":$cPriority, \"editor\":\"text\"}");
 		echo(']}');
 	}
 }

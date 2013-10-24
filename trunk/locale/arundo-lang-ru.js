@@ -52,5 +52,10 @@ Arundo.locale.addItems("ru", {
 	fldID: "Идентификатор",
 	fldName: "Название",
 	fldParent: "Родительский узел",
-	fldPriority: "Приоритет"
+	fldPriority: "Приоритет",
+	fldLinkType: "Тип связи",
+	fldLinkDB: "Связанная БД",
+	fldLinkTable: "Связанная таблица",
+	grpTreeNode: "Узел дерева",
+	grpLink: "Связь"
 });

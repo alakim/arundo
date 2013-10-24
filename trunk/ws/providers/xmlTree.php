@@ -56,16 +56,26 @@ class XmlTree{
 	
 		$cNm = Util::conv($cat->getAttribute("name"));
 		$cPriority = $cat->getAttribute("priority");
+		if($cPriority=='') $cPriority = 0;
 		$cPrt = $cat->parentNode->getAttribute("id");
 		
 		echo("{\"total\":4,");
 		echo("\"rows\":[");
-		echo("{\"name\":\"ID\", \"value\":\"$treeCatID\", \"editor\":\"text\"}");
-		echo(",{\"name\":\"Name\", \"value\":\"$cNm\", \"editor\":\"text\"}");
+		echo("{\"name\":\"ID\", \"group\":\"TreeNode\", \"value\":\"$treeCatID\", \"editor\":\"text\"}");
+		echo(",{\"name\":\"Name\", \"group\":\"TreeNode\", \"value\":\"$cNm\", \"editor\":\"text\"}");
 		//if($cPrt!='')
-			echo(",{\"name\":\"Parent\", \"value\":\"$cPrt\", \"editor\":{\"type\":\"combotree\"}}");
+			echo(",{\"name\":\"Parent\", \"group\":\"TreeNode\", \"value\":\"$cPrt\", \"editor\":{\"type\":\"combotree\"}}");
 		//if($cPriority!='')
-			echo(",{\"name\":\"Priority\", \"value\":$cPriority, \"editor\":\"text\"}");
+			echo(",{\"name\":\"Priority\", \"group\":\"TreeNode\", \"value\":$cPriority, \"editor\":\"text\"}");
+			
+			
+		$lnkType = '';
+		$lnkDB = '';
+		$lnkTable = '';
+		echo(",{\"name\":\"LinkType\", \"group\":\"Link\", \"value\":\"$lnkType\", \"editor\":\"linkTypes\"}");
+		echo(",{\"name\":\"LinkDB\", \"group\":\"Link\", \"value\":\"$lnkDB\", \"editor\":\"text\"}");
+		echo(",{\"name\":\"LinkTable\", \"group\":\"Link\", \"value\":\"$lnkTable\", \"editor\":\"text\"}");
+		
 		echo(']}');
 		
 	}
