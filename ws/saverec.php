@@ -1,8 +1,5 @@
 <?php 
 require('providers/factory.php');
-require('providers/xmldb.php');
-require('providers/xmlusersdb.php');
-require('providers/xmlUserSessions.php');
 
 $recID = $_REQUEST["recID"];
 

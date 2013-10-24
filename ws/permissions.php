@@ -1,7 +1,5 @@
 <?php 
 require('providers/factory.php');
-require('providers/xmldb.php');
-require('providers/xmlusersdb.php');
 
 $grpID = $_REQUEST["grpID"];
 $ticket = $_REQUEST["ticket"];
