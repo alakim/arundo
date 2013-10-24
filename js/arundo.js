@@ -76,7 +76,12 @@ var Arundo = (function($, $H, $P){
 					fldID: "ID",
 					fldName: "Name",
 					fldParent: "Parent",
-					fldPriority: "Priority"
+					fldPriority: "Priority",
+					fldLinkType: "Link Type",
+					fldLinkDB: "Link DB",
+					fldLinkTable: "Link Table",
+					grpTreeNode: "Tree Node",
+					grpLink: "Link"
 				}
 			},
 			addItems: function(lang, items){
