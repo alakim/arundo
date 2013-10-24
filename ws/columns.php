@@ -1,5 +1,4 @@
 <?php 
-require('treeUtil.php');
 require('providers/factory.php');
 require('providers/xmldb.php');
 require('providers/xmlusersdb.php');
@@ -13,7 +12,8 @@ $allMode = $_REQUEST["all"]=='1';
 $ticket = $_REQUEST["ticket"];
 
 function writeColumns($treeCatID, $dbCatID, $allMode){
-	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
+	$treeProvider = ProviderFactory::getTree();
+	$tblRef = $treeProvider->getTableRef($treeCatID, $dbCatID);
 	if($tblRef['srcType']=='') die();
 	$provider = ProviderFactory::getTable($tblRef);
 	if(Util::checkAccess($ticket, $catRef)){

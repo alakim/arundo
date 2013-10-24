@@ -1,11 +1,11 @@
 <?php 
 require('util.php');
 
-class TreeUtility{
+class XmlTree{
 	// ƒокумент, содержащий описание дерева
-	static $treeDoc = 'xmlData/tree.xml';
+	private static $treeDoc = 'xmlData/tree.xml';
 	
-	static function getTableRef($treeCatID, $dbCatID){
+	function getTableRef($treeCatID, $dbCatID){
 		$treeDoc = new DOMDocument('1.0', 'UTF-8');
 		$treeDoc->load(self::$treeDoc);
 		$treePath = new DOMXPath($treeDoc);
@@ -33,8 +33,28 @@ class TreeUtility{
 		}
 	}
 	
+	function writeTree($rootID, $recursive, $parentID, $permissions, $defaultVisibility){
+		$xmlDoc = new DOMDocument('1.0', 'UTF-8');
+		$xmlDoc->load(self::$treeDoc);
 
-	static function addLinkedTree($el, $xpath, $permissions, $defaultVisibility){
+		$xpath = new DOMXPath($xmlDoc);
+		$query = "/tree/catalog";
+		if($rootID) $query = "//catalog[@id='".$rootID."']";
+		$elements = $xpath->query($query);
+
+		self::writeElements($elements, $recursive, $xpath, $parentID, $permissions, $defaultVisibility);
+	}
+	
+	function writeTableTree($db, $tableName, $parentID){
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc->load('xmlData/'.$db);
+		$xp = new DOMXPath($doc);
+		$table = $xp->query('//table[@name="'.$tableName.'"]');
+		$catalogs = $xp->query('data/catalog', $table->item(0));
+		self::writeElements($catalogs, true, $xp, $parentID, $permissions, $defaultVisibility);
+	}
+
+	private static function addLinkedTree($el, $xpath, $permissions, $defaultVisibility){
 		$lnks = $xpath->query("link", $el);
 		if(is_null($lnks) || $lnks->length==0) return;
 		$link = $lnks->item(0);
@@ -46,7 +66,7 @@ class TreeUtility{
 	}
 
 
-	function writeElements($elements, $recursive, $xpath, $parentID, $permissions, $defaultVisibility){
+	private static function writeElements($elements, $recursive, $xpath, $parentID, $permissions, $defaultVisibility){
 		if($includeRoot){
 			echo("{\"id\":null, \"text\":\"/\"}");
 		}
