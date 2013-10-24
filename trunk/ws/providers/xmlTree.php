@@ -85,7 +85,7 @@ class XmlTree{
 		if(is_null($lnks) || $lnks->length==0) return;
 		$link = $lnks->item(0);
 		
-		if($link->getAttribute("xmldb")!='') $provider = new XmlDB();
+		if($link->getAttribute("xmldb")!='')$provider = new XmlDB($link->getAttribute("xmldb"));
 		if($link->getAttribute("xmlUsersDB")!='') $provider = new XmlUsersDB();
 		
 		if(!is_null($provider)) $provider->writeLinkedNodes($link, $el, $permissions, $defaultVisibility);

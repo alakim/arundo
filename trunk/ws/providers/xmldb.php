@@ -1,16 +1,26 @@
 <?php 
 
 class XmlDB{
+	static $idField = "xmlDBID";
+	
+	function __construct($db){
+		$this->db = $db;
+	}
+	
 	function writeLinkedNodes($link, $el, $permissions, $defaultVisibility){
 		$db = $link->getAttribute("xmldb");
 		$tableName = $link->getAttribute("table");
 		$parentID = $el->getAttribute("id");
 		
 		if($db=='') return;
-		$this->writeTableTree($db, $tableName, $parentID);
+		$this->writeDBTableTree($db, $tableName, $parentID);
 	}
 	
-	function writeTableTree($db, $tableName, $parentID){
+	function writeTableTree($tableName, $parentID){
+		$this->writeDBTableTree($this->db, $tableName, $parentID);
+	}
+	
+	function writeDBTableTree($db, $tableName, $parentID){
 		$doc = new DOMDocument('1.0', 'UTF-8');
 		$doc->load('xmlData/'.$db);
 		$xp = new DOMXPath($doc);
@@ -20,10 +30,10 @@ class XmlDB{
 	}
 	
 	function writeColumns($tblRef, $allMode){
-		if($tblRef['xmlDBID']=='') return;
+		if($tblRef[self::$idField]=='') return;
 	
 		$dbDoc = new DOMDocument('1.0', 'UTF-8');
-		$dbDoc->load('xmlData/'.$tblRef['xmlDBID']);
+		$dbDoc->load('xmlData/'.$tblRef[self::$idField]);
 		$dbPath = new DOMXPath($dbDoc);
 		$table = $dbPath->query("//table[@name='{$tblRef['tableID']}']")->item(0);
 	
@@ -48,10 +58,10 @@ class XmlDB{
 	}
 	
 	function writeTableRows($tblRef, $dbCatID){
-		if($tblRef['xmlDBID']=='') return;
+		if($tblRef[self::$idField]=='') return;
 		
 		$dbDoc = new DOMDocument('1.0', 'UTF-8');
-		$dbDoc->load('xmlData/'.$tblRef['xmlDBID']);
+		$dbDoc->load('xmlData/'.$tblRef[self::$idField]);
 		$dbPath = new DOMXPath($dbDoc);
 		
 		$table = $dbPath->query("//table[@name='{$tblRef['tableID']}']")->item(0);
@@ -81,10 +91,10 @@ class XmlDB{
 	}
 	
 	function writeRecordData($tblRef, $dbCatID, $recID){
-		if($tblRef['xmlDBID']=='') return;
+		if($tblRef[self::$idField]=='') return;
 		
 		$dbDoc = new DOMDocument('1.0', 'UTF-8');
-		$dbDoc->load('xmlData/'.$tblRef['xmlDBID']);
+		$dbDoc->load('xmlData/'.$tblRef[self::$idField]);
 		$dbPath = new DOMXPath($dbDoc);
 		
 		$table = $dbPath->query("//table[@name='{$tblRef['tableID']}']")->item(0);
@@ -120,7 +130,7 @@ class XmlDB{
 	
 	function saveRecordData($tblRef, $dbCatID, $recID, $data){
 		$dbDoc = new DOMDocument('1.0', 'UTF-8');
-		$dbDocFile = 'xmlData/'.$tblRef['xmlDBID'];
+		$dbDocFile = 'xmlData/'.$tblRef[self::$idField];
 		$dbDoc->load($dbDocFile);
 		$dbPath = new DOMXPath($dbDoc);
 		if($recID==''){
@@ -152,7 +162,7 @@ class XmlDB{
 	
 	function deleteRows($tblRef, $rowIDs){
 		$dbDoc = new DOMDocument('1.0', 'UTF-8');
-		$dbDocFile = 'xmlData/'.$tblRef['xmlDBID'];
+		$dbDocFile = 'xmlData/'.$tblRef[self::$idField];
 		$dbDoc->load($dbDocFile);
 		$xp = new DOMXPath($dbDoc);
 		
@@ -170,7 +180,7 @@ class XmlDB{
 	
 	function writeCatData($tblRef, $dbCatID){
 		$dbDoc = new DOMDocument('1.0', 'UTF-8');
-		$dbDocFile = 'xmlData/'.$tblRef['xmlDBID'];
+		$dbDocFile = 'xmlData/'.$tblRef[self::$idField];
 		$dbDoc->load($dbDocFile);
 		$xp = new DOMXPath($dbDoc);
 		
