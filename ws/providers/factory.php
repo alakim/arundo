@@ -23,7 +23,7 @@ class ProviderFactory{
 			echo("{\"error\":\"errMissingDataProvider\"}");
 			die();
 		};
-		$provider = new $provName;
+		$provider = new $provName($tblRef[$provName::$idField]);
 		return $provider;
 	}
 	
