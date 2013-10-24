@@ -1,7 +1,5 @@
 <?php 
 require('providers/factory.php');
-require('providers/xmldb.php');
-require('providers/xmlusersdb.php');
 
 $catRef = explode("/", $_REQUEST["catID"]);
 $treeCatID = $catRef[0];

@@ -1,5 +1,8 @@
 <?php 
+require('xmldb.php');
 require('xmlTree.php');
+require('xmlusersdb.php');
+require('xmlUserSessions.php');
 
 class ProviderFactory{
 	static function getSessions($baseDir){
