@@ -1,5 +1,4 @@
 <?php 
-require('treeUtil.php');
 require('providers/factory.php');
 require('providers/xmldb.php');
 require('providers/xmlusersdb.php');
@@ -12,7 +11,8 @@ $dbCatID = $catRef[1];
 $data = $_REQUEST["data"];
 
 function writeRefRows($treeCatID, $dbCatID, $recID){
-	$tblRef = TreeUtility::getTableRef($treeCatID, $dbCatID);
+	$treeProvider = ProviderFactory::getTree();
+	$tblRef = $treeProvider->getTableRef($treeCatID, $dbCatID);
 	if($tblRef['srcType']=='') die();
 	$provider = ProviderFactory::getTable($tblRef);
 	$provider->writeRefRows($tblRef, $dbCatID, $recID);

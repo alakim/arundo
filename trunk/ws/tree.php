@@ -1,5 +1,4 @@
 <?php 
-require('treeUtil.php');
 require('providers/factory.php');
 require('providers/xmldb.php');
 require('providers/xmlusersdb.php');
@@ -14,14 +13,9 @@ $thisDBOnly = $_REQUEST["thisDBOnly"]=='true';
 
 $permissions = Util::getUserPermissions($ticket);
 
-$xmlDoc = new DOMDocument('1.0', 'UTF-8');
-$xmlDoc->load(TreeUtility::$treeDoc);
 
-$xpath = new DOMXPath($xmlDoc);
-$query = "/tree/catalog";
-if($rootID) $query = "//catalog[@id='".$rootID."']";
-$elements = $xpath->query($query);
+$treeProvider = ProviderFactory::getTree();
 
 echo("[");
-TreeUtility::writeElements($elements, $depth!="1", $xpath, null, $permissions, false);
+$treeProvider->writeTree($rootID, $depth!="1", null, $permissions, false);
 echo("]");
