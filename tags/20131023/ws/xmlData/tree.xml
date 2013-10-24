@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tree>
+  <catalog id="users" name="Пользователи" priority="100">
+	<link xmlUsersDB="usersDB.xml"/>
+  </catalog>
+  <catalog id="content" name="Контент" priority="90">
+    <catalog id="productions" name="Продукция" priority="100">
+      <link xmldb="db1.xml" table="Production"/>
+    </catalog>
+    <catalog id="phoneBook" name="Телефонный справочник">
+      <link xmldb="db1.xml" table="Persons"/>
+    </catalog>
+    <catalog id="standards" name="Стандарты" priority="90"/>
+  </catalog>
+</tree>
