@@ -133,7 +133,7 @@ class XmlTree{
 				
 				$iconClass = '';
 				$links = $el->getElementsByTagName('link');
-				if($links->length>0 && $links->item(0)->parentNode===$el) $iconClass = 'greenTree';
+				if($links->length>0 && $links->item(0)->parentNode===$el) $iconClass = 'linkNode';
 				if($iconClass!='') echo(",\"iconCls\":\"$iconClass\"");
 				
 				if($recursive && $el->hasChildNodes()){
