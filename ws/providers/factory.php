@@ -5,6 +5,13 @@ require('xmlusersdb.php');
 require('xmlUserSessions.php');
 
 class ProviderFactory{
+	static function getDBTypes(){
+		return array(
+			'xmlDB'=>'XmlDB',
+			'xmlUsersDB'=>'XmlUsersDB'
+		);
+	}
+	
 	static function getSessions($baseDir){
 		return new XmlUsersSessions($baseDir);
 	}
