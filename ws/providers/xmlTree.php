@@ -63,18 +63,31 @@ class XmlTree{
 		echo("\"rows\":[");
 		echo("{\"name\":\"ID\", \"group\":\"TreeNode\", \"value\":\"$treeCatID\", \"editor\":\"text\"}");
 		echo(",{\"name\":\"Name\", \"group\":\"TreeNode\", \"value\":\"$cNm\", \"editor\":\"text\"}");
-		//if($cPrt!='')
-			echo(",{\"name\":\"Parent\", \"group\":\"TreeNode\", \"value\":\"$cPrt\", \"editor\":{\"type\":\"combotree\"}}");
-		//if($cPriority!='')
-			echo(",{\"name\":\"Priority\", \"group\":\"TreeNode\", \"value\":$cPriority, \"editor\":\"text\"}");
+		echo(",{\"name\":\"Parent\", \"group\":\"TreeNode\", \"value\":\"$cPrt\", \"editor\":{\"type\":\"combotree\"}}");
+		echo(",{\"name\":\"Priority\", \"group\":\"TreeNode\", \"value\":$cPriority, \"editor\":\"text\"}");
 			
 			
 		$lnkType = '';
 		$lnkDB = '';
 		$lnkTable = '';
+
+		$link = $xpath->query('link', $cat);
+		if($link->length>0){
+			$link = $link->item(0);
+			if($link->getAttribute('xmlUsersDB')!=''){
+				$lnkType = "XmlUsersDB";
+				$lnkDB = $link->getAttribute('xmlUsersDB');
+			}
+			else if($link->getAttribute('xmldb')!=''){
+				$lnkType = "XmlDB";
+				$lnkDB = $link->getAttribute('xmldb');
+				$lnkTable = $link->getAttribute('table');
+			}
+		}
 		echo(",{\"name\":\"LinkType\", \"group\":\"Link\", \"value\":\"$lnkType\", \"editor\":\"linkTypes\"}");
 		echo(",{\"name\":\"LinkDB\", \"group\":\"Link\", \"value\":\"$lnkDB\", \"editor\":\"text\"}");
 		echo(",{\"name\":\"LinkTable\", \"group\":\"Link\", \"value\":\"$lnkTable\", \"editor\":\"text\"}");
+		
 		
 		echo(']}');
 		

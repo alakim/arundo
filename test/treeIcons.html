@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tree Node Icons - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../ui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../ui/themes/icon.css">
+	<script type="text/javascript" src="../ui/jquery.min.js"></script>
+	<script type="text/javascript" src="../ui/jquery.easyui.min.js"></script>
+	<style type="text/css">
+		.tree-icon.tree-folder.grayTree{
+			background: url('../design/tree_icons.png') no-repeat scroll 1px 0;
+		}
+		.tree-icon.tree-folder.tree-folder-open.grayTree{
+			background: url('../design/tree_icons.png') no-repeat scroll -15px 0;
+		}
+		.tree-icon.tree-folder.greenTree{
+			background: url('../design/tree_icons.png') no-repeat scroll -31px 0;
+		}
+		.tree-icon.tree-folder.tree-folder-open.greenTree{
+			background: url('../design/tree_icons.png') no-repeat scroll -47px 0;
+		}
+		.tree-icon.tree-folder.redTree{
+			background: url('../design/tree_icons.png') no-repeat scroll -63px 0;
+		}
+		.tree-icon.tree-folder.tree-folder-open.redTree{
+			background: url('../design/tree_icons.png') no-repeat scroll -79px 0;
+		}
+	</style>
+</head>
+<body>
+	<h2>Tree Node Icons</h2>
+	<div class="demo-info">
+		<div class="demo-tip icon-tip"></div>
+		<div>This sample illustrates how to add icons to tree node.</div>
+	</div>
+	<div style="margin:10px 0;"></div>
+	<ul class="easyui-tree" data-options="url:'tree_data2.json',method:'get',animate:true"></ul>
+
+</body>
+</html>
