@@ -1,7 +1,8 @@
 <?php 
 
 class XmlUsersDB{
-
+	static $idField = "usersDBID";
+	
 	static $defaultDoc = 'usersDB.xml';
 	
 	function __construct(){
@@ -29,7 +30,7 @@ class XmlUsersDB{
 	}
 	
 	function writeColumns($tblRef){
-		$db = $tblRef['usersDBID'];
+		$db = $tblRef[self::$idField];
 		$sectID = $tblRef['section'];
 		
 		if($db=='' || $sectID==''){echo('[]'); return;}
@@ -41,7 +42,7 @@ class XmlUsersDB{
 	}
 	
 	function writeTableRows($tblRef, $dbCatID){
-		$db = $tblRef['usersDBID'];
+		$db = $tblRef[self::$idField];
 		$sectID = $tblRef['section'];
 		
 		if($db=='') return;
@@ -67,7 +68,7 @@ class XmlUsersDB{
 	}
 	
 	function writeRecordData($tblRef, $dbCatID, $recID){
-		$db = $tblRef['usersDBID'];
+		$db = $tblRef[self::$idField];
 		$sectID = $tblRef['section'];
 		
 		if($db=='') return;
@@ -122,7 +123,7 @@ class XmlUsersDB{
 	}
 	
 	function writeRefRows($tblRef, $dbCatID, $recID){
-		$db = $tblRef['usersDBID'];
+		$db = $tblRef[self::$idField];
 		$sectID = $tblRef['section'];
 		
 		if($db=='') return;

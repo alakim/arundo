@@ -37,6 +37,23 @@
 	},{
 		"id":16,
 		"text":"Actions",
+		"iconCls":"blueTree",
+		"children":[{
+			"text":"Add",
+			"iconCls":"icon-add"
+		},{
+			"text":"Remove",
+			"iconCls":"icon-remove"
+		},{
+			"text":"Save",
+			"iconCls":"icon-save"
+		},{
+			"text":"Search",
+			"iconCls":"icon-search"
+		}]
+	},{
+		"id":16,
+		"text":"Dangerous Actions",
 		"iconCls":"redTree",
 		"children":[{
 			"text":"Add",
