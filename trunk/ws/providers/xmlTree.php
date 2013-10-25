@@ -92,6 +92,18 @@ class XmlTree{
 		echo(']}');
 		
 	}
+	
+	function saveTreeNode($treeCatID, $data){
+		$xmlDoc = new DOMDocument('1.0', 'UTF-8');
+		$xmlDoc->load(self::$treeDoc);
+		$xpath = new DOMXPath($xmlDoc);
+
+		$cat = $xpath->query("//catalog[@id='$treeCatID']");
+		if($cat->length<1){Util:writeErrorData('errCatNotExist', $treeCatID); die();}
+		$cat = $cat->item(0);
+		
+		var_dump($data);
+	}
 
 	private static function addLinkedTree($el, $xpath, $permissions, $defaultVisibility){
 		$lnks = $xpath->query("link", $el);
