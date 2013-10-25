@@ -128,7 +128,13 @@ class XmlTree{
 				$name = Util::conv($el->getAttribute("name"));
 				$priority = $el->getAttribute("priority"); if($priority=="") $priority = 0;
 				
+				
 				echo("{\"id\":\"".$prefix.$id."\", \"text\":\"".$name."\", \"priority\":".$priority);
+				
+				$iconClass = '';
+				$links = $el->getElementsByTagName('link');
+				if($links->length>0 && $links->item(0)->parentNode===$el) $iconClass = 'greenTree';
+				if($iconClass!='') echo(",\"iconCls\":\"$iconClass\"");
 				
 				if($recursive && $el->hasChildNodes()){
 					echo(",\"children\":[");
