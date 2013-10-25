@@ -75,10 +75,10 @@ h2 {
 .tree-icon.tree-folder.tree-folder-open.grayTree{
 	background: url('tree_icons.png') no-repeat scroll -15px 0;
 }
-.tree-icon.tree-folder.linkNode{
+.tree-icon.tree-folder.geenNode{
 	background: url('tree_icons.png') no-repeat scroll -31px 0;
 }
-.tree-icon.tree-folder.tree-folder-open.linkNode{
+.tree-icon.tree-folder.tree-folder-open.greenNode{
 	background: url('tree_icons.png') no-repeat scroll -47px 0;
 }
 .tree-icon.tree-folder.redTree{
@@ -93,9 +93,16 @@ h2 {
 .tree-icon.tree-folder.tree-folder-open.blueTree{
 	background: url('tree_icons.png') no-repeat scroll -111px 0;
 }
+
+.tree-icon.tree-folder.linkNode{
+	background: url('tree_link_icons.png') no-repeat scroll 1px 0;
+}
+.tree-icon.tree-folder.tree-folder-open.linkNode{
+	background: url('tree_link_icons.png') no-repeat scroll -15px 0;
+}
 .tree-icon.tree-file.linkNode{
-	background: url('tree_icons.png') no-repeat scroll -31px 0;
+	background: url('tree_link_icons.png') no-repeat scroll 1px 0;
 }
 .tree-node-selected .tree-icon.tree-file.linkNode{
-	background: url('tree_icons.png') no-repeat scroll -47px 0;
+	background: url('tree_link_icons.png') no-repeat scroll -15px 0;
 }
