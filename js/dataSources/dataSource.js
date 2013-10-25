@@ -73,7 +73,12 @@ Arundo.dataSource = (function($, $A, $P){
 			});
 		},
 		saveCatalogProperties: function(catID, data, onSuccess, onError){
-			onError("Method 'saveCatalogProperties' not implemented.");
+			$.post("ws/savecatdata.php", {catID:catID, data:data, ticket:$A.ticket}, function(res){
+				res = JSON.parse(res);
+				if(res.error) onError(res);
+				else onSuccess(res);
+			});
+			// onError("Method 'saveCatalogProperties' not implemented.");
 		},
 		
 		getRefRows: function(prm, onSuccess, onError){
