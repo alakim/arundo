@@ -52,7 +52,6 @@
 				propGrid.propertygrid({
 					loader: function(param, onSuccess){
 						$A.dataSource.getCatalogProperties(param, function(data){
-							//console.log(data);
 							$.each(data.rows, function(i, row){
 								row.name = $A.locale.getItem("fld"+row.name);
 								if(row.group) row.group = $A.locale.getItem("grp"+row.group);
@@ -66,21 +65,24 @@
 										},
 										queryParams:{catID:catID}
 									};
-									else if(row.editor.type=="linkTypes") row.editor = {
-										type:"combobox", 
-										options:{
-											data:[
-												"",
-												"xmldb",
-												"xmlUsersDB"
-											]
-										}
-									};
+									else if(row.editor=="linkTypes"){
+										row.editor = {
+											type:"combobox", 
+											options:{
+												data:[
+													{id:"no", text:"---"},
+													{id:"xmlDB", text:"XmlDB"},
+													{id:"xmlUsersDB", text:"XmlUsersDB"}
+												],
+												valueField: 'id',
+												textField: 'text'
+											}
+										};
+									}
 									
 									
 								}
 							});
-							//console.log(data);
 							onSuccess(data);
 						}, $A.displayError);
 					},
