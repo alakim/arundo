@@ -69,11 +69,8 @@
 										row.editor = {
 											type:"combobox", 
 											options:{
-												data:[
-													{id:"no", text:"---"},
-													{id:"xmlDB", text:"XmlDB"},
-													{id:"xmlUsersDB", text:"XmlUsersDB"}
-												],
+												url:'ws/dbtypes.php',
+												method:'GET',
 												valueField: 'id',
 												textField: 'text'
 											}
