@@ -1,5 +1,4 @@
 <?php 
-require('util.php');
 
 class XmlTree{
 	// ƒокумент, содержащий описание дерева
