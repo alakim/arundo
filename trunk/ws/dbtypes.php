@@ -1,4 +1,5 @@
 <?php 
+require('util.php');
 require('providers/factory.php');
 
 $ticket = $_REQUEST["ticket"];

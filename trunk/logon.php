@@ -6,8 +6,6 @@
 <?php 
 	require('ws/util.php');
 	require('ws/providers/factory.php');
-	require('ws/providers/xmlusersdb.php');
-	require('ws/providers/xmlUserSessions.php');
 ?>
 
 <html>
