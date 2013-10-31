@@ -1,12 +1,12 @@
 (function($, $A, $H){
 	var templates = {
 		grid: function(data){with($H){
-			return div(
-				table({border:1, cellpadding:3, cellspacing:0},
+			return div({"class":"propertyGrid"},
+				table({border:0, cellpadding:3, cellspacing:0},
 					apply(data.columns, function(col, id){
 						col.id = id;
 						return tr(
-							th(col.title),
+							td({"class":"fldHeader"}, $A.locale.getItem("fld"+col.title)),
 							td(templates.cell(col, data.values[col.id]))
 						);
 					})
