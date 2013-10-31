@@ -101,7 +101,10 @@ class XmlTree{
 		if($cat->length<1){Util:writeErrorData('errCatNotExist', $treeCatID); die();}
 		$cat = $cat->item(0);
 		
+		
 		var_dump($data);
+
+		echo('[]');
 	}
 
 	private static function addLinkedTree($el, $xpath, $permissions, $defaultVisibility){
