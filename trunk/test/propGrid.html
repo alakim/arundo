@@ -24,6 +24,13 @@
 		border: 1px solid #888;
 		width: 800px;
 	}
+	.propertyGrid{
+		border: 1px solid #888;
+	}
+	.propertyGrid .fldHeader{
+		font-weight: bold;
+		text-align: right;
+	}
 </style>
 
 <script type="text/javascript">
@@ -32,11 +39,11 @@ Arundo.view = {
 	init: function(){
 		$("#pnl1").propertyGrid({data:{
 			columns:{
-				parent:{title:"Расположение", editor:{type:"treeRef", options:{
+				parent:{title:"Parent", editor:{type:"treeRef", options:{
 					url:"tree_data2.json"
 				}}},
-				name:{title:"Наименование", editor:"text"},
-				priority:{title:"Приоритет", editor:"text"},
+				name:{title:"Name", editor:"text"},
+				priority:{title:"Priority", editor:"text"},
 			},
 			values:{
 				parent:"112",
