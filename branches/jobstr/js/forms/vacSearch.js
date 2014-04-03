@@ -1,0 +1,1 @@
+﻿define(["html"], function($H){	function template(){with($H){		return div(			h2("Поиск вакансий")		);	}}		return {		view: function(pnl){			pnl.html(template());		}	};});
