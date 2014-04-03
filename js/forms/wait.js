@@ -1,0 +1,1 @@
+﻿define(["html"], function($H){	return {		view: function(pnl){with($H){			pnl.html(				img({src:"images/wait.gif"})			);		}}	};});

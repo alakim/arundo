@@ -1,0 +1,394 @@
+﻿TD.clouds
+{
+	background-position: left top;
+	background-image: url(images/clouds_bg.jpg);
+	background-repeat: no-repeat;
+}
+TD.buildings
+{
+	background-image: url(images/buildings_bg.jpg);
+	background-repeat: repeat-x;
+}
+TD.topmenu
+{
+	background-position: left top;
+	background-image: url(images/topmenu_bg.jpg);
+	background-repeat: repeat-x;
+}
+/**********************UTILS***********************/
+.clear{clear:both;}
+/********************ОБЩАЯ ОБЕРТКА*****************/
+.wrapper{
+	margin-left:10px;
+}
+
+/********************ЛОГОТИП*****************/
+.logo{
+	padding-left:20px;
+	padding-top:10px; 
+}
+.logo_big{
+	width:  229px;
+	height: 32px; 
+	font: 18px Tahoma;
+	text-align:center;
+	background-color: RGB(242, 178, 15);
+	background-image:	URL(images/logo_big_bg.gif);
+	background-position:bottom;
+	background-repeat:repeat-x;
+	padding-top:5px;
+}
+
+.logo_big A:hover{color:Black;}
+.logo_big A:visited{color:Black;}
+
+.logo_small{
+	margin-left:160px;
+	margin-top:-10px;
+	width:80px;
+	font: 15px Tahoma;
+	text-align:center;
+	color: #ffffff;
+	background-color: black;
+}
+/*****************ГЛАВНОЕ МЕНЮ***************/
+.mainmenu{
+	padding-left:19px;
+	padding-top: 20px; 
+}
+TD.mainmenu_title{font-size:15px; font-weight:bold; font-family: Arial; color:White;}
+.mainmenu TD.leftaction{width:120px;padding-top:7px;}
+.mainmenu TD.rightaction{width:140px;padding-top:7px;}
+TD.action_distance{padding-top:7px;}
+A.mainmenu_action{
+	font-size:13px;
+	font-weight: normal; 
+	font-family: Arial; 
+	color:#F09E15;
+}
+A:hover.mainmenu_action{
+	font-size: 13px;
+	font-weight: normal;
+	font-family: Arial;
+	color: #F09E15;
+	text-decoration: underline;
+}
+
+.mainmenu_inner .block{padding-top:15px;}
+.mainmenu_inner .block A:hover{color:#FF5A35;}
+.mainmenu_inner .distance{padding-top:5px;}
+.mainmenu_inner .competitor{
+	color:white;
+	float:left;
+	padding-left:15px;
+}
+.mainmenu_inner .employer{
+	color:white;
+	float:left;
+	margin-left:20px;
+}
+/**************************БЫСТРЫЙ ПОИСК*******************************/
+.search_quick{
+	margin-top:0px; 
+	color:white;
+	float:left; 
+	padding-left:50px;
+}
+
+.search_quick .choice{font-size:15px;}
+.search_quick TD.keywords{width:485px;}
+.search_quick TD.industry{width:300px;}
+.search_quick TD.city{width:175px;}
+
+/**************************КАРТИНКА РАБОЧИХ*******************************/
+.workers{
+	margin-top:10px;
+	margin-left:200px; 
+	float:left;
+}
+/***********ЛЕВАЯ ЧАСТЬ**********/
+ TD.left{
+	vertical-align:top;
+	padding-left:26px;
+	margin:0; 
+ }
+/*************** ЛЕВОЕ МЕНЮ ******************/
+.menu_left{
+	padding-top:15px;
+	width:300px;
+}
+/*ССЫЛКИ*/
+.menu_left TD.other {
+	padding-top:5px; 
+	padding-bottom:10px;
+}
+/*ССЫЛКА*/
+.menu_left TD.link{
+	padding-top: 5px;
+	text-align:left;
+}
+/**/
+.menu_left TD.link A{
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:underline;
+}
+/**/
+.menu_left TD.link A:hover{color:#FF5A35;}
+/*ОТСТУП СВЕРХУ ДЛЯ ПЕРВОГО БАННЕРА*/
+.menu_left TD.banner_first{padding-top:25px;}
+/*БАННЕРЫ*/
+.menu_left TD.banner{padding-top:10px;}
+ 
+/***********КОНТЕНТ**************/
+
+TD.maincontent{
+  /*РАСПОЛОЖЕНИЕ БЛОКА*/
+  vertical-align:top;
+  width:100%;
+  padding-bottom:30px;
+  padding-right:25px;
+  /*------------------*/
+}
+
+DIV.content A{text-decoration:none;color:#014983;}
+DIV.content A:active{text-decoration:none;color:#014983;}
+DIV.content A:link{text-decoration:none;color:#014983;}
+DIV.content A:visited{color:#014983}
+DIV.content A:hover{text-decoration:underline;color:#cc0000;}
+
+DIV.content{
+	font-size: 12px;
+	margin: 0px;
+}
+
+DIV.content LABEL{
+	font-size: 12px;
+	cursor: pointer;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content DIV{
+	margin-top: 0px;
+	font-size: 12px;
+	margin-bottom: 0px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content I{
+	font-size: 12px;
+	font-style: italic;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content U{
+	font-size: 12px;
+	font-family: Arial, sans-serif;
+	text-decoration: underline;
+}
+
+DIV.content P{
+	margin-top: 10px;
+	font-size: 12px;
+	margin-bottom: 10px;
+	font-family: Arial, sans-serif;
+	text-decoration: none;
+}
+
+DIV.content TH{
+	font-weight: bold;
+	font-size: 13px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content TD{
+	font-size: 12px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content STRONG{
+	font-weight: bold;
+	font-size: 13px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content UL{
+	margin-top: 10px;
+	font-size: 12px;
+	margin-bottom: 10px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content OL{
+	margin-top: 10px;
+	font-size: 12px;
+	margin-bottom: 10px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content LI{
+	margin-top: 5px;
+	font-size: 12px;
+	margin-bottom: 5px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content INPUT{
+	font-size: 12px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content SELECT{
+	font-size: 12px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content TEXTAREA{
+	font-size: 12px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content BLOCKQUOTE{
+	margin-top: 10px;
+	font-size: 12px;
+	margin-bottom: 10px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content H1{
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 28px;
+	margin-bottom: 10px;
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+DIV.content H2{
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 22px;
+	margin-bottom: 10px;
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+DIV.content H3{
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 19px;
+	margin-bottom: 10px;
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+DIV.content H4{
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 16px;
+	margin-bottom: 10px;
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+DIV.content H5{
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 13px;
+	margin-bottom: 10px;
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+DIV.content H6{
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 11px;
+	margin-bottom: 10px;
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+DIV.content SMALL{
+	font-size: 11px;
+	font-family: Arial, sans-serif;
+}
+
+DIV.content PRE{
+	font-family: Arial, sans-serif;
+}
+
+DIV.content HR{
+	height: 1px;
+}
+
+ 
+
+
+/**************ПРИВИЛИГИРОВАННЫЕ ВАКАНСИИ/РЕЗЮМЕ************/
+.resvac_priv{
+	position:relative;
+	margin-top:-5px;
+	padding-left:25px;
+	padding-top:20px;
+	background-color:#F5F5F5;
+	margin-left:-15px;
+}
+
+.resvac_priv .res_priv{
+	float:left;
+}
+
+.resvac_priv .vac_priv{
+	float:left; 
+	padding-left:40px; 
+}
+
+.resvac_priv DIV.last_vacres{
+	padding-bottom:20px;
+}
+
+.resvac_priv TD.profession{
+	width:70%;
+	font:12px arial;
+	padding-bottom:4px;
+	padding-right:40px;
+}
+
+.resvac_priv TD.distance{
+	width:10px;
+}
+
+.resvac_priv TD.pay{
+	font-size:12px;
+	color:Red;
+}
+
+/**************НОВОСТИ***********/
+.hotnews{padding-top:15px;}
+.hotnews .block{
+	margin-top:10px;
+	padding-left:20px;
+	background-image:url(images/news_marker.jpg);
+	background-position:0 4px;
+	background-repeat:no-repeat;
+}
+.hotnews .block A{
+	font:10pt tahoma;
+}
+.hotnews .block STRONG{
+	font:9pt tahoma;
+	font-weight:bold;
+}
+.hotnews .block B{
+	font:9pt tahoma;
+	font-weight:bold;
+}
+
+/*************RSS***************/
+.rssMain{
+	padding-top:15px;
+	padding-bottom:15px;
+}
+
+.rssMain A{color:#F29644;}
+.rssMain A:active{color:#F29644;}
+.rssMain A:visited{color:#F29644;}
+.rssMain A:link{color:#F29644;}
+.rssMain A:hover{color:#F29644;}
+.rssText{padding-bottom:5px;}

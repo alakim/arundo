@@ -1,35 +1,20 @@
 ﻿body{
-	font-family: Verdana, Arial, Sans-Serif;
+	margin : 0; 
+	padding: 0;
+	font-family: Arial, Verdana, Tahoma, Sans-serif;
+	font-size:14px;
 }
+IMG{border:0;}
+P{margin:0;}
+A{text-decoration:none;color:black;}
+A:active{text-decoration:none;color:black;}
+A:link{text-decoration:none;color:black;}
+A:visited{color:black}
+A:hover{color:#cc0000;}
 
-div.paper{
-	margin:5px;
-	border:1px solid #888;
-}
 
-div.samplePanel{
-	margin:10px;
+#pnlTopList{
+	background-color: #eee;
 	padding:10px;
-	border: 1px solid #888;
-}
-
-.code{
-	font-family: Courier New, Courier, Fixed;
-}
-
-.attention{
-	border-left: 10px solid #f55;
-	padding: 8px;
-	margin-left: 45px;
-}
-
-.out{
-	margin:10px;
-	padding:5px;
-	border:1px solid #888;
-}
-
-.selCommand{
-	color:#f00;
-	font-weight: bold;
+	margin:3px;
 }
