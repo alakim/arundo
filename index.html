@@ -41,7 +41,7 @@
 					  <tr>
 						<td class="rightaction">
 						  
-											  <a href="_AddResume.aspx" class="mainmenu_action">добавить резюме</a>
+											  <a id="bAddResume" href="_AddResume.aspx" class="mainmenu_action">добавить резюме</a>
 										  
 									  </td>
 					  </tr>
@@ -75,76 +75,7 @@
 			<td class="buildings" style="height:97px">
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tbody><tr>
-				  <td style="height:97px">
-<!-- ВСТАВИТЬ БЛОК БЫСТРОГО ПОИСКА -->
-					
-  
-<div class="search_quick">
-<table border="0" cellspacing="5px" cellpadding="0">
-  <tbody><tr>
-	<td class="mainmenu_title">
-	  Быстрый поиск</td>
-	<td align="right" colspan="2">
-	<span class="choice">
-	  <input type="radio" checked="checked" value="radioSearchVacancy" name="ctl00$cphHeader$SearchFast1$SearchSelect" id="ctl00_cphHeader_SearchFast1_radioSearchVacancy"><label for="ctl00_cphHeader_SearchFast1_radioSearchVacancy">Вакансии</label>
-	</span>
-	<span class="choice">
-	  <input type="radio" value="radioSearchResume" name="ctl00$cphHeader$SearchFast1$SearchSelect" id="ctl00_cphHeader_SearchFast1_radioSearchResume"><label for="ctl00_cphHeader_SearchFast1_radioSearchResume">Резюме</label>
-	</span>
-	</td>
-  </tr>
-  <tr>
-	<td width="100%" colspan="3">
-	  <input type="text" style="font-size:13px;width:99%;" class="control_text" id="ctl00_cphHeader_SearchFast1_textKeywords" name="ctl00$cphHeader$SearchFast1$textKeywords"></td>
-  </tr>
-  <tr>
-	<td class="industry">
-	  <select style="width:100%;" class="control_dropdown" id="ctl00_cphHeader_SearchFast1_listrefIndustry" name="ctl00$cphHeader$SearchFast1$listrefIndustry">
-	<option value="empty">Все рубрики</option>
-	<option value="2343a000-9af9-4bea-b296-8407aa0b0ff6">Разнорабочие, начальный уровень</option>
-	<option value="7def249a-a65c-4bec-9993-92be4ffe72d9">Рабочие общестроительных профессий</option>
-	<option value="331ff6bb-305b-43e2-addc-90c2f808307a">Рабочие-отделочники</option>
-	<option value="37963d22-ace2-4254-825a-bb4f9ee04e73">Машинисты строительно-дорожных машин</option>
-	<option value="bc6915b8-15f7-4232-879c-471fcd4417c3">Сантехники, вентиляционщики</option>
-	<option value="3ffdd97a-d4ce-4e2d-aa6d-dad010688986">Электромонтажники</option>
-	<option value="822a2102-1a9a-4031-a967-999282dd35c0">Электро-газосварщики</option>
-	<option value="a3436cc0-fb48-4af2-801e-775d93d42a7f">Слесаря по ремонту строительных машин</option>
-	<option value="6250af38-cbef-409c-a919-fc29fd2e599a">Производство стройматериалов, ЖБИ</option>
-	<option value="dc4da825-cf84-480a-b292-87da2cc9f1d6">Инженеры-строители</option>
-	<option value="fca38e9d-12c4-4dee-81c5-8e014568feb5">Инженеры-электромеханики</option>
-	<option value="b2d24927-20ab-48e6-a956-09b01638f227">Инженеры-геодезисты, гидротехники</option>
-	<option value="b370914a-73a6-4428-93aa-eadc876dba38">Мастера строит.-монтажных работ</option>
-	<option value="a97cac46-d1c7-4f64-889c-3ab2fc40feac">Производители работ (прорабы)</option>
-	<option value="3990aee2-2776-435a-ac50-fd69ad2add7f">Начальники участков</option>
-	<option value="904ed61a-50a7-42e5-a7fe-400e5475575f">Экономисты, сметчики</option>
-	<option value="60722c52-8f07-435f-b06f-5eb16be23f0d">Обеспечение безопасности и охрана строительных объектов</option>
-	<option value="b0c16c76-dbdd-4bf6-9592-6cd1e1ca725f">Охрана труда и ТБ</option>
-	<option value="0a25d8a8-cded-4105-9732-73b327b139be">Архитекторы, конструкторы</option>
-	<option value="3ebfc721-47e3-4714-beaa-941a9e86b1ae">Благоустройство, ландшафт</option>
-	<option value="a8893756-deaf-45b1-8faf-89dbb193af98">Информационные технологии в строительстве</option>
-
-</select></td>
-	<td class="city">
-	  <select style="font-size:13px;width:100%;" class="control_dropdown" id="ctl00_cphHeader_SearchFast1_listrefCity" name="ctl00$cphHeader$SearchFast1$listrefCity">
-	<option value="57f6223a-1bb9-481d-8af9-bf01ebc31778">Москва</option>
-	<option value="8da3cc5d-128d-49f4-b0e1-3b360d15810a">Московская область</option>
-	<option value="660821a0-d2f2-4a3e-baec-09452496ace6">Санкт-Петербург</option>
-	<option value="8d2b2156-b63e-49e3-80e9-9996178cead4">Брянская область</option>
-	<option value="dbfbc51c-31d6-4c1d-b57a-172dc373f8a5">Владимирская область</option>
-	<option value="536c2073-dcf0-4e28-ab0f-8646ebc0d9c3">Ивановская область</option>
-	<option value="05752a23-71ce-49ad-8c77-41c52110ec84">Калужская область</option>
-	<option value="03fe1ae4-6302-4a99-ae2c-4ee86a8c8efb">Рязанская область</option>
-	<option value="6152849a-076a-43ae-91fc-fb196abc7e07">Смоленская область</option>
-	<option value="ac226955-2239-4d2c-b7ea-60d88c7ff18e">Тверская область</option>
-	<option value="bf008554-1f36-47a2-8678-cb5ac436011c">Тульская область</option>
-	<option value="6aa61440-31d6-4d34-b5d0-451b3dbe9689">Ярославская область</option>
-
-</select></td>
-	<td align="right">
-	  <input type="submit" style="font-size:13px;font-weight:bold;" class="button" id="ctl00_cphHeader_SearchFast1_btnSearch" value="Искать" name="ctl00$cphHeader$SearchFast1$btnSearch"></td>
-  </tr>
-</tbody></table>
-</div>
+				  <td id="headerPanel" style="height:97px">
 
 				  </td>
 				  <td align="right" style="height:97px;width:145px"><img style="border-width:0px;" src="images/workers_bottom.gif" id="ctl00_workers_bottom"></td>
@@ -294,6 +225,45 @@
   
   
   
+<div style="display:none;">
+	<div id="rulesTemplate">
+		<div class="inner">
+		  <h4 align="center">Общие правила</h4>
+		  <p align="justify">Сайт «Работа в строительстве» является специализированным информационным ресурсом, предоставляющим услуги по размещению и поиску вакансий и резюме в строительной отрасли города Москвы.</p>
+		  <p align="justify">Администрация ресурса оставляет за собой право удалять информацию о вакансиях и резюме в случае нарушения правил ее размещения.</p>
+		  <p align="justify">К публикации на сайте принимаются вакансии и резюме на <strong>русском</strong> и <strong>английском</strong> языках. Это касается следующих полей и разделов: должность(специальность), дополнительная информация, контактная информация.</p>
+		  <h4 align="center">Правила публикации резюме</h4>
+		  <p align="justify">1. Обязательные поля</p>
+		  <ul type="square">
+				  <li>Специальность</li>
+				  <li>Дополнительная информация (Текст резюме)</li>
+				  <li>Рубрика (выбор значения из списка по тематике отрасли)</li>
+				  <li>Контактная информация</li>
+				  <li>Срок размещения объявления (выбирается из списка)</li>
+		  </ul>
+		  <p align="justify">2. Запрещается публикация резюме</p>
+		  <ul type="square">
+			<li>не являющихся таковыми;</li>
+			<li>содержащих название специальности не по тематике выбранной рубрики; </li>
+			<li>содержащих прямую и скрытую рекламу товаров и услуг, в том числе кадровых агентств, компаний, занятых разработкой или продвижением сайтов, строительных бригад и т. п.; </li>
+			<li>содержащих ссылки на другие сайты; </li>
+			<li>содержащих рекламу финансовых «пирамид» и других сомнительных коммерческих предприятий; </li>
+			<li>содержащих нецензурные и оскорбительные слова и выражения; </li>
+			<li>содержащих заведомо ложную информацию о соискателе, включая контактный телефон или e-mail; </li>
+			<li>содержащие предложения эротического или интимного характера; </li>
+			<li>содержащих публичные призывы к осуществлению террористической деятельности или публично оправдывающих терроризм, других экстремистских материалов, а также материалов, пропагандирующих порнографию, культ насилия и жестокости.</li>
+			<li>Содержащие другую информацию, противоречащую законодательству РФ;</li>
+		  </ul>
+		  <p align="justify">3. Резюме должны быть размещены в соответствующих рубриках.</p>
+		  <p align="justify">4. Дубликаты объявлений удаляются (дубликатом считается объявление, совпадающее с другим объявлением по названию, должности (специальности), тексту, размеру зарплаты, рубрике, городу).</p>
+		  <p align="justify">5. Не рекомендуется писать текст объявления ПРОПИСНЫМИ буквами &ndash; такие объявления редактируются модераторами.Объявление, написанное латиницей по-русски ("vot tak"), без пробелов и прочими способами, затрудняющими чтение &ndash; удаляются.</p>
+		  <p align="justify">6. Желательно указывать возраст и персональные характеристики.</p>
+		  <blockquote>
+		  <p><em><strong>Внимание!</strong></em> Если ваше объявление не будет удовлетворять перечисленным требованиям, ему может быть отказано в публикации.</p>
+		  </blockquote>
+		</div>
+	</div>
+</div>
   
 </body>
 </html>
