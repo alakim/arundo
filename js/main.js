@@ -5,7 +5,8 @@
 		html:"lib/html",
 		knockout:"lib/knockout-3.1.0",
         lib: "lib",
-		dataSource:"testDataSource"
+		dataSource:"test/dataSource",
+		"const":"test/const"
     },
 	shim:{
 		"html":{exports:"Html"}
