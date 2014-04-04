@@ -13,7 +13,7 @@
 	}
 });
 
-requirejs(["jquery", "html", "forms/mainPage", "forms/vacSearch"], function   ($, $H, mainPage, vacSearch) {
+requirejs(["jquery", "html", "forms/mainPage", "forms/vacSearch", "forms/resSearch"], function   ($, $H, mainPage, vacSearch, resSearch) {
 	var mainPnl = $(".mainPanel");
 	
 	mainPage.view(mainPnl);
@@ -24,5 +24,9 @@ requirejs(["jquery", "html", "forms/mainPage", "forms/vacSearch"], function   ($
 	
 	$("#bVacSearch").attr({href:"#"}).click(function(){
 		vacSearch.view(mainPnl);
+	});
+	
+	$("#bResSearch").attr({href:"#"}).click(function(){
+		resSearch.view(mainPnl);
 	});
 });
