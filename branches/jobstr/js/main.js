@@ -13,20 +13,37 @@
 	}
 });
 
-requirejs(["jquery", "html", "forms/mainPage", "forms/vacSearch", "forms/resSearch"], function   ($, $H, mainPage, vacSearch, resSearch) {
-	var mainPnl = $(".mainPanel");
-	
-	mainPage.view(mainPnl);
-
-	$("#bDefault").attr({href:"#"}).click(function(){
+requirejs([
+		"jquery", "html", 
+		"forms/mainPage", 
+		"forms/vacSearch", "forms/resSearch", "forms/qSearch",
+		"forms/addResume"
+	], function($, $H, mainPage, vacSearch, resSearch, qSearch, addResume) {
+		var mainPnl = $(".mainPanel"),
+			hdrPnl = $("#headerPanel");
+		
 		mainPage.view(mainPnl);
-	});
-	
-	$("#bVacSearch").attr({href:"#"}).click(function(){
-		vacSearch.view(mainPnl);
-	});
-	
-	$("#bResSearch").attr({href:"#"}).click(function(){
-		resSearch.view(mainPnl);
-	});
-});
+
+		$("#bDefault").attr({href:"#"}).click(function(){
+			mainPage.view(mainPnl);
+			qSearch.view(hdrPnl);
+		});
+		
+		$("#bVacSearch").attr({href:"#"}).click(function(){
+			hdrPnl.html($H.h2("Раздел для соискателей"));
+			vacSearch.view(mainPnl);
+		});
+		
+		$("#bAddResume").attr({href:"#"}).click(function(){
+			hdrPnl.html($H.h2("Раздел для соискателей"));
+			addResume.view(mainPnl);
+		});
+		
+		$("#bResSearch").attr({href:"#"}).click(function(){
+			hdrPnl.html($H.h2("Раздел для работодателей"));
+			resSearch.view(mainPnl);
+		});
+		
+		qSearch.view(hdrPnl);
+	}
+);

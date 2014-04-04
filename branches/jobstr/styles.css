@@ -22,3 +22,21 @@ A:hover{color:#cc0000;}
 .panel_expand{
 	border-bottom: 1px solid #888;
 }
+
+#headerPanel h2{
+	margin-left:50px;
+	color: #eef;
+}
+
+.dialog th{
+	background-color:#eee;
+}
+
+
+DIV.rule_placing {
+    border: 1px solid #000000;
+    font: 10pt Arial;
+    height: 250px;
+    overflow: auto;
+    width: 100%;
+}
