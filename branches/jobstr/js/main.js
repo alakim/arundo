@@ -17,8 +17,9 @@ requirejs([
 		"jquery", "html", 
 		"forms/mainPage", 
 		"forms/vacSearch", "forms/resSearch", "forms/qSearch",
-		"forms/addResume", "forms/addVacancy"
-	], function($, $H, mainPage, vacSearch, resSearch, qSearch, addResume, addVacancy) {
+		"forms/addResume", "forms/addVacancy",
+		"forms/authentication"
+	], function($, $H, mainPage, vacSearch, resSearch, qSearch, addResume, addVacancy, auth) {
 		var mainPnl = $(".mainPanel"),
 			hdrPnl = $("#headerPanel");
 		
@@ -48,6 +49,8 @@ requirejs([
 			hdrPnl.html($H.h2("Раздел для работодателей"));
 			addVacancy.view(mainPnl);
 		});
+		
+		auth.view($("#ctl00_UPanel_pnlLogon"));
 		
 		qSearch.view(hdrPnl);
 	}
