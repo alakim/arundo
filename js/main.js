@@ -17,8 +17,8 @@ requirejs([
 		"jquery", "html", 
 		"forms/mainPage", 
 		"forms/vacSearch", "forms/resSearch", "forms/qSearch",
-		"forms/addResume"
-	], function($, $H, mainPage, vacSearch, resSearch, qSearch, addResume) {
+		"forms/addResume", "forms/addVacancy"
+	], function($, $H, mainPage, vacSearch, resSearch, qSearch, addResume, addVacancy) {
 		var mainPnl = $(".mainPanel"),
 			hdrPnl = $("#headerPanel");
 		
@@ -42,6 +42,11 @@ requirejs([
 		$("#bResSearch").attr({href:"#"}).click(function(){
 			hdrPnl.html($H.h2("Раздел для работодателей"));
 			resSearch.view(mainPnl);
+		});
+		
+		$("#bAddVacancy").attr({href:"#"}).click(function(){
+			hdrPnl.html($H.h2("Раздел для работодателей"));
+			addVacancy.view(mainPnl);
 		});
 		
 		qSearch.view(hdrPnl);
