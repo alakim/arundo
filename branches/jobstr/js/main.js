@@ -6,6 +6,7 @@
 		knockout:"lib/knockout-3.1.0",
         lib: "lib",
 		dataSource:"test/dataSource",
+		//dataSource:"dataSource",
 		"const":"test/const"
     },
 	shim:{
