@@ -40,6 +40,13 @@ DIV.rule_placing {
     overflow: auto;
     width: 100%;
 }
+tr.even{
+	background-color: #F2F2F2;
+}
+.tblHeader th{
+	background-color:#CCCCCC;
+	font-weight: bold;
+}
 
 #pnlLogon{
 	background-color:#eee;
