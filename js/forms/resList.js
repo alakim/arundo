@@ -1,0 +1,1 @@
+﻿define(["html", "dataSource", "forms/common"], function($H, ds, common){	function template(data){with($H){		return div("RESUME LIST");	}}		return {		view: function(pnl){			common.wait(pnl);			ds.getResumes({}, function(data){				pnl.html(template(data));			});		}	};});
