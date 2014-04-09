@@ -55,7 +55,7 @@ requirejs([
 		actions.bind("#bAddVacancy", "addVacancy");
 		
 		
-		auth.view($("#ctl00_UPanel_pnlLogon"));
+		auth.view($("#pnlLogon"));
 		
 	}
 );
