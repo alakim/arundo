@@ -10,6 +10,7 @@ requirejs.config({
         lib: "lib",
 		dataSource:localMode?"test/dataSource":"dataSource"
     },
+	urlArgs: "bust=" + (new Date()).getTime(),
 	shim:{
 		"html":{exports:"Html"}
 	}
