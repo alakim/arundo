@@ -4,7 +4,7 @@
 requirejs.config({
     baseUrl: "js",
     paths: {
-		jquery: "lib/jquery-1.7.2.min",
+		jquery: "lib/jquery-1.11.0.min",
 		html:"lib/html",
 		knockout:"lib/knockout-3.1.0",
         lib: "lib",
