@@ -1,13 +1,14 @@
-﻿requirejs.config({
+﻿var localMode = window.location.href.match(/^file:\/\/\//i),
+	constModule = localMode?"test/const":"/const.php";
+	
+requirejs.config({
     baseUrl: "js",
     paths: {
 		jquery: "lib/jquery-1.7.2.min",
 		html:"lib/html",
 		knockout:"lib/knockout-3.1.0",
         lib: "lib",
-		dataSource:"test/dataSource",
-		//dataSource:"dataSource",
-		"const":"test/const"
+		dataSource:localMode?"test/dataSource":"dataSource"
     },
 	shim:{
 		"html":{exports:"Html"}
@@ -23,6 +24,10 @@ requirejs([
 	], function($, $H, Actions, mainPage, vacSearch, resSearch, qSearch, addResume, addVacancy, auth) {
 		var mainPnl = $(".mainPanel"),
 			hdrPnl = $("#headerPanel");
+			
+		if(localMode){
+			$("body").append($H.div({style:"position:absolute; left:400px; top:10px; background-color:yellow; color:red; font-weight:bold; border:1px solid red; padding:15px;"}, "LOCAL TEST MODE"));
+		}
 		
 		mainPage.view(mainPnl);
 		
