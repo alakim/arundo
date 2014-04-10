@@ -2,17 +2,26 @@
 require('../util.php');
 $con = openConnection();
 
-execSql($con, "DROP TABLE Resumes");
+echo("Creating Resumes table<br/>");
+
+if(execSql($con, "show tables like \"Resumes\"")->num_rows>0){
+	execSql($con, "DROP TABLE Resumes");
+}
 execSql($con, 
 	"CREATE TABLE Resumes(".
-	"PID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(PID),".
+	"ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(ID),".
 	"Title CHAR(30), Salary CHAR(30), Age INT)"
 );
 
-execSql($con, "INSERT INTO Resumes (Title, Salary, Age) VALUES (\"Сварщик\", \"35000\", 33)");
-execSql($con, "INSERT INTO Resumes (Title, Salary, Age) VALUES (\"Электрик\", \"30000\", 38)");
-execSql($con, "INSERT INTO Resumes (Title, Salary, Age) VALUES (\"Программист\", \"50000\", 27)");
-execSql($con, "INSERT INTO Resumes (Title, Salary, Age) VALUES (\"Водитель\", \"40000\", 43)");
+echo("Creating Vacancies table<br/>");
+if(execSql($con, "show tables like \"Vacancies\"")->num_rows>0){
+	execSql($con, "DROP TABLE Vacancies");
+}
+execSql($con, 
+	"CREATE TABLE Vacancies(".
+	"ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(ID),".
+	"Title CHAR(30), Salary CHAR(30), Organization CHAR(30))"
+);
 
 
 
