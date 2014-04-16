@@ -23,6 +23,9 @@ $dbUsr = new DbUsersTest();
 $dbUsr->rebuild($con);
 
 
+//echo("Current time: ".time()."<br/>");
+
+
 
 
 closeConnection($con);
