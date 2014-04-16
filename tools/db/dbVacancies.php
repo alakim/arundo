@@ -1,4 +1,5 @@
 <?php
+require_once('db/GenericTable.php');
 
 class DbVacancies extends GenericTable{
 	public $tableName = "Vacancies";
@@ -14,13 +15,5 @@ class DbVacancies extends GenericTable{
 		);
 	}
 	
-	public function testFill($con){
-		$fields = "Title, Salary, Organization";
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Сварщик\", \"30000\", \"OOO Кирпич\")");
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Бухгалтер\", \"60000\", \"OOO Кирпич\")");
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Фрезеровщик\", \"32000\", \"OOO Кирпич\")");
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Руководитель проектов\", \"65000\", \"OOO Кирпич\")");
-	
-	}
 }
 

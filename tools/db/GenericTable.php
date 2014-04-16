@@ -1,4 +1,5 @@
 <?php
+require_once('../util.php');
 
 class GenericTable{
 	public $tableName = "";
@@ -9,7 +10,6 @@ class GenericTable{
 	
 	public function rebuild($con){
 		$this->create($con);
-		$this->testFill($con);
 	}
 }
 
