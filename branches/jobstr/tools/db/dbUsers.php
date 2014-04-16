@@ -1,8 +1,8 @@
 <?php
 require_once('db/GenericTable.php');
 
-class DbResumes extends GenericTable{
-	public $tableName = "Resumes";
+class DbUsers extends GenericTable{
+	public $tableName = "Users";
 	
 	public function create($con){
 		if(tableExists($con, $this->tableName)){
@@ -11,7 +11,7 @@ class DbResumes extends GenericTable{
 		execSql($con, 
 			"CREATE TABLE ".$this->tableName."(".
 			"ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(ID),".
-			"Title CHAR(30), Salary CHAR(30), Age INT)"
+			"Name CHAR(30), Login CHAR(30), Password CHAR(30))"
 		);
 	}
 	
