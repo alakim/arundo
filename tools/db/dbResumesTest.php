@@ -16,7 +16,8 @@ class DbResumesTest extends DbResumes{
 			"Experience"=>224,
 			"Phone"=>"89267600096",
 			"Email"=>"furwanova-ekaterina@mail.ru",
-			"Date"=>"2014-03-12"
+			"Date"=>"2014-03-12",
+			"Owner"=>1
 		));
 		addRecord($con, $this->tableName, array(
 			"Title"=>"Руководитель проектов",
@@ -30,7 +31,8 @@ class DbResumesTest extends DbResumes{
 			"Experience"=>224,
 			"Phone"=>"7 903 623 3231",
 			"Email"=>"mishwwolozzm@yandex.ru",
-			"Date"=>"2014-03-12"
+			"Date"=>"2014-03-12",
+			"Owner"=>1
 		));
 		addRecord($con, $this->tableName, array(
 			"Title"=>"прораб",
