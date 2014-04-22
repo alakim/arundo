@@ -11,7 +11,16 @@ class DbVacancies extends GenericTable{
 		execSql($con, 
 			"CREATE TABLE ".$this->tableName."(".
 			"ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(ID), Owner INT, ".
-			"Title CHAR(30), Salary CHAR(30), Organization CHAR(30))"
+			"Title CHAR(30), ".
+			"Salary CHAR(30), ".
+			"Date DATE, ".
+			"Rubric INT,".
+			"Organization CHAR(30),".
+			"Description CHAR(125),".
+			"Contact CHAR(30),".
+			"Phone CHAR(30),".
+			"Email CHAR(30)".
+			")"
 		);
 	}
 	
