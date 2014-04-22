@@ -5,6 +5,7 @@ requirejs.config({
     baseUrl: "js",
     paths: {
 		jquery: "lib/jquery-1.11.0.min",
+		cookie: "lib/jquery.cookie",
 		html:"lib/html",
 		knockout:"lib/knockout-3.1.0",
         lib: "lib",
@@ -17,12 +18,12 @@ requirejs.config({
 });
 
 requirejs([
-		"jquery", "html", "actions",
+		"jquery", "cookie", "html", "actions",
 		"forms/mainPage", 
 		"forms/vacSearch", "forms/resSearch", "forms/qSearch",
 		"forms/addResume", "forms/addVacancy",
 		"forms/authentication"
-	], function($, $H, Actions, mainPage, vacSearch, resSearch, qSearch, addResume, addVacancy, auth) {
+	], function($, $Cookie, $H, Actions, mainPage, vacSearch, resSearch, qSearch, addResume, addVacancy, auth) {
 		var mainPnl = $(".mainPanel"),
 			hdrPnl = $("#headerPanel");
 			
