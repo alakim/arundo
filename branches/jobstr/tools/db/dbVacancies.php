@@ -15,8 +15,10 @@ class DbVacancies extends GenericTable{
 			"Salary CHAR(30), ".
 			"Date DATE, ".
 			"Rubric INT,".
+			"Region INT,".
 			"Organization CHAR(30),".
 			"Description CHAR(125),".
+			"Education INT,".
 			"Contact CHAR(30),".
 			"Phone CHAR(30),".
 			"Email CHAR(30)".
