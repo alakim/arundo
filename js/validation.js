@@ -1,4 +1,9 @@
 ﻿define(["knockout"], function(ko){
+	function lambda(expr){
+		expr = expr.split("|");
+		return new Function(expr[0], "return "+expr[1]);
+	}
+	
 	ko.extenders.required = function(target, options) {
 		var overrideMessage = typeof(options)=="string"?options:options.message;
 		
@@ -10,8 +15,14 @@
 			if(valid && options.value!=null){
 				valid = newValue==options.value;
 			}
-			else if(valid && options.regex)
-				valid = (newValue+"").match(options.regex)!=null;
+			else {
+				if(valid && options.regex)
+					valid = (newValue+"").match(options.regex)!=null;
+				if(valid && options.condition){
+					var cond = lambda(options.condition);
+					valid = cond(newValue);
+				}
+			}
 			target.hasError(!valid);
 			target.validationMessage(valid ? "" : overrideMessage || "Это поле обязательное.");
 		}
@@ -22,6 +33,7 @@
 	
 		return target;
 	};
+	
 	
 	function getMessages(model){
 		var res = [];
