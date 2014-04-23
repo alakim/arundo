@@ -5,7 +5,8 @@ requirejs.config({
     baseUrl: "js",
     paths: {
 		jquery: "lib/jquery-1.11.0.min",
-		cookie: "lib/jquery.cookie",
+		jcook: "lib/jquery.cookie",
+		cookie: localMode?"test/cookie":"cookie",
 		html:"lib/html",
 		knockout:"lib/knockout-3.1.0",
         lib: "lib",
@@ -61,7 +62,6 @@ requirejs([
 		actions.bind("#bAddResume", "addResume");
 		actions.bind("#bResSearch", "resSearch");
 		actions.bind("#bAddVacancy", "addVacancy");
-		
 		
 		auth.view($("#pnlLogon"));
 		
