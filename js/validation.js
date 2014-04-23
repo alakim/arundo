@@ -1,0 +1,48 @@
+﻿define(["knockout"], function(ko){
+	ko.extenders.required = function(target, options) {
+		var overrideMessage = typeof(options)=="string"?options:options.message;
+		
+		target.hasError = ko.observable();
+		target.validationMessage = ko.observable();
+	 
+		function validate(newValue) {
+			var valid = newValue!=null && (typeof(newValue)!="string" || newValue.length>0);
+			if(valid && options.value!=null){
+				valid = newValue==options.value;
+			}
+			else if(valid && options.regex)
+				valid = (newValue+"").match(options.regex)!=null;
+			target.hasError(!valid);
+			target.validationMessage(valid ? "" : overrideMessage || "Это поле обязательное.");
+		}
+	 
+		validate(target());
+	 
+		target.subscribe(validate);
+	
+		return target;
+	};
+	
+	function getMessages(model){
+		var res = [];
+		for(var k in model){
+			if(model[k].validationMessage){
+				var msg = model[k].validationMessage();
+				if(msg.length) res.push(msg);
+			}
+		}
+		return res;
+	}
+	
+	
+	return {
+		validate: function(model){
+			var valid = getMessages(model);
+			if(valid.length){
+				alert(valid.join("\n"));
+			}
+			return valid.length==0;
+		}
+
+	};
+});

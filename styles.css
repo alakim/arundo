@@ -53,3 +53,9 @@ tr.even{
 	padding:3px;
 	border: 1px solid #ccc;
 }
+
+.validation{
+	font-style: italic;
+	padding-left:10px;
+	color:#f00;
+}
