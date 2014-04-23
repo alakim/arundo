@@ -50,20 +50,20 @@ class DbConstTest extends DbConstants{
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (2, 120, \"Благоустройство, ландшафт\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (2, 121, \"Информационные технологии в строительстве\")");
 		
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (3, 201, \"Любое\")");
+		// execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (3, 201, \"Любое\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (3, 202, \"Среднее\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (3, 203, \"Среднее специальное\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (3, 204, \"Неполное высшее\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (3, 205, \"Высшее\")");
 		
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (4, 221, \"Любой\")");
+		// execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (4, 221, \"Любой\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (4, 222, \"Нет\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (4, 223, \"1 - 2 года\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (4, 224, \"2 - 5 лет\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (4, 225, \"Более 5 лет\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (4, 226, \"Нет опыта работы\")");
 		
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (5, 241, \"Любой\")");
+		// execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (5, 241, \"Любой\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (5, 242, \"Полный рабочий день\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (5, 243, \"Неполный рабочий день\")");
 		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (5, 244, \"Свободный\")");
