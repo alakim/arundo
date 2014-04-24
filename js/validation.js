@@ -35,12 +35,17 @@
 	};
 	
 	
-	function getMessages(model){
+	function getMessages(model, level){
+		level = level || 0;
 		var res = [];
 		for(var k in model){
 			if(model[k].validationMessage){
 				var msg = model[k].validationMessage();
 				if(msg.length) res.push(msg);
+			}
+			if(level<3){
+				var r1 = getMessages(model[k], level+1);
+				if(r1.length) res = res.concat(r1);
 			}
 		}
 		return res;
