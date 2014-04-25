@@ -8,12 +8,12 @@ class DbUsersTest extends DbUsers{
 	}
 	
 	public function testFill($con){
-		$fields = "Name, Login, Password";
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Системный администратор\", \"sa\", \"".(DbUsersTest::stdCrypt("sa"))."\")");
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Администратор\", \"admin\", \"".(DbUsersTest::stdCrypt("admin"))."\")");
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Иванов И.И.\", \"ivanov\", \"".(DbUsersTest::stdCrypt("ivanov"))."\")");
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Петров П.П.\", \"petrov\", \"".(DbUsersTest::stdCrypt("petrov"))."\")");
-		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Сидоров С.С.\", \"sidorov\", \"".(DbUsersTest::stdCrypt("sidorov"))."\")");
+		$fields = "Name, Login, Password, EMail";
+		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Системный администратор\", \"sa\", \"".(DbUsersTest::stdCrypt("sa"))."\", \"sa423@mail.ru\")");
+		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Администратор\", \"admin\", \"".(DbUsersTest::stdCrypt("admin"))."\", \"admin234@mail.ru\")");
+		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Иванов И.И.\", \"ivanov\", \"".(DbUsersTest::stdCrypt("ivanov"))."\", \"ivanov@mail.ru\")");
+		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Петров П.П.\", \"petrov\", \"".(DbUsersTest::stdCrypt("petrov"))."\", \"petrov@mail.ru\")");
+		execSql($con, "INSERT INTO ".$this->tableName." (".$fields.") VALUES (\"Сидоров С.С.\", \"sidorov\", \"".(DbUsersTest::stdCrypt("sidorov"))."\", \"sidorov@mail.ru\")");
 	
 	}
 	
