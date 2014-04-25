@@ -11,7 +11,7 @@ class DbUsers extends GenericTable{
 		execSql($con, 
 			"CREATE TABLE ".$this->tableName."(".
 			"ID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(ID),".
-			"Name CHAR(30), Login CHAR(30), Password CHAR(30), Ticket CHAR(30))"
+			"Name CHAR(30), Login CHAR(30), EMail CHAR(30), Password CHAR(36), Ticket CHAR(36))"
 		);
 	}
 	
