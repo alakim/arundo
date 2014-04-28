@@ -1,0 +1,1 @@
+<?phprequire('../util.php');$con = openConnection();$uid = $_REQUEST["uid"];$ticket = $_REQUEST["ticket"];$resID = $_REQUEST["resID"];if(!checkSession($con, $uid, $ticket)){	writeError("Access denied.");	die();}execSql($con, "DELETE FROM Resumes WHERE ID=".$resID);echo("{\"success\":true}");closeConnection($con);

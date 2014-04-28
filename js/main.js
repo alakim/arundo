@@ -19,12 +19,12 @@ requirejs.config({
 });
 
 requirejs([
-		"jquery", "cookie", "html", "actions",
+		"jquery", "cookie", "html", "actions", "forms/common",
 		"forms/mainPage", 
 		"forms/vacSearch", "forms/resSearch", "forms/qSearch",
 		"forms/addResume", "forms/addVacancy",
 		"forms/authentication"
-	], function($, $Cookie, $H, Actions, mainPage, vacSearch, resSearch, qSearch, addResume, addVacancy, auth) {
+	], function($, $Cookie, $H, Actions, common, mainPage, vacSearch, resSearch, qSearch, addResume, addVacancy, auth) {
 		var mainPnl = $(".mainPanel"),
 			hdrPnl = $("#headerPanel");
 			
@@ -34,7 +34,7 @@ requirejs([
 		
 		mainPage.view(mainPnl);
 		
-		var actions = new Actions({
+		common.actions.add({
 			main: function(){
 				mainPage.view(mainPnl);
 				qSearch.view(hdrPnl);
@@ -57,11 +57,11 @@ requirejs([
 			}
 		})
 
-		actions.bind("#bDefault", "main");
-		actions.bind("#bVacSearch", "vacSearch");
-		actions.bind("#bAddResume", "addResume");
-		actions.bind("#bResSearch", "resSearch");
-		actions.bind("#bAddVacancy", "addVacancy");
+		common.actions.bind("#bDefault", "main");
+		common.actions.bind("#bVacSearch", "vacSearch");
+		common.actions.bind("#bAddResume", "addResume");
+		common.actions.bind("#bResSearch", "resSearch");
+		common.actions.bind("#bAddVacancy", "addVacancy");
 		
 		auth.view($("#pnlLogon"));
 		
