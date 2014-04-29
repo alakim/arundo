@@ -4,6 +4,24 @@
 		return new Function(expr[0], "return "+expr[1]);
 	}
 	
+	ko.extenders.requiredEMail = function(target) {
+		target.hasError = ko.observable();
+		target.validationMessage = ko.observable();
+	 
+		function validate(newValue) {
+			var valid = newValue!=null 
+				&& typeof(newValue)=="string" 
+				&& newValue.match(/^[a-z0-9\-\_\.]+\@[a-z0-9\-\_\.]+\.[a-z]+$/)!=null;
+			
+			target.hasError(!valid);
+			target.validationMessage(valid ? "" : "Укажите адрес электронной почты");
+		}
+	 
+		validate(target());
+		target.subscribe(validate);
+		return target;
+	}
+	
 	ko.extenders.required = function(target, options) {
 		var overrideMessage = typeof(options)=="string"?options:options.message;
 		
