@@ -148,11 +148,11 @@
 	
 	return {
 		view: function(id, pnl){pnl=$(pnl);
-			pnl.html(template());
 			
+			common.wait(pnl);
 			ds.getVacancy(id, function(data){
-				var model = new RequestModel(data);
-				ko.applyBindings(model, pnl.find("div")[0]);
+				pnl.html(template());
+				ko.applyBindings(new RequestModel(data), pnl.find("div")[0]);
 			});
 		}
 	};
