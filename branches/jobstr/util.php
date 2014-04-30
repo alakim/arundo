@@ -13,7 +13,9 @@ function openConnection(){
 		return false;
 	}
 	
-	// mysqli_query($con, "SET NAMES '".$Settings['encoding']."'"); 
+	if($Settings['setDbEncoding']!=false){
+		mysqli_query($con, "SET NAMES '".$Settings['setDbEncoding']."'"); 
+	}
 
 	
 	return $con;
