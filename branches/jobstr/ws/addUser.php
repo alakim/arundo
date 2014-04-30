@@ -22,7 +22,7 @@ addRecord($con, "Users", array(
 	"Name"=>getRequestField($data, "name", false),
 	"Login"=>getRequestField($data, "login", false),
 	"EMail"=>getRequestField($data, "email", false),
-	"Password"=>crypt(getRequestField($data, "password", false), cryptKey)
+	"Password"=>crypt(getRequestField($data, "password", false), $Settings['cryptKey'])
 ));
 
 

@@ -1,7 +1,11 @@
 <?php 
 
+require("settings.php");
+
 function openConnection(){
-	$con=mysqli_connect("localhost","sa","123456","jobstr");
+	global $Settings;
+	
+	$con=mysqli_connect($Settings['dbServer'], $Settings['dbUser'], $Settings['dbPassword'], $Settings['dbName']);
 
 	// Check connection
 	if (mysqli_connect_errno()){
@@ -9,9 +13,7 @@ function openConnection(){
 		return false;
 	}
 	
-	$encoding = "CP1251";
-
-	mysqli_query($con, "SET NAMES '".$encoding."'"); 
+	mysqli_query($con, "SET NAMES '".$Settings['encoding']."'"); 
 
 	
 	return $con;
@@ -117,6 +119,5 @@ function writeError($msg){
 	echo("{\"error\":\"".$msg."\"}");
 }
 
-$cryptKey = '$1$oy789FnX$n456FkIc4Hrm123PZ0IEO/';
 
 

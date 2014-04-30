@@ -4,7 +4,8 @@ require_once('db/dbUsers.php');
 class DbUsersTest extends DbUsers{
 	
 	private function stdCrypt($str){
-		return crypt($str, cryptKey);
+		global $Settings;
+		return crypt($str, $Settings['cryptKey']);
 	}
 	
 	public function testFill($con){
