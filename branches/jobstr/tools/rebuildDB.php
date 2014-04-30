@@ -11,6 +11,8 @@ require_once('db/dbConstTest.php');
 
 $con = openConnection();
 
+mysqli_query($con, "SET NAMES 'CP1251'"); 
+
 
 echo("Rebuilding Resumes <br/>");
 $dbRes = new DbResumesTest();
