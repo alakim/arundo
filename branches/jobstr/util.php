@@ -13,7 +13,7 @@ function openConnection(){
 		return false;
 	}
 	
-	mysqli_query($con, "SET NAMES '".$Settings['encoding']."'"); 
+	// mysqli_query($con, "SET NAMES '".$Settings['encoding']."'"); 
 
 	
 	return $con;
@@ -95,11 +95,16 @@ function writeJsonField($row, $fldName, $stringMode){
 }
 
 function getRequestField($data, $fldName, $intMode){
+	global $Settings;
+	
 	$val = $data[$fldName];
 	if(is_null($val)) {return null;}
 	if($intMode) {return (int)$val;}
 	
-	$val = mb_convert_encoding($val, "Windows-1251", "UTF-8");
+	if($Settings['writeConversion']!=false){
+		$enc = explode('/', $Settings['writeConversion']);
+		$val = mb_convert_encoding($val, $enc[0], $enc[1]);
+	}
 	if(get_magic_quotes_gpc()){$val = stripslashes($val);}
 	return $val;
 }
