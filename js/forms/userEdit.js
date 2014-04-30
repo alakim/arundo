@@ -80,12 +80,11 @@
 	
 	return {
 		view: function(pnl){
-			pnl.html(template());
-			pnl.find(".rule_placing").html($("#resRulesTemplate").html());
+			common.wait(pnl);
 			
 			ds.getUserData(function(data){
-				var model = new RequestModel(data);
-				ko.applyBindings(model, pnl.find("div")[0]);
+				pnl.html(template());
+				ko.applyBindings(new RequestModel(data), pnl.find("div")[0]);
 			});
 		}
 	};
